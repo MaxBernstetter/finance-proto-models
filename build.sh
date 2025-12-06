@@ -4,6 +4,8 @@
 # Usage: ./build_py.sh [python|cpp|all]
 
 set -e
+eval "$(devbox shellenv)"
+poetry install --with dev
 source $VENV_DIR/bin/activate
 
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
