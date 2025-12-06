@@ -1,5 +1,6 @@
 syntax = "proto3";
-package crypto;
+package FinanceProtobufModels;
+
 
 enum MetricType {
     PRICE_RAW = 0;

@@ -1,5 +1,5 @@
 syntax = "proto3";
-package crypto;
+package FinanceProtobufModels;
 
 enum Provider {
     COINBASE = 0;
