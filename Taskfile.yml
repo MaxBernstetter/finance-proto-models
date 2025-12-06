@@ -1,0 +1,9 @@
+version: '3'
+
+tasks:
+
+  build-proto:*:
+    desc: Build protobuf code for the provided target [python, cpp, all]
+    vars:
+      TARGET: '{{index .MATCH 0}}'
+    cmd: bash build.sh {{.TARGET}}

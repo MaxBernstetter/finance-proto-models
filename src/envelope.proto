@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package crypto;
+
+// Import the required message and enum definitions
+import "metrics/price.proto";
+import "metrics/enum_aggregation_window.proto";
+import "metrics/enum_metric_types.proto";
+import "provider/enum_provider.proto";
+
+
+message PriceAggregationEnvelope {
+    Provider provider = 1;
+    MetricType metricType = 2;
+    AggregationWindow aggregationWindow = 3;
+    PriceData payload = 4;
+}

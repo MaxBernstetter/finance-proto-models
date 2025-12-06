@@ -39,3 +39,13 @@
 
 # debug information files
 *.dwo
+
+# Generated protobuf models
+build
+
+# Virtual environment
+.venv
+venv
+
+# Mypy
+.mypy_cache

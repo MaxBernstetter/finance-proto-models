@@ -1,0 +1,12 @@
+syntax = "proto3";
+package crypto;
+
+enum AggregationWindow {
+
+    NONE = 0;
+    ONE_SECOND = 1;
+    THIRTY_SECONDS = 2;
+    FIVE_MINUTES = 3;
+    THIRTY_MINUTES = 4;
+    ONE_HOUR = 5;
+}

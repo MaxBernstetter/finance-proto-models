@@ -1,0 +1,10 @@
+syntax = "proto3";
+package crypto;
+
+enum MetricType {
+    PRICE_RAW = 0;
+    PRICE_AGGREGATED = 1;
+    PRICE_AGGREGATED_INTERPOLATED = 2;
+    PRICE_STATISTIC = 3;
+    PRICE_STATISTIC_INTERPOLATED = 4;
+}

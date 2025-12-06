@@ -1,0 +1,6 @@
+syntax = "proto3";
+package crypto;
+
+enum Provider {
+    COINBASE = 0;
+}

@@ -1,0 +1,15 @@
+[project]
+name = "finance-proto"
+version = "0.0.0"
+description = "Common python and protobuf models for finance data-processing."
+authors = [
+    { name="Max Bernstetter", email="max.bernstetter@gmx.net" }
+]
+requires-python = ">=3.12,<4.0"
+
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.group.dev.dependencies]
+protoletariat = "^3.3.10"
+betterproto = {extras = ["compiler"], version = "^1.2.5"}
