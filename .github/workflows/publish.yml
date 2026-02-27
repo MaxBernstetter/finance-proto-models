@@ -2,32 +2,57 @@ name: Publish Packages
 
 on:
   push:
+    branches: ['*']  # Triggers on every commit
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'  # Triggers on tags matching X.Y.Z format
       - 'v[0-9]+.[0-9]+.[0-9]+'  # Triggers on tags matching vX.Y.Z format
 
 jobs:
+  setup:
+    name: Setup and Determine Version
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      pypi_version: ${{ steps.version.outputs.pypi_version }}
+      display_version: ${{ steps.version.outputs.display_version }}
+    steps:
+      - name: Determine version
+        id: version
+        run: |
+          # Check if this is a tag push
+          if [[ "${{ github.ref_type }}" == "tag" ]]; then
+            TAG_NAME="${{ env.GITHUB_REF_NAME }}"
+            VERSION=${TAG_NAME#v}  # Remove 'v' prefix if present
+            if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "❌ Invalid version format: $VERSION (expected X.Y.Z)"
+              exit 1
+            fi
+            PYPI_VERSION="$VERSION"
+            DISPLAY_VERSION="$VERSION"
+          else
+            # For commits, use "latest"
+            VERSION="latest"
+            PYPI_VERSION="0.0.0+latest"
+            DISPLAY_VERSION="latest"
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "pypi_version=$PYPI_VERSION" >> $GITHUB_OUTPUT
+          echo "display_version=$DISPLAY_VERSION" >> $GITHUB_OUTPUT
+          echo "✅ Version: $DISPLAY_VERSION (PyPI: $PYPI_VERSION)"
+
   publish-python:
     name: Build and Publish Python Package
     runs-on: ubuntu-latest
+    needs: setup
     permissions:
       contents: read
-      id-token: write  # For PyPI publishing with trusted publishing
-    
+      id-token: write
     steps:
-      - uses: ./.github/actions/setup
+      - name: Checkout code
+        uses: actions/checkout@v4
       
-      - name: Extract and validate version
-        id: version
-        run: |
-          TAG_NAME="${{ env.GITHUB_REF_NAME }}"
-          VERSION=${TAG_NAME#v}  # Remove 'v' prefix if present
-          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "❌ Invalid version format: $VERSION (expected X.Y.Z)"
-            exit 1
-          fi
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "✅ Extracted version: $VERSION"
+      - name: Install devbox
+        uses: jetify-com/devbox-install-action@v0.12.0
       
       - name: Build Python protobuf code
         run: |
@@ -35,7 +60,8 @@ jobs:
       
       - name: Create Python package structure
         run: |
-          VERSION="${{ steps.version.outputs.version }}"
+          PYPI_VERSION="${{ needs.setup.outputs.pypi_version }}"
+          DISPLAY_VERSION="${{ needs.setup.outputs.display_version }}"
           PACKAGE_DIR="python-package"
           mkdir -p ${PACKAGE_DIR}
           
@@ -50,7 +76,7 @@ jobs:
           
           [project]
           name = "finance-proto-models-py"
-          version = "${VERSION}"
+          version = "${PYPI_VERSION}"
           description = "Python bindings for finance-proto-models protobuf definitions"
           authors = [
               { name="Max Bernstetter", email="max.bernstetter@gmx.net" }
@@ -72,7 +98,7 @@ jobs:
           cat > ${PACKAGE_DIR}/README.md << EOF
           # finance-proto-models-py
           
-          Version: ${VERSION}
+          Version: ${DISPLAY_VERSION}
           
           Python bindings for finance-proto-models protobuf definitions.
           EOF
@@ -95,23 +121,15 @@ jobs:
   publish-cpp:
     name: Build and Publish C++ Package
     runs-on: ubuntu-latest
+    needs: setup
     permissions:
-      contents: write  # For GitHub Releases
-    
+      contents: write
     steps:
-      - uses: ./.github/actions/setup
+      - name: Checkout code
+        uses: actions/checkout@v4
       
-      - name: Extract and validate version
-        id: version
-        run: |
-          TAG_NAME="${{ env.GITHUB_REF_NAME }}"
-          VERSION=${TAG_NAME#v}  # Remove 'v' prefix if present
-          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "❌ Invalid version format: $VERSION (expected X.Y.Z)"
-            exit 1
-          fi
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "✅ Extracted version: $VERSION"
+      - name: Install devbox
+        uses: jetify-com/devbox-install-action@v0.12.0
       
       - name: Build C++ protobuf code
         run: |
@@ -119,7 +137,7 @@ jobs:
       
       - name: Create C++ package archive
         run: |
-          VERSION="${{ steps.version.outputs.version }}"
+          VERSION="${{ needs.setup.outputs.version }}"
           PACKAGE_NAME="finance-proto-models-cpp-${VERSION}"
           mkdir -p package/${PACKAGE_NAME}
           
@@ -159,10 +177,11 @@ jobs:
       - name: Upload C++ package to GitHub Releases
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ needs.setup.outputs.version == 'latest' && 'latest' || format('v{0}', needs.setup.outputs.version) }}
           files: |
             package/${{ env.PACKAGE_NAME }}.tar.gz
             package/${{ env.PACKAGE_NAME }}.zip
           draft: false
-          prerelease: false
+          prerelease: ${{ needs.setup.outputs.version == 'latest' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
