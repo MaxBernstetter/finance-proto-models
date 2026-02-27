@@ -16,7 +16,7 @@ tasks:
   upload-python-package:
     desc: Upload Python package to GitHub Packages
     cmd: python3 -m twine upload \
-      --repository-url https://upload.pkg.github.com/${{ github.repository_owner }}/finance-proto-models-py \
-      --username ${{ github.repository_owner }} \
-      --password ${{ secrets.GITHUB_TOKEN }} \
+      --repository-url https://upload.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/finance-proto-models-py \
+      --username ${GITHUB_REPOSITORY_OWNER} \
+      --password ${GITHUB_TOKEN} \
       dist/*
