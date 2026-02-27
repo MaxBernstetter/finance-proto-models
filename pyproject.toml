@@ -1,28 +1,14 @@
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
 [project]
-name = "finance-proto-models-py"
+name = "finance-proto"
 version = "0.0.0"
-description = "Common python and protobuf models for finance data-processing."
-
-requires-python = ">=3.12,<4.0"
-readme = "README.md"
-license = { text = "MIT" }
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.12",
+description = "Common protobuf models for finance data-processing."
+authors = [
+    { name="Max Bernstetter", email="max.bernstetter@gmx.net" }
 ]
+requires-python = ">=3.12,<4.0"
 
 [tool.poetry]
-name = "finance-proto-models-py"
-version = "0.0.0"
-description = "Protobuf models for finance data-processing."
-authors = ["Max Bernstetter <max.bernstetter@gmx.net>"]
-readme = "README.md"
-package-mode = true
-packages = [{include = "build/python"}]
+package-mode = false
 
 [tool.poetry.group.dev.dependencies]
 protoletariat = "^3.3.10"

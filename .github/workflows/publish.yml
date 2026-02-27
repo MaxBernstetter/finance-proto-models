@@ -3,42 +3,88 @@ name: Publish Packages
 on:
   push:
     tags:
-      - '[0-9]+.[0-9]+.[0-9]+'
+      - '[0-9]+.[0-9]+.[0-9]+'  # Triggers on tags matching X.Y.Z format
+      - 'v[0-9]+.[0-9]+.[0-9]+'  # Triggers on tags matching vX.Y.Z format
 
 jobs:
-  setup:
-    name: Setup environment
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
-      - name: Install devbox
-        uses: jetify-com/devbox-install-action@v0.12.0
-      
   publish-python:
     name: Build and Publish Python Package
     runs-on: ubuntu-latest
-    needs: setup
     permissions:
       contents: read
       id-token: write  # For PyPI publishing with trusted publishing
     
     steps:
       - uses: ./.github/actions/setup
-
-      - name: Update version in pyproject.toml
+      
+      - name: Extract and validate version
+        id: version
         run: |
-          VERSION="${{ env.GITHUB_REF_NAME }}"
-          sed -i "s/^version = \".*\"/version = \"$VERSION\"/" pyproject.toml
+          TAG_NAME="${{ env.GITHUB_REF_NAME }}"
+          VERSION=${TAG_NAME#v}  # Remove 'v' prefix if present
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "❌ Invalid version format: $VERSION (expected X.Y.Z)"
+            exit 1
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "✅ Extracted version: $VERSION"
       
       - name: Build Python protobuf code
         run: |
           devbox run task build-proto:python
       
+      - name: Create Python package structure
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          PACKAGE_DIR="python-package"
+          mkdir -p ${PACKAGE_DIR}
+          
+          # Copy generated Python code
+          cp -r build/python/* ${PACKAGE_DIR}/
+          
+          # Create pyproject.toml for the package
+          cat > ${PACKAGE_DIR}/pyproject.toml << EOF
+          [build-system]
+          requires = ["setuptools>=61.0", "wheel"]
+          build-backend = "setuptools.build_meta"
+          
+          [project]
+          name = "finance-proto-models-py"
+          version = "${VERSION}"
+          description = "Python bindings for finance-proto-models protobuf definitions"
+          authors = [
+              { name="Max Bernstetter", email="max.bernstetter@gmx.net" }
+          ]
+          requires-python = ">=3.12,<4.0"
+          license = { text = "MIT" }
+          classifiers = [
+              "Development Status :: 4 - Beta",
+              "Intended Audience :: Developers",
+              "Programming Language :: Python :: 3",
+              "Programming Language :: Python :: 3.12",
+          ]
+          
+          [tool.setuptools]
+          packages = ["."]
+          EOF
+          
+          # Create README for the package
+          cat > ${PACKAGE_DIR}/README.md << EOF
+          # finance-proto-models-py
+          
+          Version: ${VERSION}
+          
+          Python bindings for finance-proto-models protobuf definitions.
+          EOF
+      
       - name: Build Python package
         run: |
-          devbox run poetry build
+          cd python-package
+          devbox run python -m pip install build
+          devbox run python -m build
+          cd ..
+          mkdir -p dist
+          cp python-package/dist/* dist/
       
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
@@ -49,20 +95,32 @@ jobs:
   publish-cpp:
     name: Build and Publish C++ Package
     runs-on: ubuntu-latest
-    needs: setup
     permissions:
       contents: write  # For GitHub Releases
     
     steps:
       - uses: ./.github/actions/setup
-
+      
+      - name: Extract and validate version
+        id: version
+        run: |
+          TAG_NAME="${{ env.GITHUB_REF_NAME }}"
+          VERSION=${TAG_NAME#v}  # Remove 'v' prefix if present
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "❌ Invalid version format: $VERSION (expected X.Y.Z)"
+            exit 1
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "✅ Extracted version: $VERSION"
+      
       - name: Build C++ protobuf code
         run: |
           devbox run task build-proto:cpp
       
       - name: Create C++ package archive
         run: |
-          PACKAGE_NAME="finance-proto-models-cpp-${{ env.GITHUB_REF_NAME }}"
+          VERSION="${{ steps.version.outputs.version }}"
+          PACKAGE_NAME="finance-proto-models-cpp-${VERSION}"
           mkdir -p package/${PACKAGE_NAME}
           
           # Copy generated C++ files
@@ -71,6 +129,24 @@ jobs:
           # Copy proto source files
           mkdir -p package/${PACKAGE_NAME}/proto
           cp -r src/* package/${PACKAGE_NAME}/proto/
+          
+          # Create README for the package
+          cat > package/${PACKAGE_NAME}/README.md << EOF
+          # finance-proto-models-cpp
+          
+          Version: ${VERSION}
+          
+          This package contains the generated C++ code from the finance-proto-models protobuf definitions.
+          
+          ## Usage
+          
+          Include the generated headers in your C++ project and link against the protobuf library.
+          
+          ## Files
+          
+          - Generated C++ headers and source files
+          - Original .proto files in the proto/ directory
+          EOF
           
           # Create tarball
           cd package
