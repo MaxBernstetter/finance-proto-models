@@ -69,16 +69,22 @@ jobs:
       - name: Build Python protobuf code
         run: |
           devbox run task build-proto:python
-      
+            
       - name: Create Python package structure
         run: |
           PYPI_VERSION="${{ needs.setup.outputs.pypi_version }}"
           DISPLAY_VERSION="${{ needs.setup.outputs.display_version }}"
           PACKAGE_DIR="python-package"
-          mkdir -p ${PACKAGE_DIR}
+          PACKAGE_NAME="finance_proto_models"
           
-          # Copy generated Python code
-          cp -r build/python/* ${PACKAGE_DIR}/
+          # Create package directory structure
+          mkdir -p ${PACKAGE_DIR}/${PACKAGE_NAME}
+          
+          # Copy generated Python code into the package directory
+          cp -r build/python/* ${PACKAGE_DIR}/${PACKAGE_NAME}/
+          
+          # Create __init__.py if it doesn't exist
+          touch ${PACKAGE_DIR}/${PACKAGE_NAME}/__init__.py
           
           # Create pyproject.toml for the package using Poetry
           cat > ${PACKAGE_DIR}/pyproject.toml << EOF
@@ -93,6 +99,7 @@ jobs:
           authors = ["Max Bernstetter <max.bernstetter@gmx.net>"]
           readme = "README.md"
           package-mode = true
+          packages = [{include = "${PACKAGE_NAME}"}]
           
           [tool.poetry.dependencies]
           python = "^3.12"
@@ -106,7 +113,7 @@ jobs:
           
           Python bindings for finance-proto-models protobuf definitions.
           EOF
-      
+
       - name: Build Python package with Poetry
         run: |
           devbox run poetry build --directory python-package
