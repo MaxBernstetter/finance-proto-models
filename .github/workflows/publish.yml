@@ -120,16 +120,16 @@ jobs:
           mkdir -p dist
           cp python-package/dist/* dist/
       
-      - name: Copy built packages
+      - name: Publish to GitHub Packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          mkdir -p dist
-          cp python-package/dist/* dist/
-      
-      - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          packages-dir: dist/
-          print-hash: true
+          devbox run python -m pip install twine
+          devbox run python -m twine upload \
+            --repository-url https://upload.pkg.github.com/${{ github.repository_owner }}/finance-proto-models-py \
+            --username ${{ github.repository_owner }} \
+            --password ${{ secrets.GITHUB_TOKEN }} \
+            dist/*
 
   publish-cpp:
     name: Build and Publish C++ Package
