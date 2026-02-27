@@ -2,7 +2,7 @@ name: Publish Packages
 
 on:
   push:
-    branches: ['*']  # Triggers on every commit
+    branches: ['main']  # Triggers on every commit
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'  # Triggers on tags matching X.Y.Z format
       - 'v[0-9]+.[0-9]+.[0-9]+'  # Triggers on tags matching vX.Y.Z format
