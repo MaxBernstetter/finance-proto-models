@@ -19,7 +19,7 @@ tasks:
       - poetry:install
     cmd: |
       poetry run python3 -m twine upload \
-        --repository-url https://upload.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/finance-proto-models-py \
+        --repository-url https://upload.pkg.github.com/${GITHUB_REPOSITORY} \
         --username ${GITHUB_REPOSITORY_OWNER} \
         --password ${GITHUB_TOKEN} \
         dist/*
