@@ -93,7 +93,6 @@ jobs:
           authors = ["Max Bernstetter <max.bernstetter@gmx.net>"]
           readme = "README.md"
           package-mode = true
-          packages = [{include = "."}]
           
           [tool.poetry.dependencies]
           python = "^3.12"
