@@ -13,3 +13,4 @@ package-mode = false
 [tool.poetry.group.dev.dependencies]
 protoletariat = "^3.3.10"
 betterproto = {extras = ["compiler"], version = "^1.2.5"}
+twine = "^6.2.0"
