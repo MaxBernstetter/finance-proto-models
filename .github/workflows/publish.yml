@@ -124,11 +124,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          devbox run python3 -m twine upload \
-            --repository-url https://upload.pkg.github.com/${{ github.repository_owner }}/finance-proto-models-py \
-            --username ${{ github.repository_owner }} \
-            --password ${{ secrets.GITHUB_TOKEN }} \
-            dist/*
+          devbox run task install-deps upload-python-package
 
   publish-cpp:
     name: Build and Publish C++ Package

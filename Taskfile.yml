@@ -2,8 +2,21 @@ version: '3'
 
 tasks:
 
+
+  install-deps:
+    desc: Install dependencies
+    cmd: poetry install --with dev
+
   build-proto:*:
     desc: Build protobuf code for the provided target [python, cpp, all]
     vars:
       TARGET: '{{index .MATCH 0}}'
     cmd: bash build.sh {{.TARGET}}
+
+  upload-python-package:
+    desc: Upload Python package to GitHub Packages
+    cmd: python3 -m twine upload \
+      --repository-url https://upload.pkg.github.com/${{ github.repository_owner }}/finance-proto-models-py \
+      --username ${{ github.repository_owner }} \
+      --password ${{ secrets.GITHUB_TOKEN }} \
+      dist/*
