@@ -110,9 +110,12 @@ jobs:
       
       - name: Build Python package with Poetry
         run: |
-          cd python-package
-          devbox run poetry build
-          cd ..
+          devbox run poetry build --directory python-package
+          mkdir -p dist
+          cp python-package/dist/* dist/
+      
+      - name: Copy built packages
+        run: |
           mkdir -p dist
           cp python-package/dist/* dist/
       
