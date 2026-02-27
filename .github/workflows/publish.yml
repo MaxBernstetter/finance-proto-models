@@ -120,13 +120,18 @@ jobs:
           mkdir -p dist
           cp python-package/dist/* dist/
       
-      - name: Publish to GitHub Packages
+      - name: Upload Python package to GitHub Releases
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ needs.setup.outputs.version == 'latest' && 'latest' || format('v{0}', needs.setup.outputs.version) }}
+          name: finance-proto-models-py ${{ needs.setup.outputs.display_version }}
+          files: |
+            dist/*
+          draft: false
+          prerelease: ${{ needs.setup.outputs.version == 'latest' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-        run: |
-          devbox run task upload:py
+
 
   publish-cpp:
     name: Build and Publish C++ Package
@@ -190,6 +195,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ needs.setup.outputs.version == 'latest' && 'latest' || format('v{0}', needs.setup.outputs.version) }}
+          name: finance-proto-models-cpp ${{ needs.setup.outputs.version }}
           files: |
             package/${{ env.PACKAGE_NAME }}.tar.gz
             package/${{ env.PACKAGE_NAME }}.zip
