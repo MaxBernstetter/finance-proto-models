@@ -124,10 +124,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
-          
-        run: |
-          devbox run task install-deps upload-python-package
 
+        run: 
+            devbox run task upload:py
   publish-cpp:
     name: Build and Publish C++ Package
     runs-on: ubuntu-latest
