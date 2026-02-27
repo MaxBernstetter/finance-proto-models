@@ -124,8 +124,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          source $VENV_DIR/bin/activate
-          twine upload \
+          devbox runpython3 -m twine upload \
             --repository-url https://upload.pkg.github.com/${{ github.repository_owner }}/finance-proto-models-py \
             --username ${{ github.repository_owner }} \
             --password ${{ secrets.GITHUB_TOKEN }} \
