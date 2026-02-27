@@ -53,6 +53,18 @@ jobs:
       
       - name: Install devbox
         uses: jetify-com/devbox-install-action@v0.12.0
+        with:
+          enable-cache: true
+      
+      - name: Cache Poetry dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pypoetry
+            .venv
+          key: poetry-${{ runner.os }}-${{ hashFiles('poetry.lock') }}
+          restore-keys: |
+            poetry-${{ runner.os }}-
       
       - name: Build Python protobuf code
         run: |
@@ -68,30 +80,23 @@ jobs:
           # Copy generated Python code
           cp -r build/python/* ${PACKAGE_DIR}/
           
-          # Create pyproject.toml for the package
+          # Create pyproject.toml for the package using Poetry
           cat > ${PACKAGE_DIR}/pyproject.toml << EOF
           [build-system]
-          requires = ["setuptools>=61.0", "wheel"]
-          build-backend = "setuptools.build_meta"
+          requires = ["poetry-core>=1.0.0"]
+          build-backend = "poetry.core.masonry.api"
           
-          [project]
+          [tool.poetry]
           name = "finance-proto-models-py"
           version = "${PYPI_VERSION}"
           description = "Python bindings for finance-proto-models protobuf definitions"
-          authors = [
-              { name="Max Bernstetter", email="max.bernstetter@gmx.net" }
-          ]
-          requires-python = ">=3.12,<4.0"
-          license = { text = "MIT" }
-          classifiers = [
-              "Development Status :: 4 - Beta",
-              "Intended Audience :: Developers",
-              "Programming Language :: Python :: 3",
-              "Programming Language :: Python :: 3.12",
-          ]
+          authors = ["Max Bernstetter <max.bernstetter@gmx.net>"]
+          readme = "README.md"
+          package-mode = true
+          packages = [{include = "."}]
           
-          [tool.setuptools]
-          packages = ["."]
+          [tool.poetry.dependencies]
+          python = "^3.12"
           EOF
           
           # Create README for the package
@@ -103,11 +108,10 @@ jobs:
           Python bindings for finance-proto-models protobuf definitions.
           EOF
       
-      - name: Build Python package
+      - name: Build Python package with Poetry
         run: |
           cd python-package
-          devbox run python -m pip install build
-          devbox run python -m build
+          devbox run poetry build
           cd ..
           mkdir -p dist
           cp python-package/dist/* dist/
@@ -130,6 +134,8 @@ jobs:
       
       - name: Install devbox
         uses: jetify-com/devbox-install-action@v0.12.0
+        with:
+          enable-cache: true
       
       - name: Build C++ protobuf code
         run: |
