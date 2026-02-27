@@ -17,9 +17,9 @@ tasks:
     desc: Upload Python package to GitHub Packages
     deps:
       - poetry:install
-
-    cmd: poetry run python3 -m twine upload \
-      --repository-url https://upload.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/finance-proto-models-py \
-      --username ${GITHUB_REPOSITORY_OWNER} \
-      --password ${GITHUB_TOKEN} \
-      dist/*
+    cmd: |
+      poetry run python3 -m twine upload \
+        --repository-url https://upload.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/finance-proto-models-py \
+        --username ${GITHUB_REPOSITORY_OWNER} \
+        --password ${GITHUB_TOKEN} \
+        dist/*
