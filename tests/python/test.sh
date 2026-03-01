@@ -52,8 +52,8 @@ echo "Package installed successfully"
 # Verify installation by checking if package is importable
 echo "Testing package import..."
 
-# Get the test script path
-TEST_SCRIPT="$SCRIPT_DIR/test-script.py"
+# Get the test script path 
+TEST_SCRIPT="$(dirname "$0")/test-script.py"
 
 if [ ! -f "$TEST_SCRIPT" ]; then
     echo "Test script not found: $TEST_SCRIPT" && exit 1
