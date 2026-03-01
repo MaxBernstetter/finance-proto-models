@@ -88,10 +88,10 @@ jobs:
   publish-releases:
     name: Publish to GitHub Releases
     runs-on: ubuntu-latest
-    needs: [setup, build-packages]
+    needs: [setup, build-releases]
     permissions:
       contents: write
-    if: always() && (needs.build-packages.result == 'success')
+    if: always() && (needs.build-releases.result == 'success')
     steps:
       - name: Download all artifacts
         uses: actions/download-artifact@v4
