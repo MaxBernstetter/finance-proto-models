@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "finance-proto-models-py"
+version = "0.0.0"
+description = "Python bindings for finance-proto-models protobuf definitions"
+authors = ["Max Bernstetter <max.bernstetter@gmx.net>"]
+readme = "README.md"
+package-mode = true
+packages = [{ include = "finance-proto-models.py" }]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

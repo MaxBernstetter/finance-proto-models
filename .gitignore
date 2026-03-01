@@ -49,3 +49,6 @@ venv
 
 # Mypy
 .mypy_cache
+
+# Release packages
+release

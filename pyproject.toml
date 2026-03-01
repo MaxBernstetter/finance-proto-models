@@ -1,16 +1,14 @@
 [project]
-name = "finance-proto"
+name = "finance-proto-pipeline"
 version = "0.0.0"
-description = "Common protobuf models for finance data-processing."
-authors = [
-    { name="Max Bernstetter", email="max.bernstetter@gmx.net" }
-]
+description = "Protobuf CI dependencies."
+authors = [{ name = "Max Bernstetter", email = "max.bernstetter@gmx.net" }]
 requires-python = ">=3.12,<4.0"
 
 [tool.poetry]
 package-mode = false
 
-[tool.poetry.group.dev.dependencies]
+[tool.poetry.dependencies]
 protoletariat = "^3.3.10"
-betterproto = {extras = ["compiler"], version = "^1.2.5"}
+betterproto = { extras = ["compiler"], version = "^1.2.5" }
 twine = "^6.2.0"

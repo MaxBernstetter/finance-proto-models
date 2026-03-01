@@ -1,25 +1,119 @@
 version: '3'
 
 tasks:
-
-
-  poetry:install:
-    desc: Install dependencies
-    cmd: poetry install --with dev
-
-  build-proto:*:
+  proto:extract:namespace:
+    desc: Extract the package namespace - printing it to stdout
+    silent: true
+    cmd: echo "$(grep -E "^package\s+\w+" src/envelope.proto | sed 's/package\s*\([^;]*\);/\1/')"
+  
+  proto:build:*:
     desc: Build protobuf code for the provided target [python, cpp, all]
     vars:
       TARGET: '{{index .MATCH 0}}'
     cmd: bash build.sh {{.TARGET}}
 
-  upload:py:
-    desc: Upload Python package to GitHub Packages
+  poetry:install:
+    desc: Install dependencies
+    cmd: poetry install
+
+  poetry:build:*:
+    desc: Build the protobuf python package
     deps:
-      - poetry:install
+      - task: proto:build:python
+    vars:
+      VERSION: '{{index .MATCH 0}}'
+      NAMESPACE:
+        sh: echo $(task proto:extract:namespace)
+    cmds:
+    - mkdir -p build/python
+    - cp -r resources/py/pyproject.toml resources/py/README.md build/python/
+    - mv build/python/{{.NAMESPACE}}.py build/python/finance-proto-models.py
+    - poetry version {{.VERSION}} --directory build/python
+    - poetry build --directory build/python
+
+    preconditions:
+      - sh: test -f build/python/{{.NAMESPACE}}.py
+        msg: "Python source files '{{.NAMESPACE}}.py' not found, call task build-proto:python first"
+
+  clean:build:*:
+    vars:
+      TARGET: '{{index .MATCH 0}}'
+    desc: Clean up previous build
+    silent: true
+    cmd: rm -rf build/{{.TARGET}} || true
+
+  clean:release:*:
+    vars:
+      TARGET: '{{index .MATCH 0}}'
+    desc: Clean up previous release
+    silent: true
+    cmd: rm -rf release/{{.TARGET}} || true
+
+  release:create-version-txt:*:*:
+    vars:
+      TARGET: '{{index .MATCH 0}}'
+      VERSION: '{{index .MATCH 1}}'
+    desc: Create a version.txt file with variables 0 -> target, 1 -> version
+    silent: true
     cmd: |
-      poetry run python3 -m twine upload \
-        --repository-url https://upload.pkg.github.com/${GITHUB_REPOSITORY} \
-        --username ${GITHUB_REPOSITORY_OWNER} \
-        --password ${GITHUB_TOKEN} \
-        dist/*
+      cat > release/{{.TARGET}}/version.txt << EOF
+      {{.VERSION}}
+      $(git rev-parse HEAD)
+      $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+      EOF
+
+  release:package:cpp:*:
+    desc: Build C++ package for release
+    silent: true
+    vars:
+      PACKAGE_VERSION: '{{index .MATCH 0}}'
+    deps:
+      - clean:build:cpp > /dev/null
+      - clean:release:cpp > /dev/null
+      - proto:build:cpp > /dev/null
+    cmds:
+      - echo "Packaging release for version -> {{.PACKAGE_VERSION}}"
+
+      # Create tmp folder for the package
+      - mkdir -p release/cpp
+
+      # Create a version.txt
+      - task release:create-version-txt:cpp:{{.PACKAGE_VERSION}}
+
+      # Copy to release & create tarball
+      - |
+        cp -r resources/cpp/* build/cpp/* release/cpp/
+        tar -czf finance-proto-models-cpp-{{.PACKAGE_VERSION}}.tar.gz release/cpp > /dev/null
+        zip -r finance-proto-models-cpp-{{.PACKAGE_VERSION}}.zip release/cpp > /dev/null
+        mv finance-proto-models-cpp-{{.PACKAGE_VERSION}}.tar.gz release/cpp
+        mv finance-proto-models-cpp-{{.PACKAGE_VERSION}}.zip release/cpp
+  
+  release:package:py:*:
+    desc: Build Python wheel for release
+    silent: true
+    vars:
+      PACKAGE_VERSION: '{{index .MATCH 0}}'
+    deps:
+      - clean:build:python > /dev/null
+      - clean:release:python > /dev/null
+    cmds:
+      - echo "Packaging release for version -> {{.PACKAGE_VERSION}}"
+
+      # Create tmp folder for the package
+      - mkdir -p release/python
+
+      # Create a version.txt
+      - task release:create-version-txt:python:{{.PACKAGE_VERSION}}
+
+      # Build the package
+      - task poetry:build:{{.PACKAGE_VERSION}}
+      - cp build/python/dist/* release/python/
+
+  release:package:all:*:
+    desc: Build all packages for release
+    silent: true
+    vars:
+      PACKAGE_VERSION: '{{index .MATCH 0}}'
+    deps:
+      - task: release:package:cpp:{{.PACKAGE_VERSION}}
+      - task: release:package:py:{{.PACKAGE_VERSION}}

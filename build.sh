@@ -5,12 +5,13 @@
 
 set -e
 eval "$(devbox shellenv)"
-poetry install --with dev
+poetry install
 source $VENV_DIR/bin/activate
 
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 PROTO_SRC_DIR="$SCRIPT_DIR/src"
 PYTHON_OUTPUT_DIR="$SCRIPT_DIR/build/python"
+PYTHON_PACKAGE_NAME="finance-proto-models-py"
 CPP_OUTPUT_DIR="$SCRIPT_DIR/build/cpp"
 
 # Find all proto files
