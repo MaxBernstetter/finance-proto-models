@@ -1,0 +1,48 @@
+name: 'Build Release Package'
+description: 'Build a single package (py or cpp) for release'
+inputs:
+  package:
+    description: 'Package type (py or cpp)'
+    required: true
+  version:
+    description: 'Version string'
+    required: true
+  pypi_version:
+    description: 'PyPI version string'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Install devbox
+      uses: jetify-com/devbox-install-action@v0.12.0
+      shell: bash
+    
+    - name: Cache Poetry dependencies
+      if: inputs.package == 'py'
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cache/pypoetry
+          .venv
+        key: poetry-${{ runner.os }}-${{ hashFiles('poetry.lock') }}
+        restore-keys: |
+          poetry-${{ runner.os }}-
+      shell: bash
+    
+    - name: Build package
+      shell: bash
+      run: |
+        if [ "${{ inputs.package }}" == "py" ]; then
+          devbox run task release:package:py:${{ inputs.pypi_version }}
+        else
+          devbox run task release:package:cpp:${{ inputs.version }}
+        fi
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: finance-proto-models-${{ inputs.package }}-${{ inputs.display_version }}
+        path: |
+          release/${{ inputs.package == 'py' && 'python' || 'cpp' }}/*
+        retention-days: 30
+      shell: bash
