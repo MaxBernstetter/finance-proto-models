@@ -10,12 +10,17 @@ inputs:
   pypi_version:
     description: 'PyPI version string'
     required: true
+  display_version:
+    description: 'Display version string'
+    required: true
 runs:
   using: 'composite'
   steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
     - name: Install devbox
       uses: jetify-com/devbox-install-action@v0.12.0
-      shell: bash
     
     - name: Cache Poetry dependencies
       if: inputs.package == 'py'
@@ -27,7 +32,6 @@ runs:
         key: poetry-${{ runner.os }}-${{ hashFiles('poetry.lock') }}
         restore-keys: |
           poetry-${{ runner.os }}-
-      shell: bash
     
     - name: Build package
       shell: bash
@@ -45,4 +49,3 @@ runs:
         path: |
           release/${{ inputs.package == 'py' && 'python' || 'cpp' }}/*
         retention-days: 30
-      shell: bash
