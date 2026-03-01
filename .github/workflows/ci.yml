@@ -60,10 +60,28 @@ jobs:
           pypi_version: ${{ needs.setup.outputs.pypi_version }}
           display_version: ${{ needs.setup.outputs.display_version }}
 
+  test:
+    name: Test ${{ matrix.package }} package
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      matrix:
+        package: [py, cpp]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Test package
+        uses: ./.github/actions/test-release
+        with:
+          package: ${{ matrix.package }}
+          version: ${{ needs.setup.outputs.version }}
+          display_version: ${{ needs.setup.outputs.display_version }}
+        
   publish:
     name: Publish ${{ matrix.target }} release
     runs-on: ubuntu-latest
-    needs: [setup, build]
+    needs: [setup, build, test]
     strategy:
       matrix:
         target: [py, cpp]
@@ -73,7 +91,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Publish release package
         uses: ./.github/actions/publish-release
         with:

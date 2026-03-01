@@ -10,6 +10,7 @@ inputs:
   display_version:
     description: 'Display version string'
     required: true
+    
 runs:
   using: 'composite'
   steps:

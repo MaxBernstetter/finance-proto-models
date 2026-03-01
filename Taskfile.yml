@@ -27,7 +27,7 @@ tasks:
     cmds:
     - mkdir -p build/python
     - cp -r resources/py/pyproject.toml resources/py/README.md build/python/
-    - mv build/python/{{.NAMESPACE}}.py build/python/finance-proto-models.py
+    - mv build/python/{{.NAMESPACE}}.py build/python/finance_proto_models.py
     - poetry version {{.VERSION}} --directory build/python
     - poetry build --directory build/python
 
@@ -110,6 +110,7 @@ tasks:
       - cp build/python/dist/* release/python/
 
   release:package:all:*:
+  
     desc: Build all packages for release
     silent: true
     vars:
@@ -117,3 +118,12 @@ tasks:
     deps:
       - task: release:package:cpp:{{.PACKAGE_VERSION}}
       - task: release:package:py:{{.PACKAGE_VERSION}}
+
+  test:*:
+    desc: Test generated releases
+    vars:
+      TARGET: '{{index .MATCH 0}}'
+    preconditions:
+      - sh: test -d release/{{.TARGET}}
+        msg: "Required directory release/'{{.TARGET}}' not found, call task release:package:{{.TARGET}} first"
+    cmd: bash tests/test-{{.TARGET}}.sh release/{{.TARGET}}

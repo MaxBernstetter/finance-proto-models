@@ -52,3 +52,6 @@ venv
 
 # Release packages
 release
+
+# Tests
+tests/tmp

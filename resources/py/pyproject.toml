@@ -5,11 +5,11 @@ description = "Python bindings for finance-proto-models protobuf definitions"
 authors = ["Max Bernstetter <max.bernstetter@gmx.net>"]
 readme = "README.md"
 package-mode = true
-packages = [{ include = "finance-proto-models.py" }]
+packages = [{ include = "finance_proto_models.py" }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
-
+betterproto = { version = "^1.2.5" }
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

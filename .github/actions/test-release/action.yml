@@ -1,0 +1,22 @@
+name: 'Test Release Package'
+description: 'Test a single package (py or cpp) for release'
+inputs:
+  package:
+    description: 'Package type (py or cpp)'
+    required: true
+  version:
+    description: 'Version string'
+    required: true
+  display_version:
+    description: 'Display version string'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Run test script
+      shell: bash
+      run: |
+        bash tests/test-{{.PACKAGE}}.sh release/{{.PACKAGE}}

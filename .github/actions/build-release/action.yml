@@ -16,9 +16,11 @@ inputs:
 runs:
   using: 'composite'
   steps:
-  
+
     - name: Install devbox
       uses: jetify-com/devbox-install-action@v0.12.0
+      with:
+        enable-cache: 'true'
     
     - name: Cache Poetry dependencies
       if: inputs.package == 'py'
