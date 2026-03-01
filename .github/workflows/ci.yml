@@ -84,7 +84,7 @@ jobs:
     needs: [setup, build, test]
     strategy:
       matrix:
-        target: [py, cpp]
+        target: [python, cpp]
     permissions:
       contents: write
     if: always() && (needs.build.result == 'success') && (needs.test.result == 'success')

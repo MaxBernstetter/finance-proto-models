@@ -1,8 +1,8 @@
 name: 'Test Release Package'
-description: 'Test a single package (py or cpp) for release'
+description: 'Test a single package (python or cpp) for release'
 inputs:
   package:
-    description: 'Package type (py or cpp)'
+    description: 'Package type (python or cpp)'
     required: true
   version:
     description: 'Version string'

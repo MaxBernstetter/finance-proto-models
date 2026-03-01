@@ -1,0 +1,6 @@
+#!/home/max.bernstetter/code/finance-proto-models/tests/python/tmp/test-venv-116716/bin/python3.12
+import sys
+from grpclib.plugin.main import main
+if __name__ == '__main__':
+    sys.argv[0] = sys.argv[0].removesuffix('.exe')
+    sys.exit(main())
