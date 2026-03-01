@@ -71,6 +71,9 @@ jobs:
       contents: write
     if: always() && (needs.build.result == 'success')
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
       - name: Publish release package
         uses: ./.github/actions/publish-release
         with:
