@@ -28,8 +28,8 @@ fi
 echo "Found wheel file: $WHEEL_FILE"
 
 # Create temporary virtual environment
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-VENV_DIR="$SCRIPT_DIR/tmp/test-venv-$$"
+TMP_DIR="$(dirname $(dirname "$0"))/tmp"
+VENV_DIR="$TMP_DIR/test-venv-$$"
 
 # Clean up any existing venv directory (shouldn't happen, but be safe)
 if [ -d "$VENV_DIR" ]; then
