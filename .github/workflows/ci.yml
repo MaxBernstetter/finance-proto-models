@@ -66,7 +66,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        package: [py, cpp]
+        package: [python, cpp]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
