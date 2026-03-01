@@ -1,1 +1,1 @@
-echo "Not implemented yet" && exit 0
+echo "Not implemented yet" && exit 1
