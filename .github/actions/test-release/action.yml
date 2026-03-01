@@ -19,4 +19,4 @@ runs:
     - name: Run test script
       shell: bash
       run: |
-        bash tests/test-${{ inputs.package }}.sh release/${{ inputs.package }}
+        bash tests/${{ inputs.package }}/test.sh release/${{ inputs.package }}
