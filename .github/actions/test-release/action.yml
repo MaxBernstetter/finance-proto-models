@@ -15,8 +15,14 @@ runs:
   steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
+
+    - name: Download artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: finance-proto-models-${{ inputs.package }}-${{ inputs.display_version }}
+        path: artifacts/release
+
     - name: Run test script
       shell: bash
       run: |
-        bash tests/${{ inputs.package }}/test.sh release/${{ inputs.package }}
+        bash tests/${{ inputs.package }}/test.sh artifacts/release/${{ inputs.package }}

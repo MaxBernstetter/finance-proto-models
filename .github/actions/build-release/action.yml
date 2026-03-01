@@ -1,8 +1,8 @@
 name: 'Build Release Package'
-description: 'Build a single package (py or cpp) for release'
+description: 'Build a single package (python or cpp) for release'
 inputs:
   package:
-    description: 'Package type (py or cpp)'
+    description: 'Package type (python or cpp)'
     required: true
   version:
     description: 'Version string'
@@ -23,7 +23,7 @@ runs:
         enable-cache: 'true'
     
     - name: Cache Poetry dependencies
-      if: inputs.package == 'py'
+      if: inputs.package == 'python'
       uses: actions/cache@v4
       with:
         path: |
@@ -36,8 +36,8 @@ runs:
     - name: Build package
       shell: bash
       run: |
-        if [ "${{ inputs.package }}" == "py" ]; then
-          devbox run task release:package:py:${{ inputs.pypi_version }}
+        if [ "${{ inputs.package }}" == "python" ]; then
+          devbox run task release:package:python:${{ inputs.pypi_version }}
         else
           devbox run task release:package:cpp:${{ inputs.version }}
         fi
@@ -47,5 +47,5 @@ runs:
       with:
         name: finance-proto-models-${{ inputs.package }}-${{ inputs.display_version }}
         path: |
-          release/${{ inputs.package == 'py' && 'python' || 'cpp' }}/*
-        retention-days: 30
+          release/${{ inputs.package }}
+        retention-days: 1

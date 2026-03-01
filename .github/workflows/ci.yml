@@ -45,7 +45,7 @@ jobs:
     needs: setup
     strategy:
       matrix:
-        package: [py, cpp]
+        package: [python, cpp]
     permissions:
       contents: read
     steps:
@@ -63,7 +63,7 @@ jobs:
   test:
     name: Test ${{ matrix.package }} package
     runs-on: ubuntu-latest
-    needs: build
+    needs: [setup, build]
     strategy:
       matrix:
         package: [python, cpp]
