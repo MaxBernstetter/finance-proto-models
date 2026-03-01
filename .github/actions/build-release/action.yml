@@ -47,5 +47,5 @@ runs:
       with:
         name: finance-proto-models-${{ inputs.package }}-${{ inputs.display_version }}
         path: |
-          release/${{ inputs.package }}
+          release/${{ inputs.package }}/*
         retention-days: 1

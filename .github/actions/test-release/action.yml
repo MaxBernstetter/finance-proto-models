@@ -20,7 +20,7 @@ runs:
       uses: actions/download-artifact@v4
       with:
         name: finance-proto-models-${{ inputs.package }}-${{ inputs.display_version }}
-        path: artifacts
+        path: artifacts/${{ inputs.package }}
 
     - name: Run test script
       shell: bash
