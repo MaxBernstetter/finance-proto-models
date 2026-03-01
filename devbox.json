@@ -15,7 +15,7 @@
   "shell": {
     "init_hook": [
       "poetry install",
-      "source $VENV_DIR/bin/activate"
+      ". $VENV_DIR/bin/activate"
     ]
   }
 }
