@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e  # Exit on error
-mkdir -p $(dirname "$0")/tmp
 
 # Script to test Python package installation from a release directory
 # Usage: ./test-python.sh <path-to-release-directory>
