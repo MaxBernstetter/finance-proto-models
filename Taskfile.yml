@@ -4,7 +4,7 @@ tasks:
   proto:extract:namespace:
     desc: Extract the package namespace - printing it to stdout
     silent: true
-    cmd: echo "$(grep -E "^package\s+\w+" src/envelope.proto | sed 's/package\s*\([^;]*\);/\1/')"
+    cmd: echo "$(grep -E "^package\s+\w+" $DEVBOX_PROJECT_ROOT/src/envelope.proto | sed 's/package\s*\([^;]*\);/\1/')"
   
   proto:build:*:
     desc: Build protobuf code for the provided target [python, cpp, all]
@@ -27,14 +27,14 @@ tasks:
       NAMESPACE:
         sh: echo $(task proto:extract:namespace)
     cmds:
-    - mkdir -p build/python
-    - cp -r resources/py/pyproject.toml resources/py/README.md build/python/
+    - mkdir -p $BUILD_DIR/python
+    - cp -r $RESOURCES_DIR/py/pyproject.toml $RESOURCES_DIR/py/README.md $BUILD_DIR/python/
     - mv build/python/{{.NAMESPACE}}.py build/python/finance_proto_models.py
-    - poetry version {{.VERSION}} --directory build/python
-    - poetry build --directory build/python
+    - poetry version {{.VERSION}} --directory $BUILD_DIR/python
+    - poetry build --directory $BUILD_DIR/python
 
     preconditions:
-      - sh: test -f build/python/{{.NAMESPACE}}.py
+      - sh: test -f $BUILD_DIR/python/{{.NAMESPACE}}.py
         msg: "Python source files '{{.NAMESPACE}}.py' not found, call task build-proto:python first"
 
   clean:build:*:
@@ -42,14 +42,14 @@ tasks:
       TARGET: '{{index .MATCH 0}}'
     desc: Clean up previous build
     silent: true
-    cmd: rm -rf build/{{.TARGET}} || true
+    cmd: rm -rf $BUILD_DIR/{{.TARGET}} || true
 
   clean:release:*:
     vars:
       TARGET: '{{index .MATCH 0}}'
     desc: Clean up previous release
     silent: true
-    cmd: rm -rf release/{{.TARGET}} || true
+    cmd: rm -rf $RELEASE_DIR/{{.TARGET}} || true
 
   release:create-version-txt:*:*:
     vars:
@@ -58,7 +58,7 @@ tasks:
     desc: Create a version.txt file with variables 0 -> target, 1 -> version
     silent: true
     cmd: |
-      cat > release/{{.TARGET}}/version.txt << EOF
+      cat > $RELEASE_DIR/{{.TARGET}}/version.txt << EOF
       {{.VERSION}}
       $(git rev-parse HEAD)
       $(date -u +"%Y-%m-%dT%H:%M:%SZ")
@@ -84,10 +84,10 @@ tasks:
 
       # Copy to release & create tarball
       - |
-        cp -r resources/cpp/* build/cpp/* release/cpp
-        tar -czf finance-proto-models-cpp.tar.gz -C release/cpp .
-        mv finance-proto-models-cpp.tar.gz release/cpp
-        rm -rf release/cpp/finance-proto-models release/cpp/version.txt release/cpp/README.md
+        cp -r $RESOURCES_DIR/cpp/* $BUILD_DIR/cpp/* $RELEASE_DIR/cpp
+        tar -czf finance-proto-models-cpp.tar.gz -C $RELEASE_DIR/cpp .
+        mv finance-proto-models-cpp.tar.gz $RELEASE_DIR/cpp
+        rm -rf $RELEASE_DIR/cpp/finance-proto-models $RELEASE_DIR/cpp/version.txt $RELEASE_DIR/cpp/README.md
   
   release:package:python:*:
     desc: Build Python wheel for release
@@ -101,14 +101,14 @@ tasks:
       - echo "Packaging release for version -> {{.PACKAGE_VERSION}}"
 
       # Create tmp folder for the package
-      - mkdir -p release/python
+      - mkdir -p $RELEASE_DIR/python
 
       # Create a version.txt
       - task release:create-version-txt:python:{{.PACKAGE_VERSION}}
 
       # Build the package
       - task poetry:build:{{.PACKAGE_VERSION}}
-      - cp build/python/dist/* release/python/
+      - cp $BUILD_DIR/python/dist/* $RELEASE_DIR/python/
 
   release:package:all:*:
   
@@ -125,6 +125,6 @@ tasks:
     vars:
       TARGET: '{{index .MATCH 0}}'
     preconditions:
-      - sh: test -d release/{{.TARGET}}
+      - sh: test -d $RELEASE_DIR/{{.TARGET}}
         msg: "Required directory release/'{{.TARGET}}' not found, call task release:package:{{.TARGET}} first"
-    cmd: bash tests/{{.TARGET}}/test.sh release/{{.TARGET}}
+    cmd: bash tests/{{.TARGET}}/test.sh
