@@ -19,7 +19,7 @@ docker exec cpp-tests-runner rm -rf /build/* src/*
 docker exec cpp-tests-runner bash -c 'printf "%s\n" "#include \"finance-proto-models/provider/enum_provider.pb.h\"" "" "int main() { return FinanceProtobufModels::Provider::COINBASE; }" > /src/main.cpp'
 
 # Copy and prepare compiled protobuf files
-docker cp ../../release/cpp/. cpp-tests-runner:/src/
+docker cp $RELEASE_DIR/cpp/. cpp-tests-runner:/src/
 docker exec cpp-tests-runner tar -xzf /src/finance-proto-models-cpp.tar.gz -C /src
 
 # Compile - using compiler flags from the environment

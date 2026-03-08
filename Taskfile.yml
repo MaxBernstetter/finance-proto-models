@@ -77,7 +77,7 @@ tasks:
       - echo "Packaging release for version -> {{.PACKAGE_VERSION}}"
 
       # Create tmp folder for the package
-      - mkdir -p release/cpp
+      - mkdir -p $RELEASE_DIR/cpp
 
       # Create a version.txt
       - task release:create-version-txt:cpp:{{.PACKAGE_VERSION}}
