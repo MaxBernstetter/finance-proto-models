@@ -12,7 +12,7 @@ SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 PROTO_SRC_DIR="$SCRIPT_DIR/src"
 PYTHON_OUTPUT_DIR="$SCRIPT_DIR/build/python"
 PYTHON_PACKAGE_NAME="finance_proto_models"
-CPP_OUTPUT_DIR="$SCRIPT_DIR/build/cpp"
+CPP_OUTPUT_DIR="$SCRIPT_DIR/build/cpp/finance-proto-models"
 
 # Find all proto files
 find_proto_files() {
@@ -80,19 +80,20 @@ case "$TARGET" in
     python)
         build_target "Python" "$PYTHON_OUTPUT_DIR" "--python_betterproto_out"
         echo ""
-        echo "✅ Python build complete! You can now import the generated classes"
+        echo "Python build complete! You can now import the generated classes"
         echo "   Example: from commons.proto.envelope_pb2 import PriceMessageEnvelope"
         ;;
     cpp)
+        shopt -s extglob
         build_target "C++" "$CPP_OUTPUT_DIR" "--cpp_out"
         echo ""
-        echo "✅ C++ build complete! Generated files are in $CPP_OUTPUT_DIR"
+        echo "C++ build complete! Generated files are in $CPP_OUTPUT_DIR"
         ;;
     all)
         build_all
         ;;
     *)
-        echo "❌ Invalid target: $TARGET"
+        echo "Invalid target: $TARGET"
         echo "Usage: $0 [python|cpp|all]"
         echo "  python - Build Python code (default)"
         echo "  cpp    - Build C++ code"

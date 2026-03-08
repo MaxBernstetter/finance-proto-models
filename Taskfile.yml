@@ -11,6 +11,8 @@ tasks:
     vars:
       TARGET: '{{index .MATCH 0}}'
     cmd: bash build.sh {{.TARGET}}
+    deps:
+      - clean:build:{{.TARGET}}
 
   poetry:install:
     desc: Install dependencies
@@ -82,11 +84,10 @@ tasks:
 
       # Copy to release & create tarball
       - |
-        cp -r resources/cpp/* build/cpp/* release/cpp/
-        tar -czf finance-proto-models-cpp-{{.PACKAGE_VERSION}}.tar.gz release/cpp > /dev/null
-        zip -r finance-proto-models-cpp-{{.PACKAGE_VERSION}}.zip release/cpp > /dev/null
-        mv finance-proto-models-cpp-{{.PACKAGE_VERSION}}.tar.gz release/cpp
-        mv finance-proto-models-cpp-{{.PACKAGE_VERSION}}.zip release/cpp
+        cp -r resources/cpp/* build/cpp/* release/cpp
+        tar -czf finance-proto-models-cpp.tar.gz -C release/cpp .
+        mv finance-proto-models-cpp.tar.gz release/cpp
+        rm -rf release/cpp/finance-proto-models release/cpp/version.txt release/cpp/README.md
   
   release:package:python:*:
     desc: Build Python wheel for release
