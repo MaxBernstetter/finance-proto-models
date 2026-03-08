@@ -22,7 +22,23 @@ runs:
         name: finance-proto-models-${{ inputs.package }}-${{ inputs.display_version }}
         path: artifacts/${{ inputs.package }}
 
+    - name: Install devbox
+      uses: jetify-com/devbox-install-action@v0.12.0
+      with:
+        enable-cache: 'true'
+    
+    - name: Cache Poetry dependencies
+      if: inputs.package == 'python'
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cache/pypoetry
+          .venv
+        key: poetry-${{ runner.os }}-${{ hashFiles('poetry.lock') }}
+        restore-keys: |
+          poetry-${{ runner.os }}-
+
     - name: Run test script
       shell: bash
       run: |
-        bash tests/${{ inputs.package }}/test.sh artifacts/${{ inputs.package }}
+        devbox run task test:${{ inputs.package }}

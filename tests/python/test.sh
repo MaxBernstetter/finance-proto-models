@@ -1,24 +1,8 @@
 #!/bin/bash
 set -e  # Exit on error
 
-# Script to test Python package installation from a release directory
-# Usage: ./test-python.sh <path-to-release-directory>
-
-
-# Validate argument
-if [ $# -eq 0 ]; then
-    echo "Release directory path is required as argument" && exit 1
-fi
-
-RELEASE_DIR="$1"
-
-# Validate release directory exists
-if [ ! -d "$RELEASE_DIR" ]; then
-    echo "Release directory does not exist: $RELEASE_DIR" && exit 1
-fi
-
 # Find wheel file
-WHEEL_FILE=$(find "$RELEASE_DIR" -name "*.whl" | head -1)
+WHEEL_FILE=$(find "$RELEASE_DIR/python" -name "*.whl" | head -1)
 
 if [ -z "$WHEEL_FILE" ]; then
     echo "No .whl file found in release directory: $RELEASE_DIR" && exit 1
