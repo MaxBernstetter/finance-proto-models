@@ -18,7 +18,7 @@ runs:
       uses: actions/download-artifact@v4
       with:
         name: finance-proto-models-${{ inputs.target }}-${{ inputs.display_version }}
-        path: release/${{ inputs.package }}
+        path: release/${{ inputs.target }}
     
     - name: Upload to GitHub Releases
       uses: softprops/action-gh-release@v1
