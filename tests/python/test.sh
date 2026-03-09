@@ -11,7 +11,7 @@ fi
 echo "Found wheel file: $WHEEL_FILE"
 
 # Create temporary virtual environment
-TMP_DIR="$(dirname $(dirname "$0"))/tmp"
+TMP_DIR="$(dirname "$0")/tmp"
 VENV_DIR="$TMP_DIR/test-venv-$$"
 
 # Clean up any existing venv directory (shouldn't happen, but be safe)

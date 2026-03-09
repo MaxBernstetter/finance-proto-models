@@ -1,18 +1,33 @@
 version: '3'
 
 tasks:
+
+  proto:list-files:
+    desc: List all protobuf files in the src directory
+    silent: true
+    cmd: find $DEVBOX_PROJECT_ROOT/src -name "*.proto"
+    
   proto:extract:namespace:
     desc: Extract the package namespace - printing it to stdout
     silent: true
     cmd: echo "$(grep -E "^package\s+\w+" $DEVBOX_PROJECT_ROOT/src/envelope.proto | sed 's/package\s*\([^;]*\);/\1/')"
   
   proto:build:*:
-    desc: Build protobuf code for the provided target [python, cpp, all]
+    desc: Build protobuf code for the provided target [python, cpp]
+    silent: true
     vars:
       TARGET: '{{index .MATCH 0}}'
-    cmd: bash build.sh {{.TARGET}}
+      PROTO_OUT:
+        sh: if [ {{.TARGET}} == "python" ]; then echo "--python_out"; else echo "--cpp_out"; fi
     deps:
       - clean:build:{{.TARGET}}
+    cmds:
+      - mkdir -p $BUILD_DIR/{{.TARGET}}
+      - |
+        files=$(task proto:list-files)
+        for file in $files; do
+          protoc -I $DEVBOX_PROJECT_ROOT/src {{.PROTO_OUT}}=$BUILD_DIR/{{.TARGET}} $file
+        done
 
   poetry:install:
     desc: Install dependencies
@@ -20,22 +35,24 @@ tasks:
 
   poetry:build:*:
     desc: Build the protobuf python package
+    silent: true
     deps:
       - task: proto:build:python
     vars:
       VERSION: '{{index .MATCH 0}}'
-      NAMESPACE:
-        sh: echo $(task proto:extract:namespace)
+
     cmds:
-    - mkdir -p $BUILD_DIR/python
     - cp -r $RESOURCES_DIR/py/pyproject.toml $RESOURCES_DIR/py/README.md $BUILD_DIR/python/
-    - mv build/python/{{.NAMESPACE}}.py build/python/finance_proto_models.py
+    - mkdir -p $BUILD_DIR/python/finance_proto_models
+    - |
+      find "$BUILD_DIR/python" -mindepth 1 -maxdepth 1 \
+        ! -name "pyproject.toml" \
+        ! -name "README.md" \
+        ! -name "finance_proto_models" \
+        -exec mv {} "$BUILD_DIR/python/finance_proto_models/" \;
+
     - poetry version {{.VERSION}} --directory $BUILD_DIR/python
     - poetry build --directory $BUILD_DIR/python
-
-    preconditions:
-      - sh: test -f $BUILD_DIR/python/{{.NAMESPACE}}.py
-        msg: "Python source files '{{.NAMESPACE}}.py' not found, call task build-proto:python first"
 
   clean:build:*:
     vars:

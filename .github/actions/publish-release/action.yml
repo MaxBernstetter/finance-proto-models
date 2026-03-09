@@ -28,6 +28,5 @@ runs:
         files: release/${{ inputs.target }}/*
         draft: false
         prerelease: ${{ inputs.version == 'latest' }}
-        overwrite: ${{ inputs.version == 'latest' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
