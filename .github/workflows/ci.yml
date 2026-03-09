@@ -61,6 +61,12 @@ jobs:
           pypi_version: ${{ needs.setup.outputs.pypi_version }}
           display_version: ${{ needs.setup.outputs.display_version }}
 
+      - name: Debug via tmate on failure
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true
+
   test:
     name: Test ${{ matrix.package }} package
     runs-on: ubuntu-latest
