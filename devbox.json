@@ -8,9 +8,10 @@
     "clang": "18.1.8"
   },
   "env": {
-    "RESOURCES_DIR":                 "$DEVBOX_PROJECT_ROOT/resources",
-    "RELEASE_DIR":                   "$DEVBOX_PROJECT_ROOT/release",
-    "BUILD_DIR":                     "$DEVBOX_PROJECT_ROOT/build",
+    "POETRY_VIRTUALENVS_CREATE": "false",
+    "RESOURCES_DIR": "$DEVBOX_PROJECT_ROOT/resources",
+    "RELEASE_DIR": "$DEVBOX_PROJECT_ROOT/release",
+    "BUILD_DIR": "$DEVBOX_PROJECT_ROOT/build",
     "CLANG_VERSION": "18.1.8",
     "PROTO_VERSION": "3.21.12"
   }
