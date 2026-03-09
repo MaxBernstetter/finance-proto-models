@@ -45,7 +45,7 @@ tasks:
     - cp -r $RESOURCES_DIR/py/pyproject.toml $RESOURCES_DIR/py/README.md $BUILD_DIR/python/
     - mkdir -p $BUILD_DIR/python/finance_proto_models
     - |
-      find "$BUILD_DIR/python" -mindepth 1 -maxdepth 1 \
+      find "$BUILD_DIR/python" \
         ! -name "pyproject.toml" \
         ! -name "README.md" \
         ! -name "finance_proto_models" \
