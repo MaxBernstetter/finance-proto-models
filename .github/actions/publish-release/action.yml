@@ -25,8 +25,7 @@ runs:
       with:
         tag_name: ${{ inputs.version == 'latest' && format('{0}-latest', inputs.target) || format('{0}-v{1}', inputs.target, inputs.version) }}
         name: finance-proto-models-${{ inputs.target }}
-        files: |
-          release/${{ inputs.target }}/*
+        files: release/${{ inputs.target }}/*
         draft: false
         prerelease: ${{ inputs.version == 'latest' }}
       env:
