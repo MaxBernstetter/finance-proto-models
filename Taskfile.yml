@@ -17,8 +17,6 @@ tasks:
     silent: true
     vars:
       TARGET: '{{index .MATCH 0}}'
-      PROTO_OUT:
-        sh: if [ {{.TARGET}} == "python" ]; then echo "--python_out"; else echo "--cpp_out"; fi
     deps:
       - clean:build:{{.TARGET}}
     cmds:
@@ -26,7 +24,7 @@ tasks:
       - |
         files=$(task proto:list-files)
         for file in $files; do
-          protoc -I $DEVBOX_PROJECT_ROOT/src {{.PROTO_OUT}}=$BUILD_DIR/{{.TARGET}} $file
+          protoc -I $DEVBOX_PROJECT_ROOT/src --{{.TARGET}}_out=$BUILD_DIR/{{.TARGET}} $file
         done
 
   poetry:install:
