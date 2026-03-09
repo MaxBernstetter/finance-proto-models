@@ -10,7 +10,7 @@ packages = [{ include = "finance_proto_models" }]
 [tool.poetry.dependencies]
 python = "^3.12"
 # The 3.21.x protoc/libprotobuf generation line maps to Python 4.21.x runtime line
-protobuf = { version = "^4.21.12", markers = "python_version >= '3.12'" }
+protobuf = { version = "^6.33.5", markers = "python_version >= '3.12'" }
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
