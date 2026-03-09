@@ -20,7 +20,7 @@ runs:
       uses: actions/download-artifact@v4
       with:
         name: finance-proto-models-${{ inputs.package }}-${{ inputs.display_version }}
-        path: artifacts/${{ inputs.package }}
+        path: release/${{ inputs.package }}
 
     - name: Install devbox
       uses: jetify-com/devbox-install-action@v0.12.0
