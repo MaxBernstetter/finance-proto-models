@@ -38,16 +38,19 @@ tasks:
       - task: proto:build:python
     vars:
       VERSION: '{{index .MATCH 0}}'
-
     cmds:
-    - cp -r $RESOURCES_DIR/py/pyproject.toml $RESOURCES_DIR/py/README.md $BUILD_DIR/python/
+    - echo $BUILD_DIR
+    - cp -r $RESOURCES_DIR/python/pyproject.toml $RESOURCES_DIR/python/README.md $BUILD_DIR/python
     - mkdir -p $BUILD_DIR/python/finance_proto_models
     - |
       find "$BUILD_DIR/python" \
+        -mindepth 1 \
+        -maxdepth 1 \
         ! -name "pyproject.toml" \
         ! -name "README.md" \
         ! -name "finance_proto_models" \
         -exec mv {} "$BUILD_DIR/python/finance_proto_models/" \;
+
 
     - poetry version {{.VERSION}} --directory $BUILD_DIR/python
     - poetry build --directory $BUILD_DIR/python
@@ -85,9 +88,9 @@ tasks:
     vars:
       PACKAGE_VERSION: '{{index .MATCH 0}}'
     deps:
-      - clean:build:cpp > /dev/null
-      - clean:release:cpp > /dev/null
-      - proto:build:cpp > /dev/null
+      - task: clean:build:cpp
+      - task: clean:release:cpp
+      - task: proto:build:cpp
     cmds:
       - echo "Packaging release for version -> {{.PACKAGE_VERSION}}"
 
@@ -98,8 +101,9 @@ tasks:
       - task release:create-version-txt:cpp:{{.PACKAGE_VERSION}}
 
       # Copy to release & create tarball
+      - mkdir $RELEASE_DIR/cpp/finance-proto-models
       - |
-        cp -r $RESOURCES_DIR/cpp/* $BUILD_DIR/cpp/* $RELEASE_DIR/cpp
+        cp -r $RESOURCES_DIR/cpp/* $BUILD_DIR/cpp/* $RELEASE_DIR/cpp/finance-proto-models
         tar -czf finance-proto-models-cpp.tar.gz -C $RELEASE_DIR/cpp .
         mv finance-proto-models-cpp.tar.gz $RELEASE_DIR/cpp
         rm -rf $RELEASE_DIR/cpp/finance-proto-models $RELEASE_DIR/cpp/version.txt $RELEASE_DIR/cpp/README.md
@@ -110,8 +114,8 @@ tasks:
     vars:
       PACKAGE_VERSION: '{{index .MATCH 0}}'
     deps:
-      - clean:build:python > /dev/null
-      - clean:release:python > /dev/null
+      - task: clean:build:python
+      - task: clean:release:python
     cmds:
       - echo "Packaging release for version -> {{.PACKAGE_VERSION}}"
 
