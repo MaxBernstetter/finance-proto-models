@@ -49,9 +49,6 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
       - name: Build release package
         uses: ./.github/actions/build-release
         with:
@@ -69,9 +66,6 @@ jobs:
       matrix:
         package: [python, cpp]
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Test package
         uses: ./.github/actions/test-release
         with:
@@ -90,9 +84,6 @@ jobs:
       contents: write
     if: always() && needs.build.result == 'success' && needs.test.result == 'success'
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Publish release package
         uses: ./.github/actions/publish-release
         with:
