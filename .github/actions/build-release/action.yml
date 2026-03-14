@@ -25,9 +25,9 @@ runs:
       shell: bash
       run: |
         if [ "${{ inputs.package }}" == "python" ]; then
-          devbox run task release:package:python:${{ inputs.pypi_version }}
+          devbox run -- task release:package:python:${{ inputs.pypi_version }}
         else
-          devbox run task release:package:cpp:${{ inputs.version }}
+          devbox run -- task release:package:cpp:${{ inputs.version }}
         fi
     
     - name: Upload artifacts
