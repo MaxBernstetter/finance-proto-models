@@ -8,6 +8,7 @@ on:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+  POETRY_VIRTUALENVS_CREATE: 'false'
 
 jobs:
   setup:

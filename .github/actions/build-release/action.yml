@@ -13,8 +13,7 @@ inputs:
   display_version:
     description: 'Display version string'
     required: true
-env:
-  POETRY_VIRTUALENVS_CREATE: 'false'
+
 runs:
   using: 'composite'
   steps:
