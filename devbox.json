@@ -1,13 +1,14 @@
 {
   "$schema": "https://raw.githubusercontent.com/jetpack-io/devbox/main/.schema/devbox.schema.json",
   "packages": {
-    "python":   "3.12",
-    "poetry":   "latest",
-    "go-task":  "latest",
-    "clang":    "18.1.8",
-    "conan":    "2.21.0",
-    "protobuf": "33.5",
-    "cmake":    "4.1.2"
+    "python":     "3.12",
+    "poetry":     "latest",
+    "clang":      "18.1.8",
+    "conan":      "2.21.0",
+    "protobuf":   "33.5",
+    "cmake":      "4.1.2",
+    "github-cli": "latest",
+    "go-task":    "3.45.5"
   },
   "env": {
     "POETRY_VIRTUALENVS_CREATE": "false",

@@ -2,6 +2,17 @@ version: '3'
 
 tasks:
 
+  github:auth:
+    desc: "Config a github access token"
+    vars:
+      TOKEN: '{{.CLI_ARGS}}'
+    silent: true
+    cmds: 
+    - git config --global --unset credential.helper || true
+    - git config --system --unset credential.helper || true
+    - rm -f ~/.git-credentials || true
+    - echo "{{.TOKEN}}" | gh auth login --with-token
+
   proto:list-files:
     desc: List all protobuf files in the src directory
     silent: true
