@@ -8,7 +8,7 @@ on:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
-  
+
 jobs:
   setup:
     name: Setup and Determine Version
@@ -54,7 +54,7 @@ jobs:
     steps:
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
       
       - name: Build release package
         uses: ./.github/actions/build-release
@@ -66,7 +66,7 @@ jobs:
 
       - name: Debug via tmate on failure
         if: ${{ failure() }}
-        uses: mxschmitt/action-tmate@v3
+        uses: mxschmitt/action-tmate@v3.23
         with:
           limit-access-to-actor: true
 
@@ -81,7 +81,7 @@ jobs:
     steps:
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
       
       - name: Test package
         uses: ./.github/actions/test-release
@@ -103,7 +103,7 @@ jobs:
     steps:
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
       
       - name: Publish release package
         uses: ./.github/actions/publish-release
