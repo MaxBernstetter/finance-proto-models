@@ -103,7 +103,7 @@ tasks:
       - task: clean:release:cpp
       - task: proto:build:cpp
     cmds:
-      - echo "Packaging release for version -> {{.PACKAGE_VERSION}}"
+      #- echo "Packaging release for version -> {{.PACKAGE_VERSION}}"
 
       # Create tmp folder for the package
       - mkdir -p $RELEASE_DIR/cpp
@@ -128,7 +128,7 @@ tasks:
       - task: clean:build:python
       - task: clean:release:python
     cmds:
-      - echo "Packaging release for version -> {{.PACKAGE_VERSION}}"
+      #- echo "Packaging release for version -> {{.PACKAGE_VERSION}}"
 
       # Create tmp folder for the package
       - mkdir -p $RELEASE_DIR/python
