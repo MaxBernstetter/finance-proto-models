@@ -28,8 +28,13 @@ runs:
       run: |
         if [ "${{ inputs.package }}" == "python" ]; then
           devbox run -- task release:package:python:${{ inputs.pypi_version }}
-        else
+        elif [ "${{ inputs.package }}" == "cpp" ]; then
           devbox run -- task release:package:cpp:${{ inputs.version }}
+        elif [ "${{ inputs.package }}" == "go" ]; then
+          devbox run -- task release:package:go:${{ inputs.version }}
+        else
+          echo "Invalid package type: ${{ inputs.package }}"
+          exit 1
         fi
     
     - name: Upload artifacts
