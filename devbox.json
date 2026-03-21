@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/jetpack-io/devbox/main/.schema/devbox.schema.json",
   "packages": {
     "python":     "3.12",
-    "poetry":     "latest",
+    "poetry":     "2.3.1",
     "clang":      "18.1.8",
     "conan":      "2.21.0",
     "protobuf":   "33.5",
