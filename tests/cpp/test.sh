@@ -2,9 +2,6 @@
 set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
-#rm -rf tmp
-#mkdir -p tmp
-#mkdir -p tmp/conan
 
 # Dedicated Conan state for this script run
 export CONAN_HOME="$SCRIPT_DIR/tmp/conan-home"

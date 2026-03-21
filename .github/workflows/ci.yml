@@ -48,7 +48,7 @@ jobs:
     needs: setup
     strategy:
       matrix:
-        package: [python, cpp]
+        package: [python, cpp, go]
     permissions:
       contents: read
     steps:

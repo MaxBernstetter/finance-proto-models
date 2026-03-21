@@ -96,8 +96,6 @@ tasks:
       - task: clean:release:cpp
       - task: proto:build:cpp
     cmds:
-      #- echo "Packaging release for version -> {{.PACKAGE_VERSION}}"
-
       # Create tmp folder for the package
       - mkdir -p $RELEASE_DIR/cpp
 
@@ -121,8 +119,6 @@ tasks:
       - task: clean:build:python
       - task: clean:release:python
     cmds:
-      #- echo "Packaging release for version -> {{.PACKAGE_VERSION}}"
-
       # Create tmp folder for the package
       - mkdir -p $RELEASE_DIR/python
 
@@ -133,6 +129,35 @@ tasks:
       - task uv:build:{{.PACKAGE_VERSION}}
       - cp $BUILD_DIR/python/dist/* $RELEASE_DIR/python/
 
+  release:package:go:*:
+    desc: Build Go package for release
+    silent: true
+    vars:
+      PACKAGE_VERSION: '{{index .MATCH 0}}'
+    deps:
+      - task: clean:build:go
+      - task: clean:release:go
+      - task: proto:build:go
+    cmds:
+      # Create tmp folder for the package
+      - mkdir -p $RELEASE_DIR/go/financepb
+      
+      # Model files are flat, but nested in the out-directory (specific to protoc-gen-go)
+      - find $BUILD_DIR/go -type f -exec cp {} $RELEASE_DIR/go/financepb \;
+
+      # Ship a proper Go module (matches option go_package in .proto files)
+      - cp $RESOURCES_DIR/go/go.mod $RELEASE_DIR/go/
+      - |
+        (cd $RELEASE_DIR/go && go mod tidy)
+
+      # Create a version.txt
+      - task release:create-version-txt:go:{{.PACKAGE_VERSION}}
+  
+      # Create the tarball
+      - tar -czf finance-proto-models-go.tar.gz -C $RELEASE_DIR/go .
+      - mv finance-proto-models-go.tar.gz $RELEASE_DIR/go/
+      #- find $RELEASE_DIR/go ! -name "*.tar.gz" -delete # Remove all files except the tarball
+
   release:package:all:*:
   
     desc: Build all packages for release
@@ -142,6 +167,7 @@ tasks:
     deps:
       - task: release:package:cpp:{{.PACKAGE_VERSION}}
       - task: release:package:py:{{.PACKAGE_VERSION}}
+      - task: release:package:go:{{.PACKAGE_VERSION}}
 
   test:*:
     desc: Test generated releases for the provided target [python, cpp]
