@@ -77,7 +77,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        package: [python, cpp]
+        package: [python, cpp, go]
     steps:
 
       - name: Checkout code
@@ -96,7 +96,7 @@ jobs:
     needs: [setup, build, test]
     strategy:
       matrix:
-        target: [python, cpp]
+        target: [python, cpp, go]
     permissions:
       contents: write
     if: always() && needs.build.result == 'success' && needs.test.result == 'success'
