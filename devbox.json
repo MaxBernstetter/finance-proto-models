@@ -8,7 +8,7 @@
     "protobuf":   "33.5",
     "cmake":      "4.1.2",
     "github-cli": "2.23.0",
-    "go-task":    "3.45.5"
+    "go-task":    "3.48.0"
   },
   "env": {
     "POETRY_VIRTUALENVS_CREATE": "false",
