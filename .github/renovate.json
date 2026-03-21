@@ -1,3 +1,12 @@
 {
-    "extends": ["config:recommended"]
-  }
+  "extends": ["config:recommended"],
+  "automerge": true,
+  "platformAutomerge": true,
+  "automergeType": "pr",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    }
+  ]
+}
