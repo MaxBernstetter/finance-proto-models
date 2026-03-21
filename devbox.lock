@@ -105,67 +105,67 @@
         }
       }
     },
-    "conan@2.21.0": {
-      "last_modified": "2025-12-11T04:04:52Z",
-      "resolved": "github:NixOS/nixpkgs/5d6bdbddb4695a62f0d00a3620b37a15275a5093#conan",
+    "conan@2.26.1": {
+      "last_modified": "2026-03-06T04:25:18Z",
+      "resolved": "github:NixOS/nixpkgs/e38213b91d3786389a446dfce4ff5a8aaf6012f2#conan",
       "source": "devbox-search",
-      "version": "2.21.0",
+      "version": "2.26.1",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/la9gwffgc7jq3zxa5ac4cx1qgnlmidyg-conan-2.21.0",
+              "path": "/nix/store/pmjg2prws7270qpl1xs9gajc6s9xjx0b-conan-2.26.1",
               "default": true
             },
             {
               "name": "dist",
-              "path": "/nix/store/imqll7vn9ysi8ym50sdgiwsn1lf9b2n2-conan-2.21.0-dist"
+              "path": "/nix/store/pjyz824bwm5j8v2xlh7ac9rqys4gcfry-conan-2.26.1-dist"
             }
           ],
-          "store_path": "/nix/store/la9gwffgc7jq3zxa5ac4cx1qgnlmidyg-conan-2.21.0"
+          "store_path": "/nix/store/pmjg2prws7270qpl1xs9gajc6s9xjx0b-conan-2.26.1"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/jl509fw9qvf1jb5cmws2hi3rg7f3vp43-conan-2.21.0",
+              "path": "/nix/store/h39j7pzfmczpbwwl7fxyjyi0m8swyqbd-conan-2.26.1",
               "default": true
             },
             {
               "name": "dist",
-              "path": "/nix/store/zy6v6w9965l9pchrbc7irvb9mw2cw2ri-conan-2.21.0-dist"
+              "path": "/nix/store/0kj839an661q2iq380zwhg9f4j7n8r2a-conan-2.26.1-dist"
             }
           ],
-          "store_path": "/nix/store/jl509fw9qvf1jb5cmws2hi3rg7f3vp43-conan-2.21.0"
+          "store_path": "/nix/store/h39j7pzfmczpbwwl7fxyjyi0m8swyqbd-conan-2.26.1"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/dyjkqv3rvmq1b7v9fkgp3w55rqjbdrxv-conan-2.21.0",
+              "path": "/nix/store/8dxffa7dcnzi114p9kjq72qfmsq3rpa6-conan-2.26.1",
               "default": true
             },
             {
               "name": "dist",
-              "path": "/nix/store/qc4fq3szjkbjd3lvx2xdpq773yi2wn8y-conan-2.21.0-dist"
+              "path": "/nix/store/wpfd3n3yafgxdp7im6l7zh77ixkjp0la-conan-2.26.1-dist"
             }
           ],
-          "store_path": "/nix/store/dyjkqv3rvmq1b7v9fkgp3w55rqjbdrxv-conan-2.21.0"
+          "store_path": "/nix/store/8dxffa7dcnzi114p9kjq72qfmsq3rpa6-conan-2.26.1"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/1zfjpi0yyzzhzzj41syy74ijyc2kahvh-conan-2.21.0",
+              "path": "/nix/store/qjbk08l6w1gs22imrqb4hzb2apnl5jgf-conan-2.26.1",
               "default": true
             },
             {
               "name": "dist",
-              "path": "/nix/store/6nfnap083kcwrr48bxrx8xsasb97j6jg-conan-2.21.0-dist"
+              "path": "/nix/store/1jymc37fs4hsm69kjf0ccgcxwjnc36kj-conan-2.26.1-dist"
             }
           ],
-          "store_path": "/nix/store/1zfjpi0yyzzhzzj41syy74ijyc2kahvh-conan-2.21.0"
+          "store_path": "/nix/store/qjbk08l6w1gs22imrqb4hzb2apnl5jgf-conan-2.26.1"
         }
       }
     },

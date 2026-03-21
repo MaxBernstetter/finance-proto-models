@@ -4,7 +4,7 @@
     "python":     "3.12",
     "poetry":     "2.3.1",
     "clang":      "21.1.8",
-    "conan":      "2.21.0",
+    "conan":      "2.26.1",
     "protobuf":   "33.5",
     "cmake":      "4.1.2",
     "github-cli": "2.23.0",
