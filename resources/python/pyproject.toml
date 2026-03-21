@@ -1,19 +1,21 @@
-[tool.poetry]
+[project]
 name = "finance-proto-models-py"
 version = "0.0.0"
 description = "Python bindings for finance-proto-models protobuf definitions"
-authors = ["Max Bernstetter <max.bernstetter@gmx.net>"]
+authors = [
+  { name = "Max Bernstetter", email = "max.bernstetter@gmx.net" },
+]
 readme = "README.md"
-package-mode = true
-packages = [{ include = "finance_proto_models" }]
-
-[tool.poetry.dependencies]
-python = "^3.12"
-# The 3.21.x protoc/libprotobuf generation line maps to Python 4.21.x runtime line
-# The 33.5 protoc/libprotobuf generation line maps to Python 6.33.5 runtime line
-# https://protobuf.dev/support/version-support/
-protobuf = { version = "^6.33.5", markers = "python_version >= '3.12'" }
+requires-python = ">=3.12"
+dependencies = [
+  # The 33.5 protoc/libprotobuf generation line maps to Python 6.33.5 runtime line
+  # https://protobuf.dev/support/version-support/
+  "protobuf>=6.33.5,<7",
+]
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+only-include = ["finance_proto_models"]

@@ -38,11 +38,11 @@ tasks:
           protoc -I $DEVBOX_PROJECT_ROOT/src --{{.TARGET}}_out=$BUILD_DIR/{{.TARGET}} $file
         done
 
-  poetry:install:
-    desc: Install dependencies
-    cmd: poetry install
+  uv:install:
+    desc: Install Python package dependencies (dev)
+    cmd: uv sync --project $RESOURCES_DIR/python
 
-  poetry:build:*:
+  uv:build:*:
     desc: Build the protobuf python package
     silent: true
     deps:
@@ -52,6 +52,10 @@ tasks:
     cmds:
     - echo $BUILD_DIR
     - cp -r $RESOURCES_DIR/python/pyproject.toml $RESOURCES_DIR/python/README.md $BUILD_DIR/python
+    - |
+      if [ -f "$RESOURCES_DIR/python/uv.lock" ]; then
+        cp "$RESOURCES_DIR/python/uv.lock" "$BUILD_DIR/python/"
+      fi
     - mkdir -p $BUILD_DIR/python/finance_proto_models
     - |
       find "$BUILD_DIR/python" \
@@ -59,12 +63,12 @@ tasks:
         -maxdepth 1 \
         ! -name "pyproject.toml" \
         ! -name "README.md" \
+        ! -name "uv.lock" \
         ! -name "finance_proto_models" \
         -exec mv {} "$BUILD_DIR/python/finance_proto_models/" \;
 
-
-    - poetry version {{.VERSION}} --directory $BUILD_DIR/python
-    - poetry build --directory $BUILD_DIR/python
+    - uv version {{.VERSION}} --project $BUILD_DIR/python
+    - uv build --project $BUILD_DIR/python
 
   clean:build:*:
     vars:
@@ -137,7 +141,7 @@ tasks:
       - task release:create-version-txt:python:{{.PACKAGE_VERSION}}
 
       # Build the package
-      - task poetry:build:{{.PACKAGE_VERSION}}
+      - task uv:build:{{.PACKAGE_VERSION}}
       - cp $BUILD_DIR/python/dist/* $RELEASE_DIR/python/
 
   release:package:all:*:

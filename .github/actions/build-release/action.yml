@@ -23,19 +23,19 @@ runs:
         enable-cache: 'true'
         devbox-version: 0.16.0
      
-    # - name: Build package
-    #   shell: bash
-    #   run: |
-    #     if [ "${{ inputs.package }}" == "python" ]; then
-    #       devbox run -- task release:package:python:${{ inputs.pypi_version }}
-    #     else
-    #       devbox run -- task release:package:cpp:${{ inputs.version }}
-    #     fi
+    - name: Build package
+      shell: bash
+      run: |
+        if [ "${{ inputs.package }}" == "python" ]; then
+          devbox run -- task release:package:python:${{ inputs.pypi_version }}
+        else
+          devbox run -- task release:package:cpp:${{ inputs.version }}
+        fi
     
-    # - name: Upload artifacts
-    #   uses: actions/upload-artifact@v7.0.0
-    #   with:
-    #     name: finance-proto-models-${{ inputs.package }}-${{ inputs.display_version }}
-    #     path: |
-    #       release/${{ inputs.package }}/*
-    #     retention-days: 1
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v7.0.0
+      with:
+        name: finance-proto-models-${{ inputs.package }}-${{ inputs.display_version }}
+        path: |
+          release/${{ inputs.package }}/*
+        retention-days: 1
