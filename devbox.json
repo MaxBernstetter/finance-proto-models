@@ -7,7 +7,7 @@
     "conan":      "2.21.0",
     "protobuf":   "33.5",
     "cmake":      "4.1.2",
-    "github-cli": "latest",
+    "github-cli": "0.12.0",
     "go-task":    "3.45.5"
   },
   "env": {
