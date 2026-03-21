@@ -22,8 +22,9 @@
 *.dylib
 *.dll
 
-# Fortran module files
+# Fortran module files (exclude go.mod — same suffix)
 *.mod
+!**/go.mod
 *.smod
 
 # Compiled Static libraries
