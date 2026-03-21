@@ -15,7 +15,7 @@
     "RESOURCES_DIR":             "$DEVBOX_PROJECT_ROOT/resources",
     "RELEASE_DIR":               "$DEVBOX_PROJECT_ROOT/release",
     "BUILD_DIR":                 "$DEVBOX_PROJECT_ROOT/build",
-    "CLANG_VERSION":             "18.1.8",
+    "CLANG_VERSION":             "21.1.8",
     "PROTO_VERSION":             "33.5",
     "CONAN_PROTOBUF_VERSION":    "6.33.5"
   }
