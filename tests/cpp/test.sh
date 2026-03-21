@@ -2,31 +2,66 @@
 set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
+#rm -rf tmp
+#mkdir -p tmp
+#mkdir -p tmp/conan
 
-# Rebuild & run the container
-docker build -f cpp-env.Dockerfile \
-  --build-arg CLANG_VERSION="${CLANG_VERSION}" \
-  --build-arg PROTO_VERSION="${PROTO_VERSION}" \
-  -t cpp-test-image .
+# Dedicated Conan state for this script run
+export CONAN_HOME="$SCRIPT_DIR/tmp/conan-home"
+#rm -rf "$CONAN_HOME"
+mkdir -p "$CONAN_HOME/profiles"
 
-docker rm -f cpp-tests-runner > /dev/null 2>&1 || true
-docker run -d --name cpp-tests-runner --network none cpp-test-image
+# Ensure remote exists in THIS Conan home
+conan remote add conancenter https://center2.conan.io --force
+conan remote enable conancenter
 
-# Clean
-docker exec cpp-tests-runner rm -rf /build/* src/*
+PROFILE_NAME="clang18-local"
+cat > "$CONAN_HOME/profiles/$PROFILE_NAME" <<'EOF'
+[settings]
+os=Linux
+arch=x86_64
+build_type=Release
+compiler=clang
+compiler.version=18
+compiler.libcxx=libstdc++11
+compiler.cppstd=20
+
+[conf]
+tools.build:compiler_executables={"c":"clang","cpp":"clang++"}
+EOF
+
+conan install \
+  --requires="protobuf/${CONAN_PROTOBUF_VERSION}" \
+  --output-folder=tmp/conan \
+  --build=missing \
+  -g VirtualBuildEnv \
+  -g AutotoolsDeps \
+  -pr:h="$PROFILE_NAME" \
+  -pr:b="$PROFILE_NAME"
+
+# Export env vars so pkg-config sees Conan metadata/libs
+source tmp/conan/conanbuild.sh
+source tmp/conan/conanautotoolsdeps.sh
 
 # Add some basic testing code (import & enum access)
-docker exec cpp-tests-runner bash -c 'printf "%s\n" "#include \"finance-proto-models/provider/enum_provider.pb.h\"" "" "int main() { return FinanceProtobufModels::Provider::COINBASE; }" > /src/main.cpp'
+printf "%s\n" "#include \"finance-proto-models/provider/enum_provider.pb.h\"" "" "int main() { return FinanceProtobufModels::Provider::COINBASE; }" > ./tmp/main.cpp
 
 # Copy and prepare compiled protobuf files
-docker cp $RELEASE_DIR/cpp/. cpp-tests-runner:/src/
-docker exec cpp-tests-runner tar -xzf /src/finance-proto-models-cpp.tar.gz -C /src
+cp -r $RELEASE_DIR/cpp/. ./tmp/
+tar -xzf ./tmp/finance-proto-models-cpp.tar.gz -C ./tmp
 
 # Compile - using compiler flags from the environment
 # Include main.cpp
 # Include all protobuf files
-# Link against protobuf library
-docker exec cpp-tests-runner bash -c 'clang++ -std=c++20 -lprotobuf -pthread -I/src/finance-proto-models -o /build/test-program /src/main.cpp $(find /src/finance-proto-models -name "*.cc") -lprotobuf'
+clang++ \
+  -std=c++20 \
+  -pthread \
+  -I./tmp/finance-proto-models \
+  $CPPFLAGS $CXXFLAGS \
+  -o ./tmp/test-program \
+  ./tmp/main.cpp \
+  $(find ./tmp/finance-proto-models -name "*.cc") \
+  $LDFLAGS $LIBS
 
 # Run the test program
-docker exec cpp-tests-runner /build/test-program
+./tmp/test-program
