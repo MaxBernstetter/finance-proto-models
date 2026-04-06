@@ -96,9 +96,9 @@ const char descriptor_table_protodef_envelope_2eproto[] ABSL_ATTRIBUTE_SECTION_V
     "V\n\021aggregationWindow\030\003 \001(\0162(.FinanceProt"
     "obufModels.AggregationWindowR\021aggregatio"
     "nWindow\022:\n\007payload\030\004 \001(\0132 .FinanceProtob"
-    "ufModels.PriceDataR\007payloadBKZIgithub.co"
+    "ufModels.PriceDataR\007payloadBMZKgithub.co"
     "m/MaxBernstetter/finance-proto-models/ge"
-    "n/go/financepb;financepbb\006proto3"
+    "n/go/envelopepb;envelopepbb\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
     descriptor_table_envelope_2eproto_deps[4] = {
@@ -111,7 +111,7 @@ static ::absl::once_flag descriptor_table_envelope_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_envelope_2eproto = {
     false,
     false,
-    552,
+    554,
     descriptor_table_protodef_envelope_2eproto,
     "envelope.proto",
     &descriptor_table_envelope_2eproto_once,
