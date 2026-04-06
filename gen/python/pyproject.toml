@@ -2,9 +2,7 @@
 name = "finance-proto-models-py"
 version = "0.0.0"
 description = "Python bindings for finance-proto-models protobuf definitions"
-authors = [
-  { name = "Max Bernstetter", email = "max.bernstetter@gmx.net" },
-]
+authors = [{ name = "Max Bernstetter", email = "max.bernstetter@gmx.net" }]
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
