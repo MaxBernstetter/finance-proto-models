@@ -24,14 +24,14 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%metrics/enum_aggregation_window.proto\x12\x15\x46inanceProtobufModels*u\n\x11\x41ggregationWindow\x12\x08\n\x04NONE\x10\x00\x12\x0e\n\nONE_SECOND\x10\x01\x12\x12\n\x0eTHIRTY_SECONDS\x10\x02\x12\x10\n\x0c\x46IVE_MINUTES\x10\x03\x12\x12\n\x0eTHIRTY_MINUTES\x10\x04\x12\x0c\n\x08ONE_HOUR\x10\x05\x42:Z8github.com/MaxBernstetter/finance-proto-models/financepbb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%metrics/enum_aggregation_window.proto\x12\x15\x46inanceProtobufModels*u\n\x11\x41ggregationWindow\x12\x08\n\x04NONE\x10\x00\x12\x0e\n\nONE_SECOND\x10\x01\x12\x12\n\x0eTHIRTY_SECONDS\x10\x02\x12\x10\n\x0c\x46IVE_MINUTES\x10\x03\x12\x12\n\x0eTHIRTY_MINUTES\x10\x04\x12\x0c\n\x08ONE_HOUR\x10\x05\x42\x41Z?github.com/MaxBernstetter/finance-proto-models/financepb/metricb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'metrics.enum_aggregation_window_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'Z8github.com/MaxBernstetter/finance-proto-models/financepb'
+  _globals['DESCRIPTOR']._serialized_options = b'Z?github.com/MaxBernstetter/finance-proto-models/financepb/metric'
   _globals['_AGGREGATIONWINDOW']._serialized_start=64
   _globals['_AGGREGATIONWINDOW']._serialized_end=181
 # @@protoc_insertion_point(module_scope)
