@@ -1,4 +1,4 @@
-module github.com/MaxBernstetter/finance-proto-models/gen/go
+module github.com/MaxBernstetter/finance-proto-models
 
 go 1.26
 
