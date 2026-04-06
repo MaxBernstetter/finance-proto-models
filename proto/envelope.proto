@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package FinanceProtobufModels;
-option go_package = "github.com/MaxBernstetter/finance-proto-models/financepb/envelope";
+option go_package = "github.com/MaxBernstetter/finance-proto-models/financepb";
 
 // Import the required message and enum definitions
 import "metrics/price.proto";

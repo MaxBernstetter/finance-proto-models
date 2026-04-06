@@ -4,11 +4,9 @@
 // 	protoc        (unknown)
 // source: envelope.proto
 
-package envelope
+package financepb
 
 import (
-	metric "github.com/MaxBernstetter/finance-proto-models/financepb/metric"
-	provider "github.com/MaxBernstetter/finance-proto-models/financepb/provider"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -27,10 +25,10 @@ type PriceAggregationEnvelope struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Provider          provider.Provider        `protobuf:"varint,1,opt,name=provider,proto3,enum=FinanceProtobufModels.Provider" json:"provider,omitempty"`
-	MetricType        metric.MetricType        `protobuf:"varint,2,opt,name=metricType,proto3,enum=FinanceProtobufModels.MetricType" json:"metricType,omitempty"`
-	AggregationWindow metric.AggregationWindow `protobuf:"varint,3,opt,name=aggregationWindow,proto3,enum=FinanceProtobufModels.AggregationWindow" json:"aggregationWindow,omitempty"`
-	Payload           *metric.PriceData        `protobuf:"bytes,4,opt,name=payload,proto3" json:"payload,omitempty"`
+	Provider          Provider          `protobuf:"varint,1,opt,name=provider,proto3,enum=FinanceProtobufModels.Provider" json:"provider,omitempty"`
+	MetricType        MetricType        `protobuf:"varint,2,opt,name=metricType,proto3,enum=FinanceProtobufModels.MetricType" json:"metricType,omitempty"`
+	AggregationWindow AggregationWindow `protobuf:"varint,3,opt,name=aggregationWindow,proto3,enum=FinanceProtobufModels.AggregationWindow" json:"aggregationWindow,omitempty"`
+	Payload           *PriceData        `protobuf:"bytes,4,opt,name=payload,proto3" json:"payload,omitempty"`
 }
 
 func (x *PriceAggregationEnvelope) Reset() {
@@ -65,28 +63,28 @@ func (*PriceAggregationEnvelope) Descriptor() ([]byte, []int) {
 	return file_envelope_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *PriceAggregationEnvelope) GetProvider() provider.Provider {
+func (x *PriceAggregationEnvelope) GetProvider() Provider {
 	if x != nil {
 		return x.Provider
 	}
-	return provider.Provider(0)
+	return Provider_COINBASE
 }
 
-func (x *PriceAggregationEnvelope) GetMetricType() metric.MetricType {
+func (x *PriceAggregationEnvelope) GetMetricType() MetricType {
 	if x != nil {
 		return x.MetricType
 	}
-	return metric.MetricType(0)
+	return MetricType_PRICE_RAW
 }
 
-func (x *PriceAggregationEnvelope) GetAggregationWindow() metric.AggregationWindow {
+func (x *PriceAggregationEnvelope) GetAggregationWindow() AggregationWindow {
 	if x != nil {
 		return x.AggregationWindow
 	}
-	return metric.AggregationWindow(0)
+	return AggregationWindow_NONE
 }
 
-func (x *PriceAggregationEnvelope) GetPayload() *metric.PriceData {
+func (x *PriceAggregationEnvelope) GetPayload() *PriceData {
 	if x != nil {
 		return x.Payload
 	}
@@ -125,11 +123,11 @@ var file_envelope_proto_rawDesc = []byte{
 	0x61, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x46, 0x69, 0x6e, 0x61, 0x6e,
 	0x63, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x73,
 	0x2e, 0x50, 0x72, 0x69, 0x63, 0x65, 0x44, 0x61, 0x74, 0x61, 0x52, 0x07, 0x70, 0x61, 0x79, 0x6c,
-	0x6f, 0x61, 0x64, 0x42, 0x43, 0x5a, 0x41, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
+	0x6f, 0x61, 0x64, 0x42, 0x3a, 0x5a, 0x38, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
 	0x6d, 0x2f, 0x4d, 0x61, 0x78, 0x42, 0x65, 0x72, 0x6e, 0x73, 0x74, 0x65, 0x74, 0x74, 0x65, 0x72,
 	0x2f, 0x66, 0x69, 0x6e, 0x61, 0x6e, 0x63, 0x65, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2d, 0x6d,
-	0x6f, 0x64, 0x65, 0x6c, 0x73, 0x2f, 0x66, 0x69, 0x6e, 0x61, 0x6e, 0x63, 0x65, 0x70, 0x62, 0x2f,
-	0x65, 0x6e, 0x76, 0x65, 0x6c, 0x6f, 0x70, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6f, 0x64, 0x65, 0x6c, 0x73, 0x2f, 0x66, 0x69, 0x6e, 0x61, 0x6e, 0x63, 0x65, 0x70, 0x62, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -147,10 +145,10 @@ func file_envelope_proto_rawDescGZIP() []byte {
 var file_envelope_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_envelope_proto_goTypes = []interface{}{
 	(*PriceAggregationEnvelope)(nil), // 0: FinanceProtobufModels.PriceAggregationEnvelope
-	(provider.Provider)(0),           // 1: FinanceProtobufModels.Provider
-	(metric.MetricType)(0),           // 2: FinanceProtobufModels.MetricType
-	(metric.AggregationWindow)(0),    // 3: FinanceProtobufModels.AggregationWindow
-	(*metric.PriceData)(nil),         // 4: FinanceProtobufModels.PriceData
+	(Provider)(0),                    // 1: FinanceProtobufModels.Provider
+	(MetricType)(0),                  // 2: FinanceProtobufModels.MetricType
+	(AggregationWindow)(0),           // 3: FinanceProtobufModels.AggregationWindow
+	(*PriceData)(nil),                // 4: FinanceProtobufModels.PriceData
 }
 var file_envelope_proto_depIdxs = []int32{
 	1, // 0: FinanceProtobufModels.PriceAggregationEnvelope.provider:type_name -> FinanceProtobufModels.Provider
@@ -169,6 +167,10 @@ func file_envelope_proto_init() {
 	if File_envelope_proto != nil {
 		return
 	}
+	file_metrics_price_proto_init()
+	file_metrics_enum_aggregation_window_proto_init()
+	file_metrics_enum_metric_types_proto_init()
+	file_provider_enum_provider_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_envelope_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PriceAggregationEnvelope); i {

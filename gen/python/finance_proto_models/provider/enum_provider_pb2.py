@@ -24,14 +24,14 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1cprovider/enum_provider.proto\x12\x15\x46inanceProtobufModels*\x18\n\x08Provider\x12\x0c\n\x08\x43OINBASE\x10\x00\x42\x43ZAgithub.com/MaxBernstetter/finance-proto-models/financepb/providerb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1cprovider/enum_provider.proto\x12\x15\x46inanceProtobufModels*\x18\n\x08Provider\x12\x0c\n\x08\x43OINBASE\x10\x00\x42:Z8github.com/MaxBernstetter/finance-proto-models/financepbb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'provider.enum_provider_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'ZAgithub.com/MaxBernstetter/finance-proto-models/financepb/provider'
+  _globals['DESCRIPTOR']._serialized_options = b'Z8github.com/MaxBernstetter/finance-proto-models/financepb'
   _globals['_PROVIDER']._serialized_start=55
   _globals['_PROVIDER']._serialized_end=79
 # @@protoc_insertion_point(module_scope)

@@ -41,15 +41,15 @@ const char descriptor_table_protodef_metrics_2fenum_5faggregation_5fwindow_2epro
     "\025FinanceProtobufModels*u\n\021AggregationWin"
     "dow\022\010\n\004NONE\020\000\022\016\n\nONE_SECOND\020\001\022\022\n\016THIRTY_"
     "SECONDS\020\002\022\020\n\014FIVE_MINUTES\020\003\022\022\n\016THIRTY_MI"
-    "NUTES\020\004\022\014\n\010ONE_HOUR\020\005BAZ\?github.com/MaxB"
+    "NUTES\020\004\022\014\n\010ONE_HOUR\020\005B:Z8github.com/MaxB"
     "ernstetter/finance-proto-models/financep"
-    "b/metricb\006proto3"
+    "bb\006proto3"
 };
 static ::absl::once_flag descriptor_table_metrics_2fenum_5faggregation_5fwindow_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_metrics_2fenum_5faggregation_5fwindow_2eproto = {
     false,
     false,
-    256,
+    249,
     descriptor_table_protodef_metrics_2fenum_5faggregation_5fwindow_2eproto,
     "metrics/enum_aggregation_window.proto",
     &descriptor_table_metrics_2fenum_5faggregation_5fwindow_2eproto_once,

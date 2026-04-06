@@ -39,14 +39,14 @@ const char descriptor_table_protodef_provider_2fenum_5fprovider_2eproto[] ABSL_A
     protodesc_cold) = {
     "\n\034provider/enum_provider.proto\022\025FinanceP"
     "rotobufModels*\030\n\010Provider\022\014\n\010COINBASE\020\000B"
-    "CZAgithub.com/MaxBernstetter/finance-pro"
-    "to-models/financepb/providerb\006proto3"
+    ":Z8github.com/MaxBernstetter/finance-pro"
+    "to-models/financepbb\006proto3"
 };
 static ::absl::once_flag descriptor_table_provider_2fenum_5fprovider_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_provider_2fenum_5fprovider_2eproto = {
     false,
     false,
-    156,
+    147,
     descriptor_table_protodef_provider_2fenum_5fprovider_2eproto,
     "provider/enum_provider.proto",
     &descriptor_table_provider_2fenum_5fprovider_2eproto_once,
