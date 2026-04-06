@@ -7,7 +7,6 @@
 package envelopepb
 
 import (
-	financepb "github.com/MaxBernstetter/finance-proto-models/gen/go/financepb"
 	metricpb "github.com/MaxBernstetter/finance-proto-models/gen/go/metricpb"
 	providerpb "github.com/MaxBernstetter/finance-proto-models/gen/go/providerpb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -31,7 +30,7 @@ type PriceAggregationEnvelope struct {
 	Provider          providerpb.Provider        `protobuf:"varint,1,opt,name=provider,proto3,enum=FinanceProtobufModels.Provider" json:"provider,omitempty"`
 	MetricType        metricpb.MetricType        `protobuf:"varint,2,opt,name=metricType,proto3,enum=FinanceProtobufModels.MetricType" json:"metricType,omitempty"`
 	AggregationWindow metricpb.AggregationWindow `protobuf:"varint,3,opt,name=aggregationWindow,proto3,enum=FinanceProtobufModels.AggregationWindow" json:"aggregationWindow,omitempty"`
-	Payload           *financepb.PriceData       `protobuf:"bytes,4,opt,name=payload,proto3" json:"payload,omitempty"`
+	Payload           *metricpb.PriceData        `protobuf:"bytes,4,opt,name=payload,proto3" json:"payload,omitempty"`
 }
 
 func (x *PriceAggregationEnvelope) Reset() {
@@ -87,7 +86,7 @@ func (x *PriceAggregationEnvelope) GetAggregationWindow() metricpb.AggregationWi
 	return metricpb.AggregationWindow(0)
 }
 
-func (x *PriceAggregationEnvelope) GetPayload() *financepb.PriceData {
+func (x *PriceAggregationEnvelope) GetPayload() *metricpb.PriceData {
 	if x != nil {
 		return x.Payload
 	}
@@ -152,7 +151,7 @@ var file_envelope_proto_goTypes = []interface{}{
 	(providerpb.Provider)(0),         // 1: FinanceProtobufModels.Provider
 	(metricpb.MetricType)(0),         // 2: FinanceProtobufModels.MetricType
 	(metricpb.AggregationWindow)(0),  // 3: FinanceProtobufModels.AggregationWindow
-	(*financepb.PriceData)(nil),      // 4: FinanceProtobufModels.PriceData
+	(*metricpb.PriceData)(nil),       // 4: FinanceProtobufModels.PriceData
 }
 var file_envelope_proto_depIdxs = []int32{
 	1, // 0: FinanceProtobufModels.PriceAggregationEnvelope.provider:type_name -> FinanceProtobufModels.Provider

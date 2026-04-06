@@ -214,15 +214,15 @@ const char descriptor_table_protodef_metrics_2fprice_2eproto[] ABSL_ATTRIBUTE_SE
     "otobufModels.PriceRawH\000R\010priceRaw\022U\n\020pri"
     "ceAggregation\030\002 \001(\0132\'.FinanceProtobufMod"
     "els.PriceAggregationH\000R\020priceAggregation"
-    "B\013\n\tpriceDataBKZIgithub.com/MaxBernstett"
-    "er/finance-proto-models/gen/go/financepb"
-    ";financepbb\006proto3"
+    "B\013\n\tpriceDataBIZGgithub.com/MaxBernstett"
+    "er/finance-proto-models/gen/go/metricpb;"
+    "metricpbb\006proto3"
 };
 static ::absl::once_flag descriptor_table_metrics_2fprice_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_metrics_2fprice_2eproto = {
     false,
     false,
-    698,
+    696,
     descriptor_table_protodef_metrics_2fprice_2eproto,
     "metrics/price.proto",
     &descriptor_table_metrics_2fprice_2eproto_once,

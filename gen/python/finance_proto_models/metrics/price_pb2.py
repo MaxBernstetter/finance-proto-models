@@ -24,14 +24,14 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13metrics/price.proto\x12\x15\x46inanceProtobufModels\"I\n\rPriceMetaData\x12 \n\x0btimestampMs\x18\x01 \x01(\x04R\x0btimestampMs\x12\x16\n\x06symbol\x18\x02 \x01(\tR\x06symbol\"b\n\x08PriceRaw\x12@\n\x08metaData\x18\x01 \x01(\x0b\x32$.FinanceProtobufModels.PriceMetaDataR\x08metaData\x12\x14\n\x05price\x18\x02 \x01(\x02R\x05price\"\xd6\x01\n\x10PriceAggregation\x12@\n\x08metaData\x18\x01 \x01(\x0b\x32$.FinanceProtobufModels.PriceMetaDataR\x08metaData\x12\x30\n\x13\x61ggregationWindowMs\x18\x02 \x01(\x04R\x13\x61ggregationWindowMs\x12\x12\n\x04open\x18\x03 \x01(\x02R\x04open\x12\x14\n\x05\x63lose\x18\x04 \x01(\x02R\x05\x63lose\x12\x12\n\x04high\x18\x05 \x01(\x02R\x04high\x12\x10\n\x03low\x18\x06 \x01(\x02R\x03low\"\xae\x01\n\tPriceData\x12=\n\x08priceRaw\x18\x01 \x01(\x0b\x32\x1f.FinanceProtobufModels.PriceRawH\x00R\x08priceRaw\x12U\n\x10priceAggregation\x18\x02 \x01(\x0b\x32\'.FinanceProtobufModels.PriceAggregationH\x00R\x10priceAggregationB\x0b\n\tpriceDataBKZIgithub.com/MaxBernstetter/finance-proto-models/gen/go/financepb;financepbb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13metrics/price.proto\x12\x15\x46inanceProtobufModels\"I\n\rPriceMetaData\x12 \n\x0btimestampMs\x18\x01 \x01(\x04R\x0btimestampMs\x12\x16\n\x06symbol\x18\x02 \x01(\tR\x06symbol\"b\n\x08PriceRaw\x12@\n\x08metaData\x18\x01 \x01(\x0b\x32$.FinanceProtobufModels.PriceMetaDataR\x08metaData\x12\x14\n\x05price\x18\x02 \x01(\x02R\x05price\"\xd6\x01\n\x10PriceAggregation\x12@\n\x08metaData\x18\x01 \x01(\x0b\x32$.FinanceProtobufModels.PriceMetaDataR\x08metaData\x12\x30\n\x13\x61ggregationWindowMs\x18\x02 \x01(\x04R\x13\x61ggregationWindowMs\x12\x12\n\x04open\x18\x03 \x01(\x02R\x04open\x12\x14\n\x05\x63lose\x18\x04 \x01(\x02R\x05\x63lose\x12\x12\n\x04high\x18\x05 \x01(\x02R\x04high\x12\x10\n\x03low\x18\x06 \x01(\x02R\x03low\"\xae\x01\n\tPriceData\x12=\n\x08priceRaw\x18\x01 \x01(\x0b\x32\x1f.FinanceProtobufModels.PriceRawH\x00R\x08priceRaw\x12U\n\x10priceAggregation\x18\x02 \x01(\x0b\x32\'.FinanceProtobufModels.PriceAggregationH\x00R\x10priceAggregationB\x0b\n\tpriceDataBIZGgithub.com/MaxBernstetter/finance-proto-models/gen/go/metricpb;metricpbb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'metrics.price_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'ZIgithub.com/MaxBernstetter/finance-proto-models/gen/go/financepb;financepb'
+  _globals['DESCRIPTOR']._serialized_options = b'ZGgithub.com/MaxBernstetter/finance-proto-models/gen/go/metricpb;metricpb'
   _globals['_PRICEMETADATA']._serialized_start=46
   _globals['_PRICEMETADATA']._serialized_end=119
   _globals['_PRICERAW']._serialized_start=121
