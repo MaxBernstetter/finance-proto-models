@@ -1,6 +1,6 @@
 syntax = "proto3";
 package FinanceProtobufModels;
-option go_package = "github.com/MaxBernstetter/finance-proto-models/financepb";
+option go_package = "github.com/MaxBernstetter/finance-proto-models/gen/go/financepb;financepb";
 
 enum AggregationWindow {
 

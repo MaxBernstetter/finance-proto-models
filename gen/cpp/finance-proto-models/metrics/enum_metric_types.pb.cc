@@ -41,15 +41,16 @@ const char descriptor_table_protodef_metrics_2fenum_5fmetric_5ftypes_2eproto[] A
     "ceProtobufModels*\213\001\n\nMetricType\022\r\n\tPRICE"
     "_RAW\020\000\022\024\n\020PRICE_AGGREGATED\020\001\022!\n\035PRICE_AG"
     "GREGATED_INTERPOLATED\020\002\022\023\n\017PRICE_STATIST"
-    "IC\020\003\022 \n\034PRICE_STATISTIC_INTERPOLATED\020\004B:"
-    "Z8github.com/MaxBernstetter/finance-prot"
-    "o-models/financepbb\006proto3"
+    "IC\020\003\022 \n\034PRICE_STATISTIC_INTERPOLATED\020\004BK"
+    "ZIgithub.com/MaxBernstetter/finance-prot"
+    "o-models/gen/go/financepb;financepbb\006pro"
+    "to3"
 };
 static ::absl::once_flag descriptor_table_metrics_2fenum_5fmetric_5ftypes_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_metrics_2fenum_5fmetric_5ftypes_2eproto = {
     false,
     false,
-    266,
+    283,
     descriptor_table_protodef_metrics_2fenum_5fmetric_5ftypes_2eproto,
     "metrics/enum_metric_types.proto",
     &descriptor_table_metrics_2fenum_5fmetric_5ftypes_2eproto_once,
