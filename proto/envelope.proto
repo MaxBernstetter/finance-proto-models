@@ -1,13 +1,11 @@
 syntax = "proto3";
 
 package FinanceProtobufModels;
-option go_package = "github.com/MaxBernstetter/finance-proto-models/gen/go/envelopepb;envelopepb";
+option go_package = "github.com/MaxBernstetter/finance-proto-models/gen/go/financepb";
 
 // Import the required message and enum definitions
-import "metrics/price.proto";
-import "metrics/enum_aggregation_window.proto";
-import "metrics/enum_metric_types.proto";
-import "provider/enum_provider.proto";
+import "price.proto";
+import "enum.proto";
 
 
 message PriceAggregationEnvelope {

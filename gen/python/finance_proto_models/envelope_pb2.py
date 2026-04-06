@@ -22,20 +22,18 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
-from metrics import price_pb2 as metrics_dot_price__pb2
-from metrics import enum_aggregation_window_pb2 as metrics_dot_enum__aggregation__window__pb2
-from metrics import enum_metric_types_pb2 as metrics_dot_enum__metric__types__pb2
-from provider import enum_provider_pb2 as provider_dot_enum__provider__pb2
+import price_pb2 as price__pb2
+import enum_pb2 as enum__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0e\x65nvelope.proto\x12\x15\x46inanceProtobufModels\x1a\x13metrics/price.proto\x1a%metrics/enum_aggregation_window.proto\x1a\x1fmetrics/enum_metric_types.proto\x1a\x1cprovider/enum_provider.proto\"\xae\x02\n\x18PriceAggregationEnvelope\x12;\n\x08provider\x18\x01 \x01(\x0e\x32\x1f.FinanceProtobufModels.ProviderR\x08provider\x12\x41\n\nmetricType\x18\x02 \x01(\x0e\x32!.FinanceProtobufModels.MetricTypeR\nmetricType\x12V\n\x11\x61ggregationWindow\x18\x03 \x01(\x0e\x32(.FinanceProtobufModels.AggregationWindowR\x11\x61ggregationWindow\x12:\n\x07payload\x18\x04 \x01(\x0b\x32 .FinanceProtobufModels.PriceDataR\x07payloadBMZKgithub.com/MaxBernstetter/finance-proto-models/gen/go/envelopepb;envelopepbb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0e\x65nvelope.proto\x12\x15\x46inanceProtobufModels\x1a\x0bprice.proto\x1a\nenum.proto\"\xae\x02\n\x18PriceAggregationEnvelope\x12;\n\x08provider\x18\x01 \x01(\x0e\x32\x1f.FinanceProtobufModels.ProviderR\x08provider\x12\x41\n\nmetricType\x18\x02 \x01(\x0e\x32!.FinanceProtobufModels.MetricTypeR\nmetricType\x12V\n\x11\x61ggregationWindow\x18\x03 \x01(\x0e\x32(.FinanceProtobufModels.AggregationWindowR\x11\x61ggregationWindow\x12:\n\x07payload\x18\x04 \x01(\x0b\x32 .FinanceProtobufModels.PriceDataR\x07payloadBAZ?github.com/MaxBernstetter/finance-proto-models/gen/go/financepbb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'envelope_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'ZKgithub.com/MaxBernstetter/finance-proto-models/gen/go/envelopepb;envelopepb'
-  _globals['_PRICEAGGREGATIONENVELOPE']._serialized_start=165
-  _globals['_PRICEAGGREGATIONENVELOPE']._serialized_end=467
+  _globals['DESCRIPTOR']._serialized_options = b'Z?github.com/MaxBernstetter/finance-proto-models/gen/go/financepb'
+  _globals['_PRICEAGGREGATIONENVELOPE']._serialized_start=67
+  _globals['_PRICEAGGREGATIONENVELOPE']._serialized_end=369
 # @@protoc_insertion_point(module_scope)

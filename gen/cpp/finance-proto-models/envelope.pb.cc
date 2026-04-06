@@ -86,37 +86,33 @@ static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
 const char descriptor_table_protodef_envelope_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\016envelope.proto\022\025FinanceProtobufModels\032"
-    "\023metrics/price.proto\032%metrics/enum_aggre"
-    "gation_window.proto\032\037metrics/enum_metric"
-    "_types.proto\032\034provider/enum_provider.pro"
-    "to\"\256\002\n\030PriceAggregationEnvelope\022;\n\010provi"
-    "der\030\001 \001(\0162\037.FinanceProtobufModels.Provid"
-    "erR\010provider\022A\n\nmetricType\030\002 \001(\0162!.Finan"
-    "ceProtobufModels.MetricTypeR\nmetricType\022"
-    "V\n\021aggregationWindow\030\003 \001(\0162(.FinanceProt"
-    "obufModels.AggregationWindowR\021aggregatio"
-    "nWindow\022:\n\007payload\030\004 \001(\0132 .FinanceProtob"
-    "ufModels.PriceDataR\007payloadBMZKgithub.co"
-    "m/MaxBernstetter/finance-proto-models/ge"
-    "n/go/envelopepb;envelopepbb\006proto3"
+    "\013price.proto\032\nenum.proto\"\256\002\n\030PriceAggreg"
+    "ationEnvelope\022;\n\010provider\030\001 \001(\0162\037.Financ"
+    "eProtobufModels.ProviderR\010provider\022A\n\nme"
+    "tricType\030\002 \001(\0162!.FinanceProtobufModels.M"
+    "etricTypeR\nmetricType\022V\n\021aggregationWind"
+    "ow\030\003 \001(\0162(.FinanceProtobufModels.Aggrega"
+    "tionWindowR\021aggregationWindow\022:\n\007payload"
+    "\030\004 \001(\0132 .FinanceProtobufModels.PriceData"
+    "R\007payloadBAZ\?github.com/MaxBernstetter/f"
+    "inance-proto-models/gen/go/financepbb\006pr"
+    "oto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
-    descriptor_table_envelope_2eproto_deps[4] = {
-        &::descriptor_table_metrics_2fenum_5faggregation_5fwindow_2eproto,
-        &::descriptor_table_metrics_2fenum_5fmetric_5ftypes_2eproto,
-        &::descriptor_table_metrics_2fprice_2eproto,
-        &::descriptor_table_provider_2fenum_5fprovider_2eproto,
+    descriptor_table_envelope_2eproto_deps[2] = {
+        &::descriptor_table_enum_2eproto,
+        &::descriptor_table_price_2eproto,
 };
 static ::absl::once_flag descriptor_table_envelope_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_envelope_2eproto = {
     false,
     false,
-    554,
+    444,
     descriptor_table_protodef_envelope_2eproto,
     "envelope.proto",
     &descriptor_table_envelope_2eproto_once,
     descriptor_table_envelope_2eproto_deps,
-    4,
+    2,
     1,
     schemas,
     file_default_instances,

@@ -1,0 +1,25 @@
+syntax = "proto3";
+package FinanceProtobufModels;
+option go_package = "github.com/MaxBernstetter/finance-proto-models/gen/go/financepb";
+
+enum Provider {
+    COINBASE = 0;
+}
+
+enum MetricType {
+    PRICE_RAW = 0;
+    PRICE_AGGREGATED = 1;
+    PRICE_AGGREGATED_INTERPOLATED = 2;
+    PRICE_STATISTIC = 3;
+    PRICE_STATISTIC_INTERPOLATED = 4;
+}
+
+enum AggregationWindow {
+
+    NONE = 0;
+    ONE_SECOND = 1;
+    THIRTY_SECONDS = 2;
+    FIVE_MINUTES = 3;
+    THIRTY_MINUTES = 4;
+    ONE_HOUR = 5;
+}
