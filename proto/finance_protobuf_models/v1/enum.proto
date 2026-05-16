@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package finance_protobuf_models.v1;
+
+option go_package = "github.com/MaxBernstetter/finance-proto-models/gen/go/financepb";
+
+enum ProviderEnum {
+  PROVIDER_ENUM_UNSPECIFIED = 0;
+  PROVIDER_ENUM_COINBASE = 1;
+}
+
+enum StatisticEnum {
+  STATISTIC_ENUM_UNSPECIFIED = 0;
+  STATISTIC_ENUM_SMA = 1;   // Simple Moving Average
+  STATISTIC_ENUM_EMA = 2;   // Exponential Moving Average
+  STATISTIC_ENUM_RSI = 3;   // Relative Strength Index
+  STATISTIC_ENUM_MACD = 4;  // Moving Average Convergence Divergence
+  STATISTIC_ENUM_STOCH = 5; // Stochastic Oscillator
+  STATISTIC_ENUM_ADX = 6;   // Average Directional Index
+  STATISTIC_ENUM_ATR = 7;   // Average True Range
+}
