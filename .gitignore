@@ -56,3 +56,6 @@ release
 
 # Tests
 tests/**/tmp
+
+# Devbox
+.devbox

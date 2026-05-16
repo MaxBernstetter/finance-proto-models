@@ -1,4 +1,6 @@
 version: '3'
+includes:
+  cpp: Taskfile.cpp.yml
 
 tasks:
 

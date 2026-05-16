@@ -4,38 +4,39 @@
 # source: enum.proto
 # Protobuf Python Version: 7.34.1
 """Generated protocol buffer code."""
+
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
+
 _runtime_version.ValidateProtobufRuntimeVersion(
-    _runtime_version.Domain.PUBLIC,
-    7,
-    34,
-    1,
-    '',
-    'enum.proto'
+    _runtime_version.Domain.PUBLIC, 7, 34, 1, "", "enum.proto"
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nenum.proto\x12\x15\x46inanceProtobufModels*\x18\n\x08Provider\x12\x0c\n\x08\x43OINBASE\x10\x00*\x8b\x01\n\nMetricType\x12\r\n\tPRICE_RAW\x10\x00\x12\x14\n\x10PRICE_AGGREGATED\x10\x01\x12!\n\x1dPRICE_AGGREGATED_INTERPOLATED\x10\x02\x12\x13\n\x0fPRICE_STATISTIC\x10\x03\x12 \n\x1cPRICE_STATISTIC_INTERPOLATED\x10\x04*u\n\x11\x41ggregationWindow\x12\x08\n\x04NONE\x10\x00\x12\x0e\n\nONE_SECOND\x10\x01\x12\x12\n\x0eTHIRTY_SECONDS\x10\x02\x12\x10\n\x0c\x46IVE_MINUTES\x10\x03\x12\x12\n\x0eTHIRTY_MINUTES\x10\x04\x12\x0c\n\x08ONE_HOUR\x10\x05\x42\x41Z?github.com/MaxBernstetter/finance-proto-models/gen/go/financepbb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b"\n\nenum.proto\x12\x15\x46inanceProtobufModels*\x18\n\x08Provider\x12\x0c\n\x08\x43OINBASE\x10\x00*\x8b\x01\n\nMetricType\x12\r\n\tPRICE_RAW\x10\x00\x12\x14\n\x10PRICE_AGGREGATED\x10\x01\x12!\n\x1dPRICE_AGGREGATED_INTERPOLATED\x10\x02\x12\x13\n\x0fPRICE_STATISTIC\x10\x03\x12 \n\x1cPRICE_STATISTIC_INTERPOLATED\x10\x04*u\n\x11\x41ggregationWindow\x12\x08\n\x04NONE\x10\x00\x12\x0e\n\nONE_SECOND\x10\x01\x12\x12\n\x0eTHIRTY_SECONDS\x10\x02\x12\x10\n\x0c\x46IVE_MINUTES\x10\x03\x12\x12\n\x0eTHIRTY_MINUTES\x10\x04\x12\x0c\n\x08ONE_HOUR\x10\x05\x42\x41Z?github.com/MaxBernstetter/finance-proto-models/gen/go/financepbb\x06proto3"
+)
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'enum_pb2', _globals)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, "enum_pb2", _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
-  _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'Z?github.com/MaxBernstetter/finance-proto-models/gen/go/financepb'
-  _globals['_PROVIDER']._serialized_start=37
-  _globals['_PROVIDER']._serialized_end=61
-  _globals['_METRICTYPE']._serialized_start=64
-  _globals['_METRICTYPE']._serialized_end=203
-  _globals['_AGGREGATIONWINDOW']._serialized_start=205
-  _globals['_AGGREGATIONWINDOW']._serialized_end=322
+    _globals["DESCRIPTOR"]._loaded_options = None
+    _globals[
+        "DESCRIPTOR"
+    ]._serialized_options = (
+        b"Z?github.com/MaxBernstetter/finance-proto-models/gen/go/financepb"
+    )
+    _globals["_PROVIDER"]._serialized_start = 37
+    _globals["_PROVIDER"]._serialized_end = 61
+    _globals["_METRICTYPE"]._serialized_start = 64
+    _globals["_METRICTYPE"]._serialized_end = 203
+    _globals["_AGGREGATIONWINDOW"]._serialized_start = 205
+    _globals["_AGGREGATIONWINDOW"]._serialized_end = 322
 # @@protoc_insertion_point(module_scope)

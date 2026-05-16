@@ -17,3 +17,9 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 only-include = ["finance_proto_models"]
+
+[tool.hatch.build.targets.sdist]
+exclude = [".devbox", ".venv", "venv"]
+
+[tool.uv.sources]
+finance_proto_models = { path = "gen/python/finance_proto_models" }
