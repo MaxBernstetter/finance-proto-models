@@ -1,7 +1,0 @@
-syntax = "proto3";
-package FinanceProtobufModels;
-option go_package = "github.com/MaxBernstetter/finance-proto-models/financepb";
-
-enum Provider {
-    COINBASE = 0;
-}

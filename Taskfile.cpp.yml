@@ -1,0 +1,13 @@
+version: '3'
+tasks:
+  create:package:
+  vars:
+    VERSION: '{{.CLI_ARGS}}'
+  cmd: conan create . --version {{ .VERSION }}
+
+  upload:package:
+    desc: Upload a release package for the C++ library
+    vars:
+      VERSION: '{{.CLI_ARGS}}'
+    cmd: |
+      gh release upload ${{ .VERSION }} release/cpp/finance-proto-models-cpp-${{ .VERSION }}.tar.gz

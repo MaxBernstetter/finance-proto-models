@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package finance_protobuf_models.v1;
+
+option go_package = "github.com/MaxBernstetter/finance-proto-models/gen/go/financepb";
+
+import "finance_protobuf_models/v1/enum.proto";
+
+message CurrencyPair {
+  string base = 1;
+  string quote = 2;
+}
+
+message MessageMetadata {
+  ProviderEnum provider = 1;
+  CurrencyPair currency_pair = 2;
+}

@@ -1,0 +1,15 @@
+version: v2
+clean: true
+plugins:
+  - remote: buf.build/protocolbuffers/go:v1.31.0
+    out: gen/go
+    opt: paths=source_relative
+
+  - remote: buf.build/protocolbuffers/python:v34.1
+    out: gen/python/finance_proto_models
+
+  - remote: buf.build/protocolbuffers/cpp:v34.1
+    out: gen/cpp/finance-proto-models
+
+inputs:
+  - directory: proto

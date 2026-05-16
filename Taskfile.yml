@@ -1,173 +1,26 @@
 version: '3'
+includes:
+  cpp: Taskfile.cpp.yml
 
 tasks:
 
-  proto:list-files:
-    desc: List all protobuf files in the src directory
-    silent: true
-    cmd: find $DEVBOX_PROJECT_ROOT/src -name "*.proto"
-    
-  proto:extract:namespace:
-    desc: Extract the package namespace - printing it to stdout
-    silent: true
-    cmd: echo "$(grep -E "^package\s+\w+" $DEVBOX_PROJECT_ROOT/src/envelope.proto | sed 's/package\s*\([^;]*\);/\1/')"
-  
-  proto:build:*:
-    desc: Build protobuf code for the provided target [python, cpp]
-    silent: true
+  validate:
+    desc: Validate the protobuf definition and current buf config
+    cmd: buf build
+
+  lint:
+    desc: Lint the protobuf definitions
+    cmd: buf lint
+
+  generate:
+    desc: Generate the protobuf code
+    cmd: buf generate
+
+  check:breaking:for:
+    desc: Check whether the current state has breaking changes against the remote state (git branch)
     vars:
-      TARGET: '{{index .MATCH 0}}'
-    deps:
-      - clean:build:{{.TARGET}}
-    cmds:
-      - mkdir -p $BUILD_DIR/{{.TARGET}}
-      - |
-        files=$(task proto:list-files)
-        for file in $files; do
-          protoc -I $DEVBOX_PROJECT_ROOT/src --{{.TARGET}}_out=$BUILD_DIR/{{.TARGET}} $file
-        done
-
-  uv:install:
-    desc: Install Python package dependencies (dev)
-    cmd: uv sync --project $RESOURCES_DIR/python
-
-  uv:build:*:
-    desc: Build the protobuf python package
-    silent: true
-    deps:
-      - task: proto:build:python
-    vars:
-      VERSION: '{{index .MATCH 0}}'
-    cmds:
-    - echo $BUILD_DIR
-    - cp -r $RESOURCES_DIR/python/pyproject.toml $RESOURCES_DIR/python/README.md $BUILD_DIR/python
-    - |
-      if [ -f "$RESOURCES_DIR/python/uv.lock" ]; then
-        cp "$RESOURCES_DIR/python/uv.lock" "$BUILD_DIR/python/"
-      fi
-    - mkdir -p $BUILD_DIR/python/finance_proto_models
-    - |
-      find "$BUILD_DIR/python" \
-        -mindepth 1 \
-        -maxdepth 1 \
-        ! -name "pyproject.toml" \
-        ! -name "README.md" \
-        ! -name "uv.lock" \
-        ! -name "finance_proto_models" \
-        -exec mv {} "$BUILD_DIR/python/finance_proto_models/" \;
-
-    - uv version {{.VERSION}} --project $BUILD_DIR/python
-    - uv build --project $BUILD_DIR/python
-
-  clean:build:*:
-    vars:
-      TARGET: '{{index .MATCH 0}}'
-    desc: Clean up previous build
-    silent: true
-    cmd: rm -rf $BUILD_DIR/{{.TARGET}} || true
-
-  clean:release:*:
-    vars:
-      TARGET: '{{index .MATCH 0}}'
-    desc: Clean up previous release
-    silent: true
-    cmd: rm -rf $RELEASE_DIR/{{.TARGET}} || true
-
-  release:create-version-txt:*:*:
-    vars:
-      TARGET: '{{index .MATCH 0}}'
-      VERSION: '{{index .MATCH 1}}'
-    desc: Create a version.txt file with variables 0 -> target, 1 -> version
-    silent: true
-    cmd: |
-      cat > $RELEASE_DIR/{{.TARGET}}/version.txt << EOF
-      {{.VERSION}}
-      $(git rev-parse HEAD)
-      $(date -u +"%Y-%m-%dT%H:%M:%SZ")
-      EOF
-
-  release:package:cpp:*:
-    desc: Build C++ package for release
-    silent: true
-    vars:
-      PACKAGE_VERSION: '{{index .MATCH 0}}'
-    deps:
-      - task: clean:build:cpp
-      - task: clean:release:cpp
-      - task: proto:build:cpp
-    cmds:
-      # Create tmp folder for the package
-      - mkdir -p $RELEASE_DIR/cpp
-
-      # Create a version.txt
-      - task release:create-version-txt:cpp:{{.PACKAGE_VERSION}}
-
-      # Copy to release & create tarball
-      - mkdir $RELEASE_DIR/cpp/finance-proto-models
-      - |
-        cp -r $RESOURCES_DIR/cpp/* $BUILD_DIR/cpp/* $RELEASE_DIR/cpp/finance-proto-models
-        tar -czf finance-proto-models-cpp.tar.gz -C $RELEASE_DIR/cpp .
-        mv finance-proto-models-cpp.tar.gz $RELEASE_DIR/cpp
-        rm -rf $RELEASE_DIR/cpp/finance-proto-models $RELEASE_DIR/cpp/version.txt $RELEASE_DIR/cpp/README.md
-  
-  release:package:python:*:
-    desc: Build Python wheel for release
-    silent: true
-    vars:
-      PACKAGE_VERSION: '{{index .MATCH 0}}'
-    deps:
-      - task: clean:build:python
-      - task: clean:release:python
-    cmds:
-      # Create tmp folder for the package
-      - mkdir -p $RELEASE_DIR/python
-
-      # Create a version.txt
-      - task release:create-version-txt:python:{{.PACKAGE_VERSION}}
-
-      # Build the package
-      - task uv:build:{{.PACKAGE_VERSION}}
-      - cp $BUILD_DIR/python/dist/* $RELEASE_DIR/python/
-
-  release:package:go:*:
-    desc: Build Go package for release
-    silent: true
-    vars:
-      PACKAGE_VERSION: '{{index .MATCH 0}}'
-    deps:
-      - task: clean:build:go
-      - task: clean:release:go
-      - task: proto:build:go
-    cmds:
-      # Create tmp folder for the package
-      - mkdir -p $RELEASE_DIR/go/financepb
-      
-      # Model files are flat, but nested in the out-directory (specific to protoc-gen-go)
-      - find $BUILD_DIR/go -type f -exec cp {} $RELEASE_DIR/go/financepb \;
-
-      # Ship a proper Go module (matches option go_package in .proto files)
-      - cp $RESOURCES_DIR/go/go.mod $RELEASE_DIR/go/
-      - |
-        (cd $RELEASE_DIR/go && go mod tidy)
-
-      # Create a version.txt
-      - task release:create-version-txt:go:{{.PACKAGE_VERSION}}
-  
-      # Create the tarball
-      - tar -czf finance-proto-models-go.tar.gz -C $RELEASE_DIR/go .
-      - mv finance-proto-models-go.tar.gz $RELEASE_DIR/go/
-      #- find $RELEASE_DIR/go ! -name "*.tar.gz" -delete # Remove all files except the tarball
-
-  release:package:all:*:
-  
-    desc: Build all packages for release
-    silent: true
-    vars:
-      PACKAGE_VERSION: '{{index .MATCH 0}}'
-    deps:
-      - task: release:package:cpp:{{.PACKAGE_VERSION}}
-      - task: release:package:py:{{.PACKAGE_VERSION}}
-      - task: release:package:go:{{.PACKAGE_VERSION}}
+      REMOTE: '{{.CLI_ARGS}}'
+    cmd: buf breaking --against {{.REMOTE}}
 
   test:*:
     desc: Test generated releases for the provided target [python, cpp]
