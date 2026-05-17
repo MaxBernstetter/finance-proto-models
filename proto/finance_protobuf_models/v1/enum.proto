@@ -11,11 +11,36 @@ enum ProviderEnum {
 
 enum StatisticEnum {
   STATISTIC_ENUM_UNSPECIFIED = 0;
-  STATISTIC_ENUM_SMA = 1;   // Simple Moving Average
-  STATISTIC_ENUM_EMA = 2;   // Exponential Moving Average
-  STATISTIC_ENUM_RSI = 3;   // Relative Strength Index
-  STATISTIC_ENUM_MACD = 4;  // Moving Average Convergence Divergence
-  STATISTIC_ENUM_STOCH = 5; // Stochastic Oscillator
-  STATISTIC_ENUM_ADX = 6;   // Average Directional Index
-  STATISTIC_ENUM_ATR = 7;   // Average True Range
+  STATISTIC_ENUM_AVG = 1;     // Average
+  STATISTIC_ENUM_MEDIAN = 2;  // Median
+  STATISTIC_ENUM_SDEV = 3;    // Standard Deviation
+  STATISTIC_ENUM_VAR = 4;     // Variance
+  STATISTIC_ENUM_SMA = 5;     // Simple Moving Average
+  STATISTIC_ENUM_EMA = 6;     // Exponential Moving Average
+  STATISTIC_ENUM_RSI = 7;     // Relative Strength Index
+  STATISTIC_ENUM_MACD = 8;    // Moving Average Convergence Divergence
+  STATISTIC_ENUM_STOCH = 9;   // Stochastic
+  STATISTIC_ENUM_ADX = 10;     // Average Directional Index
+  STATISTIC_ENUM_ATR = 11;     // Average True Range
+}
+
+enum MessageTypeEnum {
+  MESSAGE_TYPE_ENUM_UNSPECIFIED = 0;
+  MESSAGE_TYPE_ENUM_PRICE = 1;
+  MESSAGE_TYPE_ENUM_METRIC = 2;
+  MESSAGE_TYPE_ENUM_OHLC = 3;
+  MESSAGE_TYPE_ENUM_BOLLINGER_BANDS = 4;
+}
+
+enum AggregationWindowEnum {
+  AGGREGATION_WINDOW_ENUM_UNSPECIFIED = 0;
+  AGGREGATION_WINDOW_ENUM_1_MINUTE = 1;
+  AGGREGATION_WINDOW_ENUM_5_MINUTES = 2;
+  AGGREGATION_WINDOW_ENUM_15_MINUTES = 3;
+  AGGREGATION_WINDOW_ENUM_30_MINUTES = 4;
+  AGGREGATION_WINDOW_ENUM_1_HOUR = 5;
+  AGGREGATION_WINDOW_ENUM_4_HOURS = 6;
+  AGGREGATION_WINDOW_ENUM_1_DAY = 7;
+  AGGREGATION_WINDOW_ENUM_1_WEEK = 8;
+  AGGREGATION_WINDOW_ENUM_1_MONTH = 9;
 }

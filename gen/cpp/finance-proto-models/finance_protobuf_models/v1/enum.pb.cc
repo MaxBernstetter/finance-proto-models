@@ -30,7 +30,7 @@ namespace v1 {
 }  // namespace v1
 }  // namespace finance_protobuf_models
 static const ::_pb::EnumDescriptor* PROTOBUF_NONNULL
-    file_level_enum_descriptors_finance_5fprotobuf_5fmodels_2fv1_2fenum_2eproto[2];
+    file_level_enum_descriptors_finance_5fprotobuf_5fmodels_2fv1_2fenum_2eproto[4];
 static constexpr const ::_pb::ServiceDescriptor* PROTOBUF_NONNULL* PROTOBUF_NULLABLE
     file_level_service_descriptors_finance_5fprotobuf_5fmodels_2fv1_2fenum_2eproto = nullptr;
 const ::uint32_t TableStruct_finance_5fprotobuf_5fmodels_2fv1_2fenum_2eproto::offsets[1] = {};
@@ -42,20 +42,38 @@ const char descriptor_table_protodef_finance_5fprotobuf_5fmodels_2fv1_2fenum_2ep
     "\n%finance_protobuf_models/v1/enum.proto\022"
     "\032finance_protobuf_models.v1*I\n\014ProviderE"
     "num\022\035\n\031PROVIDER_ENUM_UNSPECIFIED\020\000\022\032\n\026PR"
-    "OVIDER_ENUM_COINBASE\020\001*\332\001\n\rStatisticEnum"
+    "OVIDER_ENUM_COINBASE\020\001*\276\002\n\rStatisticEnum"
     "\022\036\n\032STATISTIC_ENUM_UNSPECIFIED\020\000\022\026\n\022STAT"
-    "ISTIC_ENUM_SMA\020\001\022\026\n\022STATISTIC_ENUM_EMA\020\002"
-    "\022\026\n\022STATISTIC_ENUM_RSI\020\003\022\027\n\023STATISTIC_EN"
-    "UM_MACD\020\004\022\030\n\024STATISTIC_ENUM_STOCH\020\005\022\026\n\022S"
-    "TATISTIC_ENUM_ADX\020\006\022\026\n\022STATISTIC_ENUM_AT"
-    "R\020\007BAZ\?github.com/MaxBernstetter/finance"
-    "-proto-models/gen/go/financepbb\006proto3"
+    "ISTIC_ENUM_AVG\020\001\022\031\n\025STATISTIC_ENUM_MEDIA"
+    "N\020\002\022\027\n\023STATISTIC_ENUM_SDEV\020\003\022\026\n\022STATISTI"
+    "C_ENUM_VAR\020\004\022\026\n\022STATISTIC_ENUM_SMA\020\005\022\026\n\022"
+    "STATISTIC_ENUM_EMA\020\006\022\026\n\022STATISTIC_ENUM_R"
+    "SI\020\007\022\027\n\023STATISTIC_ENUM_MACD\020\010\022\030\n\024STATIST"
+    "IC_ENUM_STOCH\020\t\022\026\n\022STATISTIC_ENUM_ADX\020\n\022"
+    "\026\n\022STATISTIC_ENUM_ATR\020\013*\262\001\n\017MessageTypeE"
+    "num\022!\n\035MESSAGE_TYPE_ENUM_UNSPECIFIED\020\000\022\033"
+    "\n\027MESSAGE_TYPE_ENUM_PRICE\020\001\022\034\n\030MESSAGE_T"
+    "YPE_ENUM_METRIC\020\002\022\032\n\026MESSAGE_TYPE_ENUM_O"
+    "HLC\020\003\022%\n!MESSAGE_TYPE_ENUM_BOLLINGER_BAN"
+    "DS\020\004*\222\003\n\025AggregationWindowEnum\022\'\n#AGGREG"
+    "ATION_WINDOW_ENUM_UNSPECIFIED\020\000\022$\n AGGRE"
+    "GATION_WINDOW_ENUM_1_MINUTE\020\001\022%\n!AGGREGA"
+    "TION_WINDOW_ENUM_5_MINUTES\020\002\022&\n\"AGGREGAT"
+    "ION_WINDOW_ENUM_15_MINUTES\020\003\022&\n\"AGGREGAT"
+    "ION_WINDOW_ENUM_30_MINUTES\020\004\022\"\n\036AGGREGAT"
+    "ION_WINDOW_ENUM_1_HOUR\020\005\022#\n\037AGGREGATION_"
+    "WINDOW_ENUM_4_HOURS\020\006\022!\n\035AGGREGATION_WIN"
+    "DOW_ENUM_1_DAY\020\007\022\"\n\036AGGREGATION_WINDOW_E"
+    "NUM_1_WEEK\020\010\022#\n\037AGGREGATION_WINDOW_ENUM_"
+    "1_MONTH\020\tBAZ\?github.com/MaxBernstetter/f"
+    "inance-proto-models/gen/go/financepbb\006pr"
+    "oto3"
 };
 static ::absl::once_flag descriptor_table_finance_5fprotobuf_5fmodels_2fv1_2fenum_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_finance_5fprotobuf_5fmodels_2fv1_2fenum_2eproto = {
     false,
     false,
-    438,
+    1124,
     descriptor_table_protodef_finance_5fprotobuf_5fmodels_2fv1_2fenum_2eproto,
     "finance_protobuf_models/v1/enum.proto",
     &descriptor_table_finance_5fprotobuf_5fmodels_2fv1_2fenum_2eproto_once,
@@ -83,7 +101,21 @@ StatisticEnum_descriptor() {
   return file_level_enum_descriptors_finance_5fprotobuf_5fmodels_2fv1_2fenum_2eproto[1];
 }
 PROTOBUF_CONSTINIT const uint32_t StatisticEnum_internal_data_[] = {
-    524288u, 0u, };
+    786432u, 0u, };
+[[nodiscard]] const ::google::protobuf::EnumDescriptor* PROTOBUF_NONNULL
+MessageTypeEnum_descriptor() {
+  ::google::protobuf::internal::AssignDescriptors(&descriptor_table_finance_5fprotobuf_5fmodels_2fv1_2fenum_2eproto);
+  return file_level_enum_descriptors_finance_5fprotobuf_5fmodels_2fv1_2fenum_2eproto[2];
+}
+PROTOBUF_CONSTINIT const uint32_t MessageTypeEnum_internal_data_[] = {
+    327680u, 0u, };
+[[nodiscard]] const ::google::protobuf::EnumDescriptor* PROTOBUF_NONNULL
+AggregationWindowEnum_descriptor() {
+  ::google::protobuf::internal::AssignDescriptors(&descriptor_table_finance_5fprotobuf_5fmodels_2fv1_2fenum_2eproto);
+  return file_level_enum_descriptors_finance_5fprotobuf_5fmodels_2fv1_2fenum_2eproto[3];
+}
+PROTOBUF_CONSTINIT const uint32_t AggregationWindowEnum_internal_data_[] = {
+    655360u, 0u, };
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace v1
 }  // namespace finance_protobuf_models

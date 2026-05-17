@@ -22,11 +22,12 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
+from google.protobuf import any_pb2 as google_dot_protobuf_dot_any__pb2
 from finance_protobuf_models.v1 import enum_pb2 as finance__protobuf__models_dot_v1_dot_enum__pb2
 from finance_protobuf_models.v1 import metadata_pb2 as finance__protobuf__models_dot_v1_dot_metadata__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&finance_protobuf_models/v1/price.proto\x12\x1a\x66inance_protobuf_models.v1\x1a%finance_protobuf_models/v1/enum.proto\x1a)finance_protobuf_models/v1/metadata.proto\"\x9f\x01\n\tPriceData\x12!\n\x0ctimestamp_ms\x18\x01 \x01(\x04R\x0btimestampMs\x12\x14\n\x05price\x18\x02 \x01(\x02R\x05price\x12L\n\x08metadata\x18\x03 \x01(\x0b\x32+.finance_protobuf_models.v1.MessageMetadataH\x00R\x08metadata\x88\x01\x01\x42\x0b\n\t_metadata\"\x9e\x02\n\x0bPriceMetric\x12!\n\x0ctimestamp_ms\x18\x01 \x01(\x04R\x0btimestampMs\x12\x32\n\x15\x61ggregation_window_ms\x18\x02 \x01(\x04R\x13\x61ggregationWindowMs\x12\x14\n\x05value\x18\x03 \x01(\x02R\x05value\x12G\n\tstatistic\x18\x04 \x01(\x0e\x32).finance_protobuf_models.v1.StatisticEnumR\tstatistic\x12L\n\x08metadata\x18\x05 \x01(\x0b\x32+.finance_protobuf_models.v1.MessageMetadataH\x00R\x08metadata\x88\x01\x01\x42\x0b\n\t_metadata\"\xa2\x02\n\x04OHLC\x12!\n\x0ctimestamp_ms\x18\x01 \x01(\x04R\x0btimestampMs\x12\x32\n\x15\x61ggregation_window_ms\x18\x02 \x01(\x04R\x13\x61ggregationWindowMs\x12\x12\n\x04open\x18\x03 \x01(\x02R\x04open\x12\x12\n\x04high\x18\x04 \x01(\x02R\x04high\x12\x10\n\x03low\x18\x05 \x01(\x02R\x03low\x12\x14\n\x05\x63lose\x18\x06 \x01(\x02R\x05\x63lose\x12\x18\n\x07\x62ullish\x18\x07 \x01(\x08R\x07\x62ullish\x12L\n\x08metadata\x18\x08 \x01(\x0b\x32+.finance_protobuf_models.v1.MessageMetadataH\x00R\x08metadata\x88\x01\x01\x42\x0b\n\t_metadata\"\xed\x01\n\x0e\x42ollingerBands\x12!\n\x0ctimestamp_ms\x18\x01 \x01(\x04R\x0btimestampMs\x12\x1d\n\nupper_band\x18\x02 \x01(\x02R\tupperBand\x12\x1f\n\x0bmiddle_band\x18\x03 \x01(\x02R\nmiddleBand\x12\x1d\n\nlower_band\x18\x04 \x01(\x02R\tlowerBand\x12L\n\x08metadata\x18\x05 \x01(\x0b\x32+.finance_protobuf_models.v1.MessageMetadataH\x00R\x08metadata\x88\x01\x01\x42\x0b\n\t_metadataBAZ?github.com/MaxBernstetter/finance-proto-models/gen/go/financepbb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&finance_protobuf_models/v1/price.proto\x12\x1a\x66inance_protobuf_models.v1\x1a\x19google/protobuf/any.proto\x1a%finance_protobuf_models/v1/enum.proto\x1a)finance_protobuf_models/v1/metadata.proto\"\xd3\x01\n\x08\x45nvelope\x12N\n\x0cmessage_type\x18\x01 \x01(\x0e\x32+.finance_protobuf_models.v1.MessageTypeEnumR\x0bmessageType\x12G\n\x08metadata\x18\x02 \x01(\x0b\x32+.finance_protobuf_models.v1.MessageMetadataR\x08metadata\x12.\n\x07payload\x18\x03 \x01(\x0b\x32\x14.google.protobuf.AnyR\x07payload\"D\n\tPriceData\x12!\n\x0ctimestamp_ms\x18\x01 \x01(\x04R\x0btimestampMs\x12\x14\n\x05price\x18\x02 \x01(\x02R\x05price\"\xf1\x01\n\x0bPriceMetric\x12!\n\x0ctimestamp_ms\x18\x01 \x01(\x04R\x0btimestampMs\x12`\n\x12\x61ggregation_window\x18\x02 \x01(\x0e\x32\x31.finance_protobuf_models.v1.AggregationWindowEnumR\x11\x61ggregationWindow\x12\x14\n\x05value\x18\x03 \x01(\x02R\x05value\x12G\n\tstatistic\x18\x04 \x01(\x0e\x32).finance_protobuf_models.v1.StatisticEnumR\tstatistic\"\xf5\x01\n\x04OHLC\x12!\n\x0ctimestamp_ms\x18\x01 \x01(\x04R\x0btimestampMs\x12`\n\x12\x61ggregation_window\x18\x02 \x01(\x0e\x32\x31.finance_protobuf_models.v1.AggregationWindowEnumR\x11\x61ggregationWindow\x12\x12\n\x04open\x18\x03 \x01(\x02R\x04open\x12\x12\n\x04high\x18\x04 \x01(\x02R\x04high\x12\x10\n\x03low\x18\x05 \x01(\x02R\x03low\x12\x14\n\x05\x63lose\x18\x06 \x01(\x02R\x05\x63lose\x12\x18\n\x07\x62ullish\x18\x07 \x01(\x08R\x07\x62ullish\"\xf4\x01\n\x0e\x42ollingerBands\x12!\n\x0ctimestamp_ms\x18\x01 \x01(\x04R\x0btimestampMs\x12`\n\x12\x61ggregation_window\x18\x02 \x01(\x0e\x32\x31.finance_protobuf_models.v1.AggregationWindowEnumR\x11\x61ggregationWindow\x12\x1d\n\nupper_band\x18\x03 \x01(\x02R\tupperBand\x12\x1f\n\x0bmiddle_band\x18\x04 \x01(\x02R\nmiddleBand\x12\x1d\n\nlower_band\x18\x05 \x01(\x02R\tlowerBandBAZ?github.com/MaxBernstetter/finance-proto-models/gen/go/financepbb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -34,12 +35,14 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'finance_protobuf_models.v1.
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z?github.com/MaxBernstetter/finance-proto-models/gen/go/financepb'
-  _globals['_PRICEDATA']._serialized_start=153
-  _globals['_PRICEDATA']._serialized_end=312
-  _globals['_PRICEMETRIC']._serialized_start=315
-  _globals['_PRICEMETRIC']._serialized_end=601
-  _globals['_OHLC']._serialized_start=604
-  _globals['_OHLC']._serialized_end=894
-  _globals['_BOLLINGERBANDS']._serialized_start=897
-  _globals['_BOLLINGERBANDS']._serialized_end=1134
+  _globals['_ENVELOPE']._serialized_start=180
+  _globals['_ENVELOPE']._serialized_end=391
+  _globals['_PRICEDATA']._serialized_start=393
+  _globals['_PRICEDATA']._serialized_end=461
+  _globals['_PRICEMETRIC']._serialized_start=464
+  _globals['_PRICEMETRIC']._serialized_end=705
+  _globals['_OHLC']._serialized_start=708
+  _globals['_OHLC']._serialized_end=953
+  _globals['_BOLLINGERBANDS']._serialized_start=956
+  _globals['_BOLLINGERBANDS']._serialized_end=1200
 # @@protoc_insertion_point(module_scope)

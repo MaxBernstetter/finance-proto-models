@@ -4,38 +4,47 @@ package finance_protobuf_models.v1;
 
 option go_package = "github.com/MaxBernstetter/finance-proto-models/gen/go/financepb";
 
+import "google/protobuf/any.proto";
 import "finance_protobuf_models/v1/enum.proto";
 import "finance_protobuf_models/v1/metadata.proto";
 
+
+// Envelope pattern to deserialize given the message type.
+message Envelope {
+  MessageTypeEnum message_type = 1;
+  MessageMetadata metadata = 2;
+  google.protobuf.Any payload = 3;
+}
+
+// Simple price - no aggregation.
 message PriceData {
   uint64 timestamp_ms = 1;
   float price = 2;
-  optional MessageMetadata metadata = 3;
 }
 
+// All statistics whose result is a single value.
 message PriceMetric {
   uint64 timestamp_ms = 1;
-  uint64 aggregation_window_ms = 2;
+  AggregationWindowEnum aggregation_window = 2;
   float value = 3;
   StatisticEnum statistic = 4;
-  optional MessageMetadata metadata = 5;
 }
 
+// All statistics whose result contains multiple values.
 message OHLC {
   uint64 timestamp_ms = 1;
-  uint64 aggregation_window_ms = 2;
+  AggregationWindowEnum aggregation_window = 2;
   float open = 3;
   float high = 4;
   float low = 5;
   float close = 6;
   bool bullish = 7;
-  optional MessageMetadata metadata = 8;
 }
 
 message BollingerBands {
   uint64 timestamp_ms = 1;
-  float upper_band = 2;
-  float middle_band = 3;
-  float lower_band = 4;
-  optional MessageMetadata metadata = 5;
+  AggregationWindowEnum aggregation_window = 2;
+  float upper_band = 3;
+  float middle_band = 4;
+  float lower_band = 5;
 }

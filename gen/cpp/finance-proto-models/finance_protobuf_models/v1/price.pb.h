@@ -30,6 +30,7 @@
 #include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
 #include "google/protobuf/unknown_field_set.h"
+#include "google/protobuf/any.pb.h"
 #include "finance_protobuf_models/v1/enum.pb.h"
 #include "finance_protobuf_models/v1/metadata.pb.h"
 // @@protoc_insertion_point(includes)
@@ -61,6 +62,10 @@ class BollingerBands;
 struct BollingerBandsDefaultTypeInternal;
 extern BollingerBandsDefaultTypeInternal _BollingerBands_default_instance_;
 extern const ::google::protobuf::internal::ClassDataFull BollingerBands_class_data_;
+class Envelope;
+struct EnvelopeDefaultTypeInternal;
+extern EnvelopeDefaultTypeInternal _Envelope_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull Envelope_class_data_;
 class OHLC;
 struct OHLCDefaultTypeInternal;
 extern OHLCDefaultTypeInternal _OHLC_default_instance_;
@@ -144,7 +149,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED PriceMetric final : public ::google
     return *reinterpret_cast<const PriceMetric*>(
         &_PriceMetric_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 1;
+  static constexpr int kIndexInFileMessages = 2;
   friend void swap(PriceMetric& a, PriceMetric& b) { a.Swap(&b); }
   inline void Swap(PriceMetric* PROTOBUF_NONNULL other) {
     if (other == this) return;
@@ -234,28 +239,11 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED PriceMetric final : public ::google
 
   // accessors -------------------------------------------------------
   enum : int {
-    kMetadataFieldNumber = 5,
     kTimestampMsFieldNumber = 1,
-    kAggregationWindowMsFieldNumber = 2,
+    kAggregationWindowFieldNumber = 2,
     kValueFieldNumber = 3,
     kStatisticFieldNumber = 4,
   };
-  // optional .finance_protobuf_models.v1.MessageMetadata metadata = 5 [json_name = "metadata"];
-  [[nodiscard]] bool has_metadata()
-      const;
-  void clear_metadata() ;
-  [[nodiscard]] const ::finance_protobuf_models::v1::MessageMetadata& metadata() const;
-  [[nodiscard]] ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE release_metadata();
-  ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL mutable_metadata();
-  void set_allocated_metadata(::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_metadata(::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value);
-  ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE unsafe_arena_release_metadata();
-
-  private:
-  const ::finance_protobuf_models::v1::MessageMetadata& _internal_metadata() const;
-  ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL _internal_mutable_metadata();
-
-  public:
   // uint64 timestamp_ms = 1 [json_name = "timestampMs"];
   void clear_timestamp_ms() ;
   [[nodiscard]] ::uint64_t timestamp_ms() const;
@@ -266,14 +254,14 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED PriceMetric final : public ::google
   void _internal_set_timestamp_ms(::uint64_t value);
 
   public:
-  // uint64 aggregation_window_ms = 2 [json_name = "aggregationWindowMs"];
-  void clear_aggregation_window_ms() ;
-  [[nodiscard]] ::uint64_t aggregation_window_ms() const;
-  void set_aggregation_window_ms(::uint64_t value);
+  // .finance_protobuf_models.v1.AggregationWindowEnum aggregation_window = 2 [json_name = "aggregationWindow"];
+  void clear_aggregation_window() ;
+  [[nodiscard]] ::finance_protobuf_models::v1::AggregationWindowEnum aggregation_window() const;
+  void set_aggregation_window(::finance_protobuf_models::v1::AggregationWindowEnum value);
 
   private:
-  ::uint64_t _internal_aggregation_window_ms() const;
-  void _internal_set_aggregation_window_ms(::uint64_t value);
+  ::finance_protobuf_models::v1::AggregationWindowEnum _internal_aggregation_window() const;
+  void _internal_set_aggregation_window(::finance_protobuf_models::v1::AggregationWindowEnum value);
 
   public:
   // float value = 3 [json_name = "value"];
@@ -300,8 +288,8 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED PriceMetric final : public ::google
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<3, 5,
-                                   1, 0,
+  static const ::google::protobuf::internal::TcParseTable<2, 4,
+                                   0, 0,
                                    2>
       _table_;
 
@@ -324,9 +312,8 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED PriceMetric final : public ::google
         const PriceMetric& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE metadata_;
     ::uint64_t timestamp_ms_;
-    ::uint64_t aggregation_window_ms_;
+    int aggregation_window_;
     float value_;
     int statistic_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -394,7 +381,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED PriceData final : public ::google::
     return *reinterpret_cast<const PriceData*>(
         &_PriceData_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 0;
+  static constexpr int kIndexInFileMessages = 1;
   friend void swap(PriceData& a, PriceData& b) { a.Swap(&b); }
   inline void Swap(PriceData* PROTOBUF_NONNULL other) {
     if (other == this) return;
@@ -484,26 +471,9 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED PriceData final : public ::google::
 
   // accessors -------------------------------------------------------
   enum : int {
-    kMetadataFieldNumber = 3,
     kTimestampMsFieldNumber = 1,
     kPriceFieldNumber = 2,
   };
-  // optional .finance_protobuf_models.v1.MessageMetadata metadata = 3 [json_name = "metadata"];
-  [[nodiscard]] bool has_metadata()
-      const;
-  void clear_metadata() ;
-  [[nodiscard]] const ::finance_protobuf_models::v1::MessageMetadata& metadata() const;
-  [[nodiscard]] ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE release_metadata();
-  ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL mutable_metadata();
-  void set_allocated_metadata(::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_metadata(::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value);
-  ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE unsafe_arena_release_metadata();
-
-  private:
-  const ::finance_protobuf_models::v1::MessageMetadata& _internal_metadata() const;
-  ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL _internal_mutable_metadata();
-
-  public:
   // uint64 timestamp_ms = 1 [json_name = "timestampMs"];
   void clear_timestamp_ms() ;
   [[nodiscard]] ::uint64_t timestamp_ms() const;
@@ -528,8 +498,8 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED PriceData final : public ::google::
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<2, 3,
-                                   1, 0,
+  static const ::google::protobuf::internal::TcParseTable<1, 2,
+                                   0, 0,
                                    2>
       _table_;
 
@@ -552,7 +522,6 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED PriceData final : public ::google::
         const PriceData& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE metadata_;
     ::uint64_t timestamp_ms_;
     float price_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -620,7 +589,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED OHLC final : public ::google::proto
     return *reinterpret_cast<const OHLC*>(
         &_OHLC_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 2;
+  static constexpr int kIndexInFileMessages = 3;
   friend void swap(OHLC& a, OHLC& b) { a.Swap(&b); }
   inline void Swap(OHLC* PROTOBUF_NONNULL other) {
     if (other == this) return;
@@ -710,31 +679,14 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED OHLC final : public ::google::proto
 
   // accessors -------------------------------------------------------
   enum : int {
-    kMetadataFieldNumber = 8,
     kTimestampMsFieldNumber = 1,
-    kAggregationWindowMsFieldNumber = 2,
+    kAggregationWindowFieldNumber = 2,
     kOpenFieldNumber = 3,
     kHighFieldNumber = 4,
     kLowFieldNumber = 5,
     kCloseFieldNumber = 6,
     kBullishFieldNumber = 7,
   };
-  // optional .finance_protobuf_models.v1.MessageMetadata metadata = 8 [json_name = "metadata"];
-  [[nodiscard]] bool has_metadata()
-      const;
-  void clear_metadata() ;
-  [[nodiscard]] const ::finance_protobuf_models::v1::MessageMetadata& metadata() const;
-  [[nodiscard]] ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE release_metadata();
-  ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL mutable_metadata();
-  void set_allocated_metadata(::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_metadata(::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value);
-  ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE unsafe_arena_release_metadata();
-
-  private:
-  const ::finance_protobuf_models::v1::MessageMetadata& _internal_metadata() const;
-  ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL _internal_mutable_metadata();
-
-  public:
   // uint64 timestamp_ms = 1 [json_name = "timestampMs"];
   void clear_timestamp_ms() ;
   [[nodiscard]] ::uint64_t timestamp_ms() const;
@@ -745,14 +697,14 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED OHLC final : public ::google::proto
   void _internal_set_timestamp_ms(::uint64_t value);
 
   public:
-  // uint64 aggregation_window_ms = 2 [json_name = "aggregationWindowMs"];
-  void clear_aggregation_window_ms() ;
-  [[nodiscard]] ::uint64_t aggregation_window_ms() const;
-  void set_aggregation_window_ms(::uint64_t value);
+  // .finance_protobuf_models.v1.AggregationWindowEnum aggregation_window = 2 [json_name = "aggregationWindow"];
+  void clear_aggregation_window() ;
+  [[nodiscard]] ::finance_protobuf_models::v1::AggregationWindowEnum aggregation_window() const;
+  void set_aggregation_window(::finance_protobuf_models::v1::AggregationWindowEnum value);
 
   private:
-  ::uint64_t _internal_aggregation_window_ms() const;
-  void _internal_set_aggregation_window_ms(::uint64_t value);
+  ::finance_protobuf_models::v1::AggregationWindowEnum _internal_aggregation_window() const;
+  void _internal_set_aggregation_window(::finance_protobuf_models::v1::AggregationWindowEnum value);
 
   public:
   // float open = 3 [json_name = "open"];
@@ -809,8 +761,8 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED OHLC final : public ::google::proto
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<3, 8,
-                                   1, 0,
+  static const ::google::protobuf::internal::TcParseTable<3, 7,
+                                   0, 0,
                                    2>
       _table_;
 
@@ -833,9 +785,8 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED OHLC final : public ::google::proto
         const OHLC& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE metadata_;
     ::uint64_t timestamp_ms_;
-    ::uint64_t aggregation_window_ms_;
+    int aggregation_window_;
     float open_;
     float high_;
     float low_;
@@ -906,7 +857,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED BollingerBands final : public ::goo
     return *reinterpret_cast<const BollingerBands*>(
         &_BollingerBands_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 3;
+  static constexpr int kIndexInFileMessages = 4;
   friend void swap(BollingerBands& a, BollingerBands& b) { a.Swap(&b); }
   inline void Swap(BollingerBands* PROTOBUF_NONNULL other) {
     if (other == this) return;
@@ -996,28 +947,12 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED BollingerBands final : public ::goo
 
   // accessors -------------------------------------------------------
   enum : int {
-    kMetadataFieldNumber = 5,
     kTimestampMsFieldNumber = 1,
-    kUpperBandFieldNumber = 2,
-    kMiddleBandFieldNumber = 3,
-    kLowerBandFieldNumber = 4,
+    kAggregationWindowFieldNumber = 2,
+    kUpperBandFieldNumber = 3,
+    kMiddleBandFieldNumber = 4,
+    kLowerBandFieldNumber = 5,
   };
-  // optional .finance_protobuf_models.v1.MessageMetadata metadata = 5 [json_name = "metadata"];
-  [[nodiscard]] bool has_metadata()
-      const;
-  void clear_metadata() ;
-  [[nodiscard]] const ::finance_protobuf_models::v1::MessageMetadata& metadata() const;
-  [[nodiscard]] ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE release_metadata();
-  ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL mutable_metadata();
-  void set_allocated_metadata(::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_metadata(::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value);
-  ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE unsafe_arena_release_metadata();
-
-  private:
-  const ::finance_protobuf_models::v1::MessageMetadata& _internal_metadata() const;
-  ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL _internal_mutable_metadata();
-
-  public:
   // uint64 timestamp_ms = 1 [json_name = "timestampMs"];
   void clear_timestamp_ms() ;
   [[nodiscard]] ::uint64_t timestamp_ms() const;
@@ -1028,7 +963,17 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED BollingerBands final : public ::goo
   void _internal_set_timestamp_ms(::uint64_t value);
 
   public:
-  // float upper_band = 2 [json_name = "upperBand"];
+  // .finance_protobuf_models.v1.AggregationWindowEnum aggregation_window = 2 [json_name = "aggregationWindow"];
+  void clear_aggregation_window() ;
+  [[nodiscard]] ::finance_protobuf_models::v1::AggregationWindowEnum aggregation_window() const;
+  void set_aggregation_window(::finance_protobuf_models::v1::AggregationWindowEnum value);
+
+  private:
+  ::finance_protobuf_models::v1::AggregationWindowEnum _internal_aggregation_window() const;
+  void _internal_set_aggregation_window(::finance_protobuf_models::v1::AggregationWindowEnum value);
+
+  public:
+  // float upper_band = 3 [json_name = "upperBand"];
   void clear_upper_band() ;
   [[nodiscard]] float upper_band() const;
   void set_upper_band(float value);
@@ -1038,7 +983,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED BollingerBands final : public ::goo
   void _internal_set_upper_band(float value);
 
   public:
-  // float middle_band = 3 [json_name = "middleBand"];
+  // float middle_band = 4 [json_name = "middleBand"];
   void clear_middle_band() ;
   [[nodiscard]] float middle_band() const;
   void set_middle_band(float value);
@@ -1048,7 +993,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED BollingerBands final : public ::goo
   void _internal_set_middle_band(float value);
 
   public:
-  // float lower_band = 4 [json_name = "lowerBand"];
+  // float lower_band = 5 [json_name = "lowerBand"];
   void clear_lower_band() ;
   [[nodiscard]] float lower_band() const;
   void set_lower_band(float value);
@@ -1063,7 +1008,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED BollingerBands final : public ::goo
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<3, 5,
-                                   1, 0,
+                                   0, 0,
                                    2>
       _table_;
 
@@ -1086,8 +1031,8 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED BollingerBands final : public ::goo
         const BollingerBands& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE metadata_;
     ::uint64_t timestamp_ms_;
+    int aggregation_window_;
     float upper_band_;
     float middle_band_;
     float lower_band_;
@@ -1098,6 +1043,238 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED BollingerBands final : public ::goo
 };
 
 extern const ::google::protobuf::internal::ClassDataFull BollingerBands_class_data_;
+// -------------------------------------------------------------------
+
+class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Envelope final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:finance_protobuf_models.v1.Envelope) */ {
+ public:
+  inline Envelope() : Envelope(nullptr) {}
+  ~Envelope() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(Envelope* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(Envelope));
+  }
+#endif
+
+  template <typename = void>
+  explicit constexpr Envelope(::google::protobuf::internal::ConstantInitialized);
+
+  inline Envelope(const Envelope& from) : Envelope(nullptr, from) {}
+  inline Envelope(Envelope&& from) noexcept
+      : Envelope(nullptr, ::std::move(from)) {}
+  inline Envelope& operator=(const Envelope& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline Envelope& operator=(Envelope&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  [[nodiscard]] inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  [[nodiscard]] inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL
+  mutable_unknown_fields() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  [[nodiscard]] static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+    return GetDescriptor();
+  }
+  [[nodiscard]] static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL
+  GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  [[nodiscard]] static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  [[nodiscard]] static const Envelope& default_instance() {
+    return *reinterpret_cast<const Envelope*>(
+        &_Envelope_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 0;
+  friend void swap(Envelope& a, Envelope& b) { a.Swap(&b); }
+  inline void Swap(Envelope* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(Envelope* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  [[nodiscard]] Envelope* PROTOBUF_NONNULL
+  New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<Envelope>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const Envelope& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const Envelope& from) { Envelope::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  [[nodiscard]] bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  [[nodiscard]] static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  [[nodiscard]] static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  [[nodiscard]] ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  [[nodiscard]] ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  [[nodiscard]] ::size_t ByteSizeLong() const final;
+  [[nodiscard]] ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  [[nodiscard]] int GetCachedSize() const {
+    return _impl_._cached_size_.Get();
+  }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(Envelope* PROTOBUF_NONNULL other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "finance_protobuf_models.v1.Envelope"; }
+
+  explicit Envelope(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  Envelope(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Envelope& from);
+  Envelope(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, Envelope&& from) noexcept
+      : Envelope(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+
+ public:
+  static constexpr auto InternalGenerateClassData_();
+
+  [[nodiscard]] ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kMetadataFieldNumber = 2,
+    kPayloadFieldNumber = 3,
+    kMessageTypeFieldNumber = 1,
+  };
+  // .finance_protobuf_models.v1.MessageMetadata metadata = 2 [json_name = "metadata"];
+  [[nodiscard]] bool has_metadata()
+      const;
+  void clear_metadata() ;
+  [[nodiscard]] const ::finance_protobuf_models::v1::MessageMetadata& metadata() const;
+  [[nodiscard]] ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE release_metadata();
+  ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL mutable_metadata();
+  void set_allocated_metadata(::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_metadata(::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value);
+  ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE unsafe_arena_release_metadata();
+
+  private:
+  const ::finance_protobuf_models::v1::MessageMetadata& _internal_metadata() const;
+  ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL _internal_mutable_metadata();
+
+  public:
+  // .google.protobuf.Any payload = 3 [json_name = "payload"];
+  [[nodiscard]] bool has_payload()
+      const;
+  void clear_payload() ;
+  [[nodiscard]] const ::google::protobuf::Any& payload() const;
+  [[nodiscard]] ::google::protobuf::Any* PROTOBUF_NULLABLE release_payload();
+  ::google::protobuf::Any* PROTOBUF_NONNULL mutable_payload();
+  void set_allocated_payload(::google::protobuf::Any* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_payload(::google::protobuf::Any* PROTOBUF_NULLABLE value);
+  ::google::protobuf::Any* PROTOBUF_NULLABLE unsafe_arena_release_payload();
+
+  private:
+  const ::google::protobuf::Any& _internal_payload() const;
+  ::google::protobuf::Any* PROTOBUF_NONNULL _internal_mutable_payload();
+
+  public:
+  // .finance_protobuf_models.v1.MessageTypeEnum message_type = 1 [json_name = "messageType"];
+  void clear_message_type() ;
+  [[nodiscard]] ::finance_protobuf_models::v1::MessageTypeEnum message_type() const;
+  void set_message_type(::finance_protobuf_models::v1::MessageTypeEnum value);
+
+  private:
+  ::finance_protobuf_models::v1::MessageTypeEnum _internal_message_type() const;
+  void _internal_set_message_type(::finance_protobuf_models::v1::MessageTypeEnum value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:finance_protobuf_models.v1.Envelope)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<2, 3,
+                                   2, 0,
+                                   2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  friend ::google::protobuf::internal::PrivateAccess;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                                    ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const Envelope& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE metadata_;
+    ::google::protobuf::Any* PROTOBUF_NULLABLE payload_;
+    int message_type_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_finance_5fprotobuf_5fmodels_2fv1_2fprice_2eproto;
+};
+
+extern const ::google::protobuf::internal::ClassDataFull Envelope_class_data_;
 
 // ===================================================================
 
@@ -1113,6 +1290,221 @@ extern const ::google::protobuf::internal::ClassDataFull BollingerBands_class_da
 #endif  // __GNUC__
 // -------------------------------------------------------------------
 
+// Envelope
+
+// .finance_protobuf_models.v1.MessageTypeEnum message_type = 1 [json_name = "messageType"];
+inline void Envelope::clear_message_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_type_ = 0;
+  ClearHasBit(_impl_._has_bits_[0],
+                  0x00000004U);
+}
+inline ::finance_protobuf_models::v1::MessageTypeEnum Envelope::message_type() const {
+  // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.Envelope.message_type)
+  return _internal_message_type();
+}
+inline void Envelope::set_message_type(::finance_protobuf_models::v1::MessageTypeEnum value) {
+  _internal_set_message_type(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00000004U);
+  // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.Envelope.message_type)
+}
+inline ::finance_protobuf_models::v1::MessageTypeEnum Envelope::_internal_message_type() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::finance_protobuf_models::v1::MessageTypeEnum>(_impl_.message_type_);
+}
+inline void Envelope::_internal_set_message_type(::finance_protobuf_models::v1::MessageTypeEnum value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_type_ = value;
+}
+
+// .finance_protobuf_models.v1.MessageMetadata metadata = 2 [json_name = "metadata"];
+inline bool Envelope::has_metadata() const {
+  bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000001U);
+  PROTOBUF_ASSUME(!value || _impl_.metadata_ != nullptr);
+  return value;
+}
+inline const ::finance_protobuf_models::v1::MessageMetadata& Envelope::_internal_metadata() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::finance_protobuf_models::v1::MessageMetadata* p = _impl_.metadata_;
+  return p != nullptr ? *p : reinterpret_cast<const ::finance_protobuf_models::v1::MessageMetadata&>(::finance_protobuf_models::v1::_MessageMetadata_default_instance_);
+}
+inline const ::finance_protobuf_models::v1::MessageMetadata& Envelope::metadata() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.Envelope.metadata)
+  return _internal_metadata();
+}
+inline void Envelope::unsafe_arena_set_allocated_metadata(
+    ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.metadata_);
+  }
+  _impl_.metadata_ = reinterpret_cast<::finance_protobuf_models::v1::MessageMetadata*>(value);
+  if (value != nullptr) {
+    SetHasBit(_impl_._has_bits_[0], 0x00000001U);
+  } else {
+    ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:finance_protobuf_models.v1.Envelope.metadata)
+}
+inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE Envelope::release_metadata() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
+  ::finance_protobuf_models::v1::MessageMetadata* released = _impl_.metadata_;
+  _impl_.metadata_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE Envelope::unsafe_arena_release_metadata() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:finance_protobuf_models.v1.Envelope.metadata)
+
+  ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
+  ::finance_protobuf_models::v1::MessageMetadata* temp = _impl_.metadata_;
+  _impl_.metadata_ = nullptr;
+  return temp;
+}
+inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL Envelope::_internal_mutable_metadata() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.metadata_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::finance_protobuf_models::v1::MessageMetadata>(GetArena());
+    _impl_.metadata_ = reinterpret_cast<::finance_protobuf_models::v1::MessageMetadata*>(p);
+  }
+  return _impl_.metadata_;
+}
+inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL Envelope::mutable_metadata()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  SetHasBit(_impl_._has_bits_[0], 0x00000001U);
+  ::finance_protobuf_models::v1::MessageMetadata* _msg = _internal_mutable_metadata();
+  // @@protoc_insertion_point(field_mutable:finance_protobuf_models.v1.Envelope.metadata)
+  return _msg;
+}
+inline void Envelope::set_allocated_metadata(::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.metadata_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    SetHasBit(_impl_._has_bits_[0], 0x00000001U);
+  } else {
+    ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
+  }
+
+  _impl_.metadata_ = reinterpret_cast<::finance_protobuf_models::v1::MessageMetadata*>(value);
+  // @@protoc_insertion_point(field_set_allocated:finance_protobuf_models.v1.Envelope.metadata)
+}
+
+// .google.protobuf.Any payload = 3 [json_name = "payload"];
+inline bool Envelope::has_payload() const {
+  bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000002U);
+  PROTOBUF_ASSUME(!value || _impl_.payload_ != nullptr);
+  return value;
+}
+inline const ::google::protobuf::Any& Envelope::_internal_payload() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::google::protobuf::Any* p = _impl_.payload_;
+  return p != nullptr ? *p : reinterpret_cast<const ::google::protobuf::Any&>(::google::protobuf::_Any_default_instance_);
+}
+inline const ::google::protobuf::Any& Envelope::payload() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.Envelope.payload)
+  return _internal_payload();
+}
+inline void Envelope::unsafe_arena_set_allocated_payload(
+    ::google::protobuf::Any* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.payload_);
+  }
+  _impl_.payload_ = reinterpret_cast<::google::protobuf::Any*>(value);
+  if (value != nullptr) {
+    SetHasBit(_impl_._has_bits_[0], 0x00000002U);
+  } else {
+    ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:finance_protobuf_models.v1.Envelope.payload)
+}
+inline ::google::protobuf::Any* PROTOBUF_NULLABLE Envelope::release_payload() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
+  ::google::protobuf::Any* released = _impl_.payload_;
+  _impl_.payload_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::google::protobuf::Any* PROTOBUF_NULLABLE Envelope::unsafe_arena_release_payload() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:finance_protobuf_models.v1.Envelope.payload)
+
+  ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
+  ::google::protobuf::Any* temp = _impl_.payload_;
+  _impl_.payload_ = nullptr;
+  return temp;
+}
+inline ::google::protobuf::Any* PROTOBUF_NONNULL Envelope::_internal_mutable_payload() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.payload_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::google::protobuf::Any>(GetArena());
+    _impl_.payload_ = reinterpret_cast<::google::protobuf::Any*>(p);
+  }
+  return _impl_.payload_;
+}
+inline ::google::protobuf::Any* PROTOBUF_NONNULL Envelope::mutable_payload()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  SetHasBit(_impl_._has_bits_[0], 0x00000002U);
+  ::google::protobuf::Any* _msg = _internal_mutable_payload();
+  // @@protoc_insertion_point(field_mutable:finance_protobuf_models.v1.Envelope.payload)
+  return _msg;
+}
+inline void Envelope::set_allocated_payload(::google::protobuf::Any* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.payload_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    SetHasBit(_impl_._has_bits_[0], 0x00000002U);
+  } else {
+    ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
+  }
+
+  _impl_.payload_ = reinterpret_cast<::google::protobuf::Any*>(value);
+  // @@protoc_insertion_point(field_set_allocated:finance_protobuf_models.v1.Envelope.payload)
+}
+
+// -------------------------------------------------------------------
+
 // PriceData
 
 // uint64 timestamp_ms = 1 [json_name = "timestampMs"];
@@ -1120,7 +1512,7 @@ inline void PriceData::clear_timestamp_ms() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.timestamp_ms_ = ::uint64_t{0u};
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000002U);
+                  0x00000001U);
 }
 inline ::uint64_t PriceData::timestamp_ms() const {
   // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.PriceData.timestamp_ms)
@@ -1128,7 +1520,7 @@ inline ::uint64_t PriceData::timestamp_ms() const {
 }
 inline void PriceData::set_timestamp_ms(::uint64_t value) {
   _internal_set_timestamp_ms(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000002U);
+  SetHasBit(_impl_._has_bits_[0], 0x00000001U);
   // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.PriceData.timestamp_ms)
 }
 inline ::uint64_t PriceData::_internal_timestamp_ms() const {
@@ -1145,7 +1537,7 @@ inline void PriceData::clear_price() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.price_ = 0;
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000004U);
+                  0x00000002U);
 }
 inline float PriceData::price() const {
   // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.PriceData.price)
@@ -1153,7 +1545,7 @@ inline float PriceData::price() const {
 }
 inline void PriceData::set_price(float value) {
   _internal_set_price(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000004U);
+  SetHasBit(_impl_._has_bits_[0], 0x00000002U);
   // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.PriceData.price)
 }
 inline float PriceData::_internal_price() const {
@@ -1165,99 +1557,6 @@ inline void PriceData::_internal_set_price(float value) {
   _impl_.price_ = value;
 }
 
-// optional .finance_protobuf_models.v1.MessageMetadata metadata = 3 [json_name = "metadata"];
-inline bool PriceData::has_metadata() const {
-  bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000001U);
-  PROTOBUF_ASSUME(!value || _impl_.metadata_ != nullptr);
-  return value;
-}
-inline const ::finance_protobuf_models::v1::MessageMetadata& PriceData::_internal_metadata() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::finance_protobuf_models::v1::MessageMetadata* p = _impl_.metadata_;
-  return p != nullptr ? *p : reinterpret_cast<const ::finance_protobuf_models::v1::MessageMetadata&>(::finance_protobuf_models::v1::_MessageMetadata_default_instance_);
-}
-inline const ::finance_protobuf_models::v1::MessageMetadata& PriceData::metadata() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.PriceData.metadata)
-  return _internal_metadata();
-}
-inline void PriceData::unsafe_arena_set_allocated_metadata(
-    ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (GetArena() == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.metadata_);
-  }
-  _impl_.metadata_ = reinterpret_cast<::finance_protobuf_models::v1::MessageMetadata*>(value);
-  if (value != nullptr) {
-    SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  } else {
-    ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:finance_protobuf_models.v1.PriceData.metadata)
-}
-inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE PriceData::release_metadata() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-
-  ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  ::finance_protobuf_models::v1::MessageMetadata* released = _impl_.metadata_;
-  _impl_.metadata_ = nullptr;
-  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
-    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
-    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    if (GetArena() == nullptr) {
-      delete old;
-    }
-  } else {
-    if (GetArena() != nullptr) {
-      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    }
-  }
-  return released;
-}
-inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE PriceData::unsafe_arena_release_metadata() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:finance_protobuf_models.v1.PriceData.metadata)
-
-  ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  ::finance_protobuf_models::v1::MessageMetadata* temp = _impl_.metadata_;
-  _impl_.metadata_ = nullptr;
-  return temp;
-}
-inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL PriceData::_internal_mutable_metadata() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.metadata_ == nullptr) {
-    auto* p = ::google::protobuf::Message::DefaultConstruct<::finance_protobuf_models::v1::MessageMetadata>(GetArena());
-    _impl_.metadata_ = reinterpret_cast<::finance_protobuf_models::v1::MessageMetadata*>(p);
-  }
-  return _impl_.metadata_;
-}
-inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL PriceData::mutable_metadata()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  ::finance_protobuf_models::v1::MessageMetadata* _msg = _internal_mutable_metadata();
-  // @@protoc_insertion_point(field_mutable:finance_protobuf_models.v1.PriceData.metadata)
-  return _msg;
-}
-inline void PriceData::set_allocated_metadata(::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value) {
-  ::google::protobuf::Arena* message_arena = GetArena();
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (message_arena == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.metadata_);
-  }
-
-  if (value != nullptr) {
-    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(value)->GetArena();
-    if (message_arena != submessage_arena) {
-      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
-    }
-    SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  } else {
-    ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  }
-
-  _impl_.metadata_ = reinterpret_cast<::finance_protobuf_models::v1::MessageMetadata*>(value);
-  // @@protoc_insertion_point(field_set_allocated:finance_protobuf_models.v1.PriceData.metadata)
-}
-
 // -------------------------------------------------------------------
 
 // PriceMetric
@@ -1267,7 +1566,7 @@ inline void PriceMetric::clear_timestamp_ms() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.timestamp_ms_ = ::uint64_t{0u};
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000002U);
+                  0x00000001U);
 }
 inline ::uint64_t PriceMetric::timestamp_ms() const {
   // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.PriceMetric.timestamp_ms)
@@ -1275,7 +1574,7 @@ inline ::uint64_t PriceMetric::timestamp_ms() const {
 }
 inline void PriceMetric::set_timestamp_ms(::uint64_t value) {
   _internal_set_timestamp_ms(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000002U);
+  SetHasBit(_impl_._has_bits_[0], 0x00000001U);
   // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.PriceMetric.timestamp_ms)
 }
 inline ::uint64_t PriceMetric::_internal_timestamp_ms() const {
@@ -1287,29 +1586,29 @@ inline void PriceMetric::_internal_set_timestamp_ms(::uint64_t value) {
   _impl_.timestamp_ms_ = value;
 }
 
-// uint64 aggregation_window_ms = 2 [json_name = "aggregationWindowMs"];
-inline void PriceMetric::clear_aggregation_window_ms() {
+// .finance_protobuf_models.v1.AggregationWindowEnum aggregation_window = 2 [json_name = "aggregationWindow"];
+inline void PriceMetric::clear_aggregation_window() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.aggregation_window_ms_ = ::uint64_t{0u};
+  _impl_.aggregation_window_ = 0;
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000004U);
+                  0x00000002U);
 }
-inline ::uint64_t PriceMetric::aggregation_window_ms() const {
-  // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.PriceMetric.aggregation_window_ms)
-  return _internal_aggregation_window_ms();
+inline ::finance_protobuf_models::v1::AggregationWindowEnum PriceMetric::aggregation_window() const {
+  // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.PriceMetric.aggregation_window)
+  return _internal_aggregation_window();
 }
-inline void PriceMetric::set_aggregation_window_ms(::uint64_t value) {
-  _internal_set_aggregation_window_ms(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000004U);
-  // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.PriceMetric.aggregation_window_ms)
+inline void PriceMetric::set_aggregation_window(::finance_protobuf_models::v1::AggregationWindowEnum value) {
+  _internal_set_aggregation_window(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00000002U);
+  // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.PriceMetric.aggregation_window)
 }
-inline ::uint64_t PriceMetric::_internal_aggregation_window_ms() const {
+inline ::finance_protobuf_models::v1::AggregationWindowEnum PriceMetric::_internal_aggregation_window() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.aggregation_window_ms_;
+  return static_cast<::finance_protobuf_models::v1::AggregationWindowEnum>(_impl_.aggregation_window_);
 }
-inline void PriceMetric::_internal_set_aggregation_window_ms(::uint64_t value) {
+inline void PriceMetric::_internal_set_aggregation_window(::finance_protobuf_models::v1::AggregationWindowEnum value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.aggregation_window_ms_ = value;
+  _impl_.aggregation_window_ = value;
 }
 
 // float value = 3 [json_name = "value"];
@@ -1317,7 +1616,7 @@ inline void PriceMetric::clear_value() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.value_ = 0;
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000008U);
+                  0x00000004U);
 }
 inline float PriceMetric::value() const {
   // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.PriceMetric.value)
@@ -1325,7 +1624,7 @@ inline float PriceMetric::value() const {
 }
 inline void PriceMetric::set_value(float value) {
   _internal_set_value(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000008U);
+  SetHasBit(_impl_._has_bits_[0], 0x00000004U);
   // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.PriceMetric.value)
 }
 inline float PriceMetric::_internal_value() const {
@@ -1342,7 +1641,7 @@ inline void PriceMetric::clear_statistic() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.statistic_ = 0;
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000010U);
+                  0x00000008U);
 }
 inline ::finance_protobuf_models::v1::StatisticEnum PriceMetric::statistic() const {
   // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.PriceMetric.statistic)
@@ -1350,7 +1649,7 @@ inline ::finance_protobuf_models::v1::StatisticEnum PriceMetric::statistic() con
 }
 inline void PriceMetric::set_statistic(::finance_protobuf_models::v1::StatisticEnum value) {
   _internal_set_statistic(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000010U);
+  SetHasBit(_impl_._has_bits_[0], 0x00000008U);
   // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.PriceMetric.statistic)
 }
 inline ::finance_protobuf_models::v1::StatisticEnum PriceMetric::_internal_statistic() const {
@@ -1362,99 +1661,6 @@ inline void PriceMetric::_internal_set_statistic(::finance_protobuf_models::v1::
   _impl_.statistic_ = value;
 }
 
-// optional .finance_protobuf_models.v1.MessageMetadata metadata = 5 [json_name = "metadata"];
-inline bool PriceMetric::has_metadata() const {
-  bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000001U);
-  PROTOBUF_ASSUME(!value || _impl_.metadata_ != nullptr);
-  return value;
-}
-inline const ::finance_protobuf_models::v1::MessageMetadata& PriceMetric::_internal_metadata() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::finance_protobuf_models::v1::MessageMetadata* p = _impl_.metadata_;
-  return p != nullptr ? *p : reinterpret_cast<const ::finance_protobuf_models::v1::MessageMetadata&>(::finance_protobuf_models::v1::_MessageMetadata_default_instance_);
-}
-inline const ::finance_protobuf_models::v1::MessageMetadata& PriceMetric::metadata() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.PriceMetric.metadata)
-  return _internal_metadata();
-}
-inline void PriceMetric::unsafe_arena_set_allocated_metadata(
-    ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (GetArena() == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.metadata_);
-  }
-  _impl_.metadata_ = reinterpret_cast<::finance_protobuf_models::v1::MessageMetadata*>(value);
-  if (value != nullptr) {
-    SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  } else {
-    ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:finance_protobuf_models.v1.PriceMetric.metadata)
-}
-inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE PriceMetric::release_metadata() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-
-  ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  ::finance_protobuf_models::v1::MessageMetadata* released = _impl_.metadata_;
-  _impl_.metadata_ = nullptr;
-  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
-    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
-    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    if (GetArena() == nullptr) {
-      delete old;
-    }
-  } else {
-    if (GetArena() != nullptr) {
-      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    }
-  }
-  return released;
-}
-inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE PriceMetric::unsafe_arena_release_metadata() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:finance_protobuf_models.v1.PriceMetric.metadata)
-
-  ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  ::finance_protobuf_models::v1::MessageMetadata* temp = _impl_.metadata_;
-  _impl_.metadata_ = nullptr;
-  return temp;
-}
-inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL PriceMetric::_internal_mutable_metadata() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.metadata_ == nullptr) {
-    auto* p = ::google::protobuf::Message::DefaultConstruct<::finance_protobuf_models::v1::MessageMetadata>(GetArena());
-    _impl_.metadata_ = reinterpret_cast<::finance_protobuf_models::v1::MessageMetadata*>(p);
-  }
-  return _impl_.metadata_;
-}
-inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL PriceMetric::mutable_metadata()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  ::finance_protobuf_models::v1::MessageMetadata* _msg = _internal_mutable_metadata();
-  // @@protoc_insertion_point(field_mutable:finance_protobuf_models.v1.PriceMetric.metadata)
-  return _msg;
-}
-inline void PriceMetric::set_allocated_metadata(::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value) {
-  ::google::protobuf::Arena* message_arena = GetArena();
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (message_arena == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.metadata_);
-  }
-
-  if (value != nullptr) {
-    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(value)->GetArena();
-    if (message_arena != submessage_arena) {
-      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
-    }
-    SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  } else {
-    ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  }
-
-  _impl_.metadata_ = reinterpret_cast<::finance_protobuf_models::v1::MessageMetadata*>(value);
-  // @@protoc_insertion_point(field_set_allocated:finance_protobuf_models.v1.PriceMetric.metadata)
-}
-
 // -------------------------------------------------------------------
 
 // OHLC
@@ -1464,7 +1670,7 @@ inline void OHLC::clear_timestamp_ms() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.timestamp_ms_ = ::uint64_t{0u};
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000002U);
+                  0x00000001U);
 }
 inline ::uint64_t OHLC::timestamp_ms() const {
   // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.OHLC.timestamp_ms)
@@ -1472,7 +1678,7 @@ inline ::uint64_t OHLC::timestamp_ms() const {
 }
 inline void OHLC::set_timestamp_ms(::uint64_t value) {
   _internal_set_timestamp_ms(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000002U);
+  SetHasBit(_impl_._has_bits_[0], 0x00000001U);
   // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.OHLC.timestamp_ms)
 }
 inline ::uint64_t OHLC::_internal_timestamp_ms() const {
@@ -1484,29 +1690,29 @@ inline void OHLC::_internal_set_timestamp_ms(::uint64_t value) {
   _impl_.timestamp_ms_ = value;
 }
 
-// uint64 aggregation_window_ms = 2 [json_name = "aggregationWindowMs"];
-inline void OHLC::clear_aggregation_window_ms() {
+// .finance_protobuf_models.v1.AggregationWindowEnum aggregation_window = 2 [json_name = "aggregationWindow"];
+inline void OHLC::clear_aggregation_window() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.aggregation_window_ms_ = ::uint64_t{0u};
+  _impl_.aggregation_window_ = 0;
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000004U);
+                  0x00000002U);
 }
-inline ::uint64_t OHLC::aggregation_window_ms() const {
-  // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.OHLC.aggregation_window_ms)
-  return _internal_aggregation_window_ms();
+inline ::finance_protobuf_models::v1::AggregationWindowEnum OHLC::aggregation_window() const {
+  // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.OHLC.aggregation_window)
+  return _internal_aggregation_window();
 }
-inline void OHLC::set_aggregation_window_ms(::uint64_t value) {
-  _internal_set_aggregation_window_ms(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000004U);
-  // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.OHLC.aggregation_window_ms)
+inline void OHLC::set_aggregation_window(::finance_protobuf_models::v1::AggregationWindowEnum value) {
+  _internal_set_aggregation_window(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00000002U);
+  // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.OHLC.aggregation_window)
 }
-inline ::uint64_t OHLC::_internal_aggregation_window_ms() const {
+inline ::finance_protobuf_models::v1::AggregationWindowEnum OHLC::_internal_aggregation_window() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.aggregation_window_ms_;
+  return static_cast<::finance_protobuf_models::v1::AggregationWindowEnum>(_impl_.aggregation_window_);
 }
-inline void OHLC::_internal_set_aggregation_window_ms(::uint64_t value) {
+inline void OHLC::_internal_set_aggregation_window(::finance_protobuf_models::v1::AggregationWindowEnum value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.aggregation_window_ms_ = value;
+  _impl_.aggregation_window_ = value;
 }
 
 // float open = 3 [json_name = "open"];
@@ -1514,7 +1720,7 @@ inline void OHLC::clear_open() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.open_ = 0;
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000008U);
+                  0x00000004U);
 }
 inline float OHLC::open() const {
   // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.OHLC.open)
@@ -1522,7 +1728,7 @@ inline float OHLC::open() const {
 }
 inline void OHLC::set_open(float value) {
   _internal_set_open(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000008U);
+  SetHasBit(_impl_._has_bits_[0], 0x00000004U);
   // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.OHLC.open)
 }
 inline float OHLC::_internal_open() const {
@@ -1539,7 +1745,7 @@ inline void OHLC::clear_high() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.high_ = 0;
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000010U);
+                  0x00000008U);
 }
 inline float OHLC::high() const {
   // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.OHLC.high)
@@ -1547,7 +1753,7 @@ inline float OHLC::high() const {
 }
 inline void OHLC::set_high(float value) {
   _internal_set_high(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000010U);
+  SetHasBit(_impl_._has_bits_[0], 0x00000008U);
   // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.OHLC.high)
 }
 inline float OHLC::_internal_high() const {
@@ -1564,7 +1770,7 @@ inline void OHLC::clear_low() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.low_ = 0;
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000020U);
+                  0x00000010U);
 }
 inline float OHLC::low() const {
   // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.OHLC.low)
@@ -1572,7 +1778,7 @@ inline float OHLC::low() const {
 }
 inline void OHLC::set_low(float value) {
   _internal_set_low(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000020U);
+  SetHasBit(_impl_._has_bits_[0], 0x00000010U);
   // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.OHLC.low)
 }
 inline float OHLC::_internal_low() const {
@@ -1589,7 +1795,7 @@ inline void OHLC::clear_close() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.close_ = 0;
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000040U);
+                  0x00000020U);
 }
 inline float OHLC::close() const {
   // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.OHLC.close)
@@ -1597,7 +1803,7 @@ inline float OHLC::close() const {
 }
 inline void OHLC::set_close(float value) {
   _internal_set_close(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000040U);
+  SetHasBit(_impl_._has_bits_[0], 0x00000020U);
   // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.OHLC.close)
 }
 inline float OHLC::_internal_close() const {
@@ -1614,7 +1820,7 @@ inline void OHLC::clear_bullish() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.bullish_ = false;
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000080U);
+                  0x00000040U);
 }
 inline bool OHLC::bullish() const {
   // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.OHLC.bullish)
@@ -1622,7 +1828,7 @@ inline bool OHLC::bullish() const {
 }
 inline void OHLC::set_bullish(bool value) {
   _internal_set_bullish(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000080U);
+  SetHasBit(_impl_._has_bits_[0], 0x00000040U);
   // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.OHLC.bullish)
 }
 inline bool OHLC::_internal_bullish() const {
@@ -1634,99 +1840,6 @@ inline void OHLC::_internal_set_bullish(bool value) {
   _impl_.bullish_ = value;
 }
 
-// optional .finance_protobuf_models.v1.MessageMetadata metadata = 8 [json_name = "metadata"];
-inline bool OHLC::has_metadata() const {
-  bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000001U);
-  PROTOBUF_ASSUME(!value || _impl_.metadata_ != nullptr);
-  return value;
-}
-inline const ::finance_protobuf_models::v1::MessageMetadata& OHLC::_internal_metadata() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::finance_protobuf_models::v1::MessageMetadata* p = _impl_.metadata_;
-  return p != nullptr ? *p : reinterpret_cast<const ::finance_protobuf_models::v1::MessageMetadata&>(::finance_protobuf_models::v1::_MessageMetadata_default_instance_);
-}
-inline const ::finance_protobuf_models::v1::MessageMetadata& OHLC::metadata() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.OHLC.metadata)
-  return _internal_metadata();
-}
-inline void OHLC::unsafe_arena_set_allocated_metadata(
-    ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (GetArena() == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.metadata_);
-  }
-  _impl_.metadata_ = reinterpret_cast<::finance_protobuf_models::v1::MessageMetadata*>(value);
-  if (value != nullptr) {
-    SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  } else {
-    ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:finance_protobuf_models.v1.OHLC.metadata)
-}
-inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE OHLC::release_metadata() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-
-  ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  ::finance_protobuf_models::v1::MessageMetadata* released = _impl_.metadata_;
-  _impl_.metadata_ = nullptr;
-  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
-    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
-    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    if (GetArena() == nullptr) {
-      delete old;
-    }
-  } else {
-    if (GetArena() != nullptr) {
-      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    }
-  }
-  return released;
-}
-inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE OHLC::unsafe_arena_release_metadata() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:finance_protobuf_models.v1.OHLC.metadata)
-
-  ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  ::finance_protobuf_models::v1::MessageMetadata* temp = _impl_.metadata_;
-  _impl_.metadata_ = nullptr;
-  return temp;
-}
-inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL OHLC::_internal_mutable_metadata() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.metadata_ == nullptr) {
-    auto* p = ::google::protobuf::Message::DefaultConstruct<::finance_protobuf_models::v1::MessageMetadata>(GetArena());
-    _impl_.metadata_ = reinterpret_cast<::finance_protobuf_models::v1::MessageMetadata*>(p);
-  }
-  return _impl_.metadata_;
-}
-inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL OHLC::mutable_metadata()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  ::finance_protobuf_models::v1::MessageMetadata* _msg = _internal_mutable_metadata();
-  // @@protoc_insertion_point(field_mutable:finance_protobuf_models.v1.OHLC.metadata)
-  return _msg;
-}
-inline void OHLC::set_allocated_metadata(::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value) {
-  ::google::protobuf::Arena* message_arena = GetArena();
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (message_arena == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.metadata_);
-  }
-
-  if (value != nullptr) {
-    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(value)->GetArena();
-    if (message_arena != submessage_arena) {
-      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
-    }
-    SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  } else {
-    ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  }
-
-  _impl_.metadata_ = reinterpret_cast<::finance_protobuf_models::v1::MessageMetadata*>(value);
-  // @@protoc_insertion_point(field_set_allocated:finance_protobuf_models.v1.OHLC.metadata)
-}
-
 // -------------------------------------------------------------------
 
 // BollingerBands
@@ -1736,7 +1849,7 @@ inline void BollingerBands::clear_timestamp_ms() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.timestamp_ms_ = ::uint64_t{0u};
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000002U);
+                  0x00000001U);
 }
 inline ::uint64_t BollingerBands::timestamp_ms() const {
   // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.BollingerBands.timestamp_ms)
@@ -1744,7 +1857,7 @@ inline ::uint64_t BollingerBands::timestamp_ms() const {
 }
 inline void BollingerBands::set_timestamp_ms(::uint64_t value) {
   _internal_set_timestamp_ms(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000002U);
+  SetHasBit(_impl_._has_bits_[0], 0x00000001U);
   // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.BollingerBands.timestamp_ms)
 }
 inline ::uint64_t BollingerBands::_internal_timestamp_ms() const {
@@ -1756,7 +1869,32 @@ inline void BollingerBands::_internal_set_timestamp_ms(::uint64_t value) {
   _impl_.timestamp_ms_ = value;
 }
 
-// float upper_band = 2 [json_name = "upperBand"];
+// .finance_protobuf_models.v1.AggregationWindowEnum aggregation_window = 2 [json_name = "aggregationWindow"];
+inline void BollingerBands::clear_aggregation_window() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.aggregation_window_ = 0;
+  ClearHasBit(_impl_._has_bits_[0],
+                  0x00000002U);
+}
+inline ::finance_protobuf_models::v1::AggregationWindowEnum BollingerBands::aggregation_window() const {
+  // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.BollingerBands.aggregation_window)
+  return _internal_aggregation_window();
+}
+inline void BollingerBands::set_aggregation_window(::finance_protobuf_models::v1::AggregationWindowEnum value) {
+  _internal_set_aggregation_window(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00000002U);
+  // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.BollingerBands.aggregation_window)
+}
+inline ::finance_protobuf_models::v1::AggregationWindowEnum BollingerBands::_internal_aggregation_window() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::finance_protobuf_models::v1::AggregationWindowEnum>(_impl_.aggregation_window_);
+}
+inline void BollingerBands::_internal_set_aggregation_window(::finance_protobuf_models::v1::AggregationWindowEnum value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.aggregation_window_ = value;
+}
+
+// float upper_band = 3 [json_name = "upperBand"];
 inline void BollingerBands::clear_upper_band() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.upper_band_ = 0;
@@ -1781,7 +1919,7 @@ inline void BollingerBands::_internal_set_upper_band(float value) {
   _impl_.upper_band_ = value;
 }
 
-// float middle_band = 3 [json_name = "middleBand"];
+// float middle_band = 4 [json_name = "middleBand"];
 inline void BollingerBands::clear_middle_band() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.middle_band_ = 0;
@@ -1806,7 +1944,7 @@ inline void BollingerBands::_internal_set_middle_band(float value) {
   _impl_.middle_band_ = value;
 }
 
-// float lower_band = 4 [json_name = "lowerBand"];
+// float lower_band = 5 [json_name = "lowerBand"];
 inline void BollingerBands::clear_lower_band() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.lower_band_ = 0;
@@ -1829,99 +1967,6 @@ inline float BollingerBands::_internal_lower_band() const {
 inline void BollingerBands::_internal_set_lower_band(float value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.lower_band_ = value;
-}
-
-// optional .finance_protobuf_models.v1.MessageMetadata metadata = 5 [json_name = "metadata"];
-inline bool BollingerBands::has_metadata() const {
-  bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000001U);
-  PROTOBUF_ASSUME(!value || _impl_.metadata_ != nullptr);
-  return value;
-}
-inline const ::finance_protobuf_models::v1::MessageMetadata& BollingerBands::_internal_metadata() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::finance_protobuf_models::v1::MessageMetadata* p = _impl_.metadata_;
-  return p != nullptr ? *p : reinterpret_cast<const ::finance_protobuf_models::v1::MessageMetadata&>(::finance_protobuf_models::v1::_MessageMetadata_default_instance_);
-}
-inline const ::finance_protobuf_models::v1::MessageMetadata& BollingerBands::metadata() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.BollingerBands.metadata)
-  return _internal_metadata();
-}
-inline void BollingerBands::unsafe_arena_set_allocated_metadata(
-    ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (GetArena() == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.metadata_);
-  }
-  _impl_.metadata_ = reinterpret_cast<::finance_protobuf_models::v1::MessageMetadata*>(value);
-  if (value != nullptr) {
-    SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  } else {
-    ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:finance_protobuf_models.v1.BollingerBands.metadata)
-}
-inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE BollingerBands::release_metadata() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-
-  ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  ::finance_protobuf_models::v1::MessageMetadata* released = _impl_.metadata_;
-  _impl_.metadata_ = nullptr;
-  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
-    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
-    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    if (GetArena() == nullptr) {
-      delete old;
-    }
-  } else {
-    if (GetArena() != nullptr) {
-      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    }
-  }
-  return released;
-}
-inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE BollingerBands::unsafe_arena_release_metadata() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:finance_protobuf_models.v1.BollingerBands.metadata)
-
-  ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  ::finance_protobuf_models::v1::MessageMetadata* temp = _impl_.metadata_;
-  _impl_.metadata_ = nullptr;
-  return temp;
-}
-inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL BollingerBands::_internal_mutable_metadata() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.metadata_ == nullptr) {
-    auto* p = ::google::protobuf::Message::DefaultConstruct<::finance_protobuf_models::v1::MessageMetadata>(GetArena());
-    _impl_.metadata_ = reinterpret_cast<::finance_protobuf_models::v1::MessageMetadata*>(p);
-  }
-  return _impl_.metadata_;
-}
-inline ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NONNULL BollingerBands::mutable_metadata()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  ::finance_protobuf_models::v1::MessageMetadata* _msg = _internal_mutable_metadata();
-  // @@protoc_insertion_point(field_mutable:finance_protobuf_models.v1.BollingerBands.metadata)
-  return _msg;
-}
-inline void BollingerBands::set_allocated_metadata(::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE value) {
-  ::google::protobuf::Arena* message_arena = GetArena();
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (message_arena == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.metadata_);
-  }
-
-  if (value != nullptr) {
-    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(value)->GetArena();
-    if (message_arena != submessage_arena) {
-      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
-    }
-    SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  } else {
-    ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  }
-
-  _impl_.metadata_ = reinterpret_cast<::finance_protobuf_models::v1::MessageMetadata*>(value);
-  // @@protoc_insertion_point(field_set_allocated:finance_protobuf_models.v1.BollingerBands.metadata)
 }
 
 #ifdef __GNUC__

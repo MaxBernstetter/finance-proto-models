@@ -53,6 +53,10 @@ extern const ::google::protobuf::internal::DescriptorTable descriptor_table_fina
 }  // extern "C"
 namespace finance_protobuf_models {
 namespace v1 {
+enum AggregationWindowEnum : int;
+extern const uint32_t AggregationWindowEnum_internal_data_[];
+enum MessageTypeEnum : int;
+extern const uint32_t MessageTypeEnum_internal_data_[];
 enum ProviderEnum : int;
 extern const uint32_t ProviderEnum_internal_data_[];
 enum StatisticEnum : int;
@@ -61,6 +65,12 @@ extern const uint32_t StatisticEnum_internal_data_[];
 }  // namespace finance_protobuf_models
 namespace google {
 namespace protobuf {
+template <>
+internal::EnumTraitsT<::finance_protobuf_models::v1::AggregationWindowEnum_internal_data_>
+    internal::EnumTraitsImpl::value<::finance_protobuf_models::v1::AggregationWindowEnum>;
+template <>
+internal::EnumTraitsT<::finance_protobuf_models::v1::MessageTypeEnum_internal_data_>
+    internal::EnumTraitsImpl::value<::finance_protobuf_models::v1::MessageTypeEnum>;
 template <>
 internal::EnumTraitsT<::finance_protobuf_models::v1::ProviderEnum_internal_data_>
     internal::EnumTraitsImpl::value<::finance_protobuf_models::v1::ProviderEnum>;
@@ -114,13 +124,17 @@ template <>
 }
 enum StatisticEnum : int {
   STATISTIC_ENUM_UNSPECIFIED = 0,
-  STATISTIC_ENUM_SMA = 1,
-  STATISTIC_ENUM_EMA = 2,
-  STATISTIC_ENUM_RSI = 3,
-  STATISTIC_ENUM_MACD = 4,
-  STATISTIC_ENUM_STOCH = 5,
-  STATISTIC_ENUM_ADX = 6,
-  STATISTIC_ENUM_ATR = 7,
+  STATISTIC_ENUM_AVG = 1,
+  STATISTIC_ENUM_MEDIAN = 2,
+  STATISTIC_ENUM_SDEV = 3,
+  STATISTIC_ENUM_VAR = 4,
+  STATISTIC_ENUM_SMA = 5,
+  STATISTIC_ENUM_EMA = 6,
+  STATISTIC_ENUM_RSI = 7,
+  STATISTIC_ENUM_MACD = 8,
+  STATISTIC_ENUM_STOCH = 9,
+  STATISTIC_ENUM_ADX = 10,
+  STATISTIC_ENUM_ATR = 11,
   StatisticEnum_INT_MIN_SENTINEL_DO_NOT_USE_ =
       ::std::numeric_limits<::int32_t>::min(),
   StatisticEnum_INT_MAX_SENTINEL_DO_NOT_USE_ =
@@ -131,11 +145,11 @@ extern const uint32_t StatisticEnum_internal_data_[];
 inline constexpr StatisticEnum StatisticEnum_MIN =
     static_cast<StatisticEnum>(0);
 inline constexpr StatisticEnum StatisticEnum_MAX =
-    static_cast<StatisticEnum>(7);
+    static_cast<StatisticEnum>(11);
 [[nodiscard]] inline bool StatisticEnum_IsValid(int value) {
-  return 0 <= value && value <= 7;
+  return 0 <= value && value <= 11;
 }
-inline constexpr int StatisticEnum_ARRAYSIZE = 7 + 1;
+inline constexpr int StatisticEnum_ARRAYSIZE = 11 + 1;
 [[nodiscard]] const ::google::protobuf::EnumDescriptor* PROTOBUF_NONNULL
 StatisticEnum_descriptor();
 [[nodiscard]] inline auto ProtobufInternalGetEnumDescriptor(StatisticEnum) {
@@ -150,12 +164,103 @@ template <typename T>
 }
 template <>
 [[nodiscard]] inline const ::std::string& StatisticEnum_Name(StatisticEnum value) {
-  return ::google::protobuf::internal::NameOfDenseEnum<StatisticEnum_descriptor, 0, 7>(
+  return ::google::protobuf::internal::NameOfDenseEnum<StatisticEnum_descriptor, 0, 11>(
       static_cast<int>(value));
 }
 [[nodiscard]] inline bool StatisticEnum_Parse(
     ::absl::string_view name, StatisticEnum* PROTOBUF_NONNULL value) {
   return ::google::protobuf::internal::ParseNamedEnum<StatisticEnum>(StatisticEnum_descriptor(), name,
+                                           value);
+}
+enum MessageTypeEnum : int {
+  MESSAGE_TYPE_ENUM_UNSPECIFIED = 0,
+  MESSAGE_TYPE_ENUM_PRICE = 1,
+  MESSAGE_TYPE_ENUM_METRIC = 2,
+  MESSAGE_TYPE_ENUM_OHLC = 3,
+  MESSAGE_TYPE_ENUM_BOLLINGER_BANDS = 4,
+  MessageTypeEnum_INT_MIN_SENTINEL_DO_NOT_USE_ =
+      ::std::numeric_limits<::int32_t>::min(),
+  MessageTypeEnum_INT_MAX_SENTINEL_DO_NOT_USE_ =
+      ::std::numeric_limits<::int32_t>::max(),
+};
+
+extern const uint32_t MessageTypeEnum_internal_data_[];
+inline constexpr MessageTypeEnum MessageTypeEnum_MIN =
+    static_cast<MessageTypeEnum>(0);
+inline constexpr MessageTypeEnum MessageTypeEnum_MAX =
+    static_cast<MessageTypeEnum>(4);
+[[nodiscard]] inline bool MessageTypeEnum_IsValid(int value) {
+  return 0 <= value && value <= 4;
+}
+inline constexpr int MessageTypeEnum_ARRAYSIZE = 4 + 1;
+[[nodiscard]] const ::google::protobuf::EnumDescriptor* PROTOBUF_NONNULL
+MessageTypeEnum_descriptor();
+[[nodiscard]] inline auto ProtobufInternalGetEnumDescriptor(MessageTypeEnum) {
+  return MessageTypeEnum_descriptor();
+}
+template <typename T>
+[[nodiscard]] const ::std::string& MessageTypeEnum_Name(T value) {
+  static_assert(::std::is_same<T, MessageTypeEnum>::value ||
+                    ::std::is_integral<T>::value,
+                "Incorrect type passed to MessageTypeEnum_Name().");
+  return MessageTypeEnum_Name(static_cast<MessageTypeEnum>(value));
+}
+template <>
+[[nodiscard]] inline const ::std::string& MessageTypeEnum_Name(MessageTypeEnum value) {
+  return ::google::protobuf::internal::NameOfDenseEnum<MessageTypeEnum_descriptor, 0, 4>(
+      static_cast<int>(value));
+}
+[[nodiscard]] inline bool MessageTypeEnum_Parse(
+    ::absl::string_view name, MessageTypeEnum* PROTOBUF_NONNULL value) {
+  return ::google::protobuf::internal::ParseNamedEnum<MessageTypeEnum>(MessageTypeEnum_descriptor(), name,
+                                           value);
+}
+enum AggregationWindowEnum : int {
+  AGGREGATION_WINDOW_ENUM_UNSPECIFIED = 0,
+  AGGREGATION_WINDOW_ENUM_1_MINUTE = 1,
+  AGGREGATION_WINDOW_ENUM_5_MINUTES = 2,
+  AGGREGATION_WINDOW_ENUM_15_MINUTES = 3,
+  AGGREGATION_WINDOW_ENUM_30_MINUTES = 4,
+  AGGREGATION_WINDOW_ENUM_1_HOUR = 5,
+  AGGREGATION_WINDOW_ENUM_4_HOURS = 6,
+  AGGREGATION_WINDOW_ENUM_1_DAY = 7,
+  AGGREGATION_WINDOW_ENUM_1_WEEK = 8,
+  AGGREGATION_WINDOW_ENUM_1_MONTH = 9,
+  AggregationWindowEnum_INT_MIN_SENTINEL_DO_NOT_USE_ =
+      ::std::numeric_limits<::int32_t>::min(),
+  AggregationWindowEnum_INT_MAX_SENTINEL_DO_NOT_USE_ =
+      ::std::numeric_limits<::int32_t>::max(),
+};
+
+extern const uint32_t AggregationWindowEnum_internal_data_[];
+inline constexpr AggregationWindowEnum AggregationWindowEnum_MIN =
+    static_cast<AggregationWindowEnum>(0);
+inline constexpr AggregationWindowEnum AggregationWindowEnum_MAX =
+    static_cast<AggregationWindowEnum>(9);
+[[nodiscard]] inline bool AggregationWindowEnum_IsValid(int value) {
+  return 0 <= value && value <= 9;
+}
+inline constexpr int AggregationWindowEnum_ARRAYSIZE = 9 + 1;
+[[nodiscard]] const ::google::protobuf::EnumDescriptor* PROTOBUF_NONNULL
+AggregationWindowEnum_descriptor();
+[[nodiscard]] inline auto ProtobufInternalGetEnumDescriptor(AggregationWindowEnum) {
+  return AggregationWindowEnum_descriptor();
+}
+template <typename T>
+[[nodiscard]] const ::std::string& AggregationWindowEnum_Name(T value) {
+  static_assert(::std::is_same<T, AggregationWindowEnum>::value ||
+                    ::std::is_integral<T>::value,
+                "Incorrect type passed to AggregationWindowEnum_Name().");
+  return AggregationWindowEnum_Name(static_cast<AggregationWindowEnum>(value));
+}
+template <>
+[[nodiscard]] inline const ::std::string& AggregationWindowEnum_Name(AggregationWindowEnum value) {
+  return ::google::protobuf::internal::NameOfDenseEnum<AggregationWindowEnum_descriptor, 0, 9>(
+      static_cast<int>(value));
+}
+[[nodiscard]] inline bool AggregationWindowEnum_Parse(
+    ::absl::string_view name, AggregationWindowEnum* PROTOBUF_NONNULL value) {
+  return ::google::protobuf::internal::ParseNamedEnum<AggregationWindowEnum>(AggregationWindowEnum_descriptor(), name,
                                            value);
 }
 
@@ -198,6 +303,18 @@ struct is_proto_enum<::finance_protobuf_models::v1::StatisticEnum> : std::true_t
 template <>
 inline const EnumDescriptor* PROTOBUF_NONNULL GetEnumDescriptor<::finance_protobuf_models::v1::StatisticEnum>() {
   return ::finance_protobuf_models::v1::StatisticEnum_descriptor();
+}
+template <>
+struct is_proto_enum<::finance_protobuf_models::v1::MessageTypeEnum> : std::true_type {};
+template <>
+inline const EnumDescriptor* PROTOBUF_NONNULL GetEnumDescriptor<::finance_protobuf_models::v1::MessageTypeEnum>() {
+  return ::finance_protobuf_models::v1::MessageTypeEnum_descriptor();
+}
+template <>
+struct is_proto_enum<::finance_protobuf_models::v1::AggregationWindowEnum> : std::true_type {};
+template <>
+inline const EnumDescriptor* PROTOBUF_NONNULL GetEnumDescriptor<::finance_protobuf_models::v1::AggregationWindowEnum>() {
+  return ::finance_protobuf_models::v1::AggregationWindowEnum_descriptor();
 }
 
 }  // namespace protobuf
