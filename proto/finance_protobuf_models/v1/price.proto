@@ -15,9 +15,10 @@ message PriceData {
 
 message PriceMetric {
   uint64 timestamp_ms = 1;
-  float value = 2;
-  StatisticEnum statistic = 3;
-  optional MessageMetadata metadata = 4;
+  uint64 aggregation_window_ms = 2;
+  float value = 3;
+  StatisticEnum statistic = 4;
+  optional MessageMetadata metadata = 5;
 }
 
 message OHLC {
@@ -27,8 +28,8 @@ message OHLC {
   float high = 4;
   float low = 5;
   float close = 6;
-  optional MessageMetadata metadata = 7;
-  bool bullish = 8;
+  bool bullish = 7;
+  optional MessageMetadata metadata = 8;
 }
 
 message BollingerBands {

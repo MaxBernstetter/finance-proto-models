@@ -34,6 +34,7 @@ inline constexpr PriceMetric::Impl_::Impl_(
       : _cached_size_{0},
         metadata_{nullptr},
         timestamp_ms_{::uint64_t{0u}},
+        aggregation_window_ms_{::uint64_t{0u}},
         value_{0},
         statistic_{static_cast< ::finance_protobuf_models::v1::StatisticEnum >(0)} {}
 
@@ -167,14 +168,16 @@ const ::uint32_t
         0,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::finance_protobuf_models::v1::PriceMetric, _impl_._has_bits_),
-        7, // hasbit index offset
+        8, // hasbit index offset
         PROTOBUF_FIELD_OFFSET(::finance_protobuf_models::v1::PriceMetric, _impl_.timestamp_ms_),
+        PROTOBUF_FIELD_OFFSET(::finance_protobuf_models::v1::PriceMetric, _impl_.aggregation_window_ms_),
         PROTOBUF_FIELD_OFFSET(::finance_protobuf_models::v1::PriceMetric, _impl_.value_),
         PROTOBUF_FIELD_OFFSET(::finance_protobuf_models::v1::PriceMetric, _impl_.statistic_),
         PROTOBUF_FIELD_OFFSET(::finance_protobuf_models::v1::PriceMetric, _impl_.metadata_),
         1,
         2,
         3,
+        4,
         0,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::finance_protobuf_models::v1::OHLC, _impl_._has_bits_),
@@ -185,16 +188,16 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::finance_protobuf_models::v1::OHLC, _impl_.high_),
         PROTOBUF_FIELD_OFFSET(::finance_protobuf_models::v1::OHLC, _impl_.low_),
         PROTOBUF_FIELD_OFFSET(::finance_protobuf_models::v1::OHLC, _impl_.close_),
-        PROTOBUF_FIELD_OFFSET(::finance_protobuf_models::v1::OHLC, _impl_.metadata_),
         PROTOBUF_FIELD_OFFSET(::finance_protobuf_models::v1::OHLC, _impl_.bullish_),
+        PROTOBUF_FIELD_OFFSET(::finance_protobuf_models::v1::OHLC, _impl_.metadata_),
         1,
         2,
         3,
         4,
         5,
         6,
-        0,
         7,
+        0,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::finance_protobuf_models::v1::BollingerBands, _impl_._has_bits_),
         8, // hasbit index offset
@@ -214,8 +217,8 @@ static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, sizeof(::finance_protobuf_models::v1::PriceData)},
         {9, sizeof(::finance_protobuf_models::v1::PriceMetric)},
-        {20, sizeof(::finance_protobuf_models::v1::OHLC)},
-        {39, sizeof(::finance_protobuf_models::v1::BollingerBands)},
+        {22, sizeof(::finance_protobuf_models::v1::OHLC)},
+        {41, sizeof(::finance_protobuf_models::v1::BollingerBands)},
 };
 static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
     &::finance_protobuf_models::v1::_PriceData_default_instance_._instance,
@@ -232,28 +235,30 @@ const char descriptor_table_protodef_finance_5fprotobuf_5fmodels_2fv1_2fprice_2e
     "Data\022!\n\014timestamp_ms\030\001 \001(\004R\013timestampMs\022"
     "\024\n\005price\030\002 \001(\002R\005price\022L\n\010metadata\030\003 \001(\0132"
     "+.finance_protobuf_models.v1.MessageMeta"
-    "dataH\000R\010metadata\210\001\001B\013\n\t_metadata\"\352\001\n\013Pri"
+    "dataH\000R\010metadata\210\001\001B\013\n\t_metadata\"\236\002\n\013Pri"
     "ceMetric\022!\n\014timestamp_ms\030\001 \001(\004R\013timestam"
-    "pMs\022\024\n\005value\030\002 \001(\002R\005value\022G\n\tstatistic\030\003"
-    " \001(\0162).finance_protobuf_models.v1.Statis"
-    "ticEnumR\tstatistic\022L\n\010metadata\030\004 \001(\0132+.f"
-    "inance_protobuf_models.v1.MessageMetadat"
-    "aH\000R\010metadata\210\001\001B\013\n\t_metadata\"\242\002\n\004OHLC\022!"
-    "\n\014timestamp_ms\030\001 \001(\004R\013timestampMs\0222\n\025agg"
-    "regation_window_ms\030\002 \001(\004R\023aggregationWin"
-    "dowMs\022\022\n\004open\030\003 \001(\002R\004open\022\022\n\004high\030\004 \001(\002R"
-    "\004high\022\020\n\003low\030\005 \001(\002R\003low\022\024\n\005close\030\006 \001(\002R\005"
-    "close\022L\n\010metadata\030\007 \001(\0132+.finance_protob"
-    "uf_models.v1.MessageMetadataH\000R\010metadata"
-    "\210\001\001\022\030\n\007bullish\030\010 \001(\010R\007bullishB\013\n\t_metada"
-    "ta\"\355\001\n\016BollingerBands\022!\n\014timestamp_ms\030\001 "
-    "\001(\004R\013timestampMs\022\035\n\nupper_band\030\002 \001(\002R\tup"
-    "perBand\022\037\n\013middle_band\030\003 \001(\002R\nmiddleBand"
-    "\022\035\n\nlower_band\030\004 \001(\002R\tlowerBand\022L\n\010metad"
-    "ata\030\005 \001(\0132+.finance_protobuf_models.v1.M"
-    "essageMetadataH\000R\010metadata\210\001\001B\013\n\t_metada"
-    "taBAZ\?github.com/MaxBernstetter/finance-"
-    "proto-models/gen/go/financepbb\006proto3"
+    "pMs\0222\n\025aggregation_window_ms\030\002 \001(\004R\023aggr"
+    "egationWindowMs\022\024\n\005value\030\003 \001(\002R\005value\022G\n"
+    "\tstatistic\030\004 \001(\0162).finance_protobuf_mode"
+    "ls.v1.StatisticEnumR\tstatistic\022L\n\010metada"
+    "ta\030\005 \001(\0132+.finance_protobuf_models.v1.Me"
+    "ssageMetadataH\000R\010metadata\210\001\001B\013\n\t_metadat"
+    "a\"\242\002\n\004OHLC\022!\n\014timestamp_ms\030\001 \001(\004R\013timest"
+    "ampMs\0222\n\025aggregation_window_ms\030\002 \001(\004R\023ag"
+    "gregationWindowMs\022\022\n\004open\030\003 \001(\002R\004open\022\022\n"
+    "\004high\030\004 \001(\002R\004high\022\020\n\003low\030\005 \001(\002R\003low\022\024\n\005c"
+    "lose\030\006 \001(\002R\005close\022\030\n\007bullish\030\007 \001(\010R\007bull"
+    "ish\022L\n\010metadata\030\010 \001(\0132+.finance_protobuf"
+    "_models.v1.MessageMetadataH\000R\010metadata\210\001"
+    "\001B\013\n\t_metadata\"\355\001\n\016BollingerBands\022!\n\014tim"
+    "estamp_ms\030\001 \001(\004R\013timestampMs\022\035\n\nupper_ba"
+    "nd\030\002 \001(\002R\tupperBand\022\037\n\013middle_band\030\003 \001(\002"
+    "R\nmiddleBand\022\035\n\nlower_band\030\004 \001(\002R\tlowerB"
+    "and\022L\n\010metadata\030\005 \001(\0132+.finance_protobuf"
+    "_models.v1.MessageMetadataH\000R\010metadata\210\001"
+    "\001B\013\n\t_metadataBAZ\?github.com/MaxBernstet"
+    "ter/finance-proto-models/gen/go/financep"
+    "bb\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
     descriptor_table_finance_5fprotobuf_5fmodels_2fv1_2fprice_2eproto_deps[2] = {
@@ -264,7 +269,7 @@ static ::absl::once_flag descriptor_table_finance_5fprotobuf_5fmodels_2fv1_2fpri
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_finance_5fprotobuf_5fmodels_2fv1_2fprice_2eproto = {
     false,
     false,
-    1157,
+    1209,
     descriptor_table_protodef_finance_5fprotobuf_5fmodels_2fv1_2fprice_2eproto,
     "finance_protobuf_models/v1/price.proto",
     &descriptor_table_finance_5fprotobuf_5fmodels_2fv1_2fprice_2eproto_once,
@@ -764,16 +769,16 @@ PriceMetric::GetClassData() const {
   return PriceMetric_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 4, 1, 0, 2>
+const ::_pbi::TcParseTable<3, 5, 1, 0, 2>
 PriceMetric::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(PriceMetric, _impl_._has_bits_),
     0, // no _extensions_
-    4, 24,  // max_field_number, fast_idx_mask
+    5, 56,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967280,  // skipmap
+    4294967264,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    4,  // num_field_entries
+    5,  // num_field_entries
     1,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     PriceMetric_class_data_.base(),
@@ -783,32 +788,41 @@ PriceMetric::_table_ = {
     ::_pbi::TcParser::GetTable<::finance_protobuf_models::v1::PriceMetric>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // optional .finance_protobuf_models.v1.MessageMetadata metadata = 4 [json_name = "metadata"];
-    {::_pbi::TcParser::FastMtS1,
-     {34, 0, 0,
-      PROTOBUF_FIELD_OFFSET(PriceMetric, _impl_.metadata_)}},
+    {::_pbi::TcParser::MiniParse, {}},
     // uint64 timestamp_ms = 1 [json_name = "timestampMs"];
     {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PriceMetric, _impl_.timestamp_ms_), 1>(),
      {8, 1, 0,
       PROTOBUF_FIELD_OFFSET(PriceMetric, _impl_.timestamp_ms_)}},
-    // float value = 2 [json_name = "value"];
+    // uint64 aggregation_window_ms = 2 [json_name = "aggregationWindowMs"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PriceMetric, _impl_.aggregation_window_ms_), 2>(),
+     {16, 2, 0,
+      PROTOBUF_FIELD_OFFSET(PriceMetric, _impl_.aggregation_window_ms_)}},
+    // float value = 3 [json_name = "value"];
     {::_pbi::TcParser::FastF32S1,
-     {21, 2, 0,
+     {29, 3, 0,
       PROTOBUF_FIELD_OFFSET(PriceMetric, _impl_.value_)}},
-    // .finance_protobuf_models.v1.StatisticEnum statistic = 3 [json_name = "statistic"];
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(PriceMetric, _impl_.statistic_), 3>(),
-     {24, 3, 0,
+    // .finance_protobuf_models.v1.StatisticEnum statistic = 4 [json_name = "statistic"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(PriceMetric, _impl_.statistic_), 4>(),
+     {32, 4, 0,
       PROTOBUF_FIELD_OFFSET(PriceMetric, _impl_.statistic_)}},
+    // optional .finance_protobuf_models.v1.MessageMetadata metadata = 5 [json_name = "metadata"];
+    {::_pbi::TcParser::FastMtS1,
+     {42, 0, 0,
+      PROTOBUF_FIELD_OFFSET(PriceMetric, _impl_.metadata_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
   }}, {{
     65535, 65535
   }}, {{
     // uint64 timestamp_ms = 1 [json_name = "timestampMs"];
     {PROTOBUF_FIELD_OFFSET(PriceMetric, _impl_.timestamp_ms_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
-    // float value = 2 [json_name = "value"];
-    {PROTOBUF_FIELD_OFFSET(PriceMetric, _impl_.value_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // .finance_protobuf_models.v1.StatisticEnum statistic = 3 [json_name = "statistic"];
-    {PROTOBUF_FIELD_OFFSET(PriceMetric, _impl_.statistic_), _Internal::kHasBitsOffset + 3, 0, (0 | ::_fl::kFcOptional | ::_fl::kOpenEnum)},
-    // optional .finance_protobuf_models.v1.MessageMetadata metadata = 4 [json_name = "metadata"];
+    // uint64 aggregation_window_ms = 2 [json_name = "aggregationWindowMs"];
+    {PROTOBUF_FIELD_OFFSET(PriceMetric, _impl_.aggregation_window_ms_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
+    // float value = 3 [json_name = "value"];
+    {PROTOBUF_FIELD_OFFSET(PriceMetric, _impl_.value_), _Internal::kHasBitsOffset + 3, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+    // .finance_protobuf_models.v1.StatisticEnum statistic = 4 [json_name = "statistic"];
+    {PROTOBUF_FIELD_OFFSET(PriceMetric, _impl_.statistic_), _Internal::kHasBitsOffset + 4, 0, (0 | ::_fl::kFcOptional | ::_fl::kOpenEnum)},
+    // optional .finance_protobuf_models.v1.MessageMetadata metadata = 5 [json_name = "metadata"];
     {PROTOBUF_FIELD_OFFSET(PriceMetric, _impl_.metadata_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }},
   {{
@@ -829,7 +843,7 @@ PROTOBUF_NOINLINE void PriceMetric::Clear() {
     ABSL_DCHECK(_impl_.metadata_ != nullptr);
     _impl_.metadata_->Clear();
   }
-  if (BatchCheckHasBit(cached_has_bits, 0x0000000eU)) {
+  if (BatchCheckHasBit(cached_has_bits, 0x0000001eU)) {
     ::memset(&_impl_.timestamp_ms_, 0, static_cast<::size_t>(
         reinterpret_cast<char*>(&_impl_.statistic_) -
         reinterpret_cast<char*>(&_impl_.timestamp_ms_)) + sizeof(_impl_.statistic_));
@@ -866,28 +880,37 @@ PROTOBUF_NOINLINE void PriceMetric::Clear() {
     }
   }
 
-  // float value = 2 [json_name = "value"];
+  // uint64 aggregation_window_ms = 2 [json_name = "aggregationWindowMs"];
   if (CheckHasBit(cached_has_bits, 0x00000004U)) {
+    if (this_._internal_aggregation_window_ms() != 0) {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
+          2, this_._internal_aggregation_window_ms(), target);
+    }
+  }
+
+  // float value = 3 [json_name = "value"];
+  if (CheckHasBit(cached_has_bits, 0x00000008U)) {
     if (::absl::bit_cast<::uint32_t>(this_._internal_value()) != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteFloatToArray(
-          2, this_._internal_value(), target);
+          3, this_._internal_value(), target);
     }
   }
 
-  // .finance_protobuf_models.v1.StatisticEnum statistic = 3 [json_name = "statistic"];
-  if (CheckHasBit(cached_has_bits, 0x00000008U)) {
+  // .finance_protobuf_models.v1.StatisticEnum statistic = 4 [json_name = "statistic"];
+  if (CheckHasBit(cached_has_bits, 0x00000010U)) {
     if (this_._internal_statistic() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteEnumToArray(
-          3, this_._internal_statistic(), target);
+          4, this_._internal_statistic(), target);
     }
   }
 
-  // optional .finance_protobuf_models.v1.MessageMetadata metadata = 4 [json_name = "metadata"];
+  // optional .finance_protobuf_models.v1.MessageMetadata metadata = 5 [json_name = "metadata"];
   if (CheckHasBit(cached_has_bits, 0x00000001U)) {
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-        4, *this_._impl_.metadata_, this_._impl_.metadata_->GetCachedSize(), target,
+        5, *this_._impl_.metadata_, this_._impl_.metadata_->GetCachedSize(), target,
         stream);
   }
 
@@ -916,8 +939,8 @@ PROTOBUF_NOINLINE void PriceMetric::Clear() {
 
   ::_pbi::Prefetch5LinesFrom7Lines(&this_);
   cached_has_bits = this_._impl_._has_bits_[0];
-  if (BatchCheckHasBit(cached_has_bits, 0x0000000fU)) {
-    // optional .finance_protobuf_models.v1.MessageMetadata metadata = 4 [json_name = "metadata"];
+  if (BatchCheckHasBit(cached_has_bits, 0x0000001fU)) {
+    // optional .finance_protobuf_models.v1.MessageMetadata metadata = 5 [json_name = "metadata"];
     if (CheckHasBit(cached_has_bits, 0x00000001U)) {
       total_size += 1 +
                     ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.metadata_);
@@ -929,14 +952,21 @@ PROTOBUF_NOINLINE void PriceMetric::Clear() {
             this_._internal_timestamp_ms());
       }
     }
-    // float value = 2 [json_name = "value"];
+    // uint64 aggregation_window_ms = 2 [json_name = "aggregationWindowMs"];
     if (CheckHasBit(cached_has_bits, 0x00000004U)) {
+      if (this_._internal_aggregation_window_ms() != 0) {
+        total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
+            this_._internal_aggregation_window_ms());
+      }
+    }
+    // float value = 3 [json_name = "value"];
+    if (CheckHasBit(cached_has_bits, 0x00000008U)) {
       if (::absl::bit_cast<::uint32_t>(this_._internal_value()) != 0) {
         total_size += 5;
       }
     }
-    // .finance_protobuf_models.v1.StatisticEnum statistic = 3 [json_name = "statistic"];
-    if (CheckHasBit(cached_has_bits, 0x00000008U)) {
+    // .finance_protobuf_models.v1.StatisticEnum statistic = 4 [json_name = "statistic"];
+    if (CheckHasBit(cached_has_bits, 0x00000010U)) {
       if (this_._internal_statistic() != 0) {
         total_size += 1 +
                       ::_pbi::WireFormatLite::EnumSize(this_._internal_statistic());
@@ -962,7 +992,7 @@ void PriceMetric::MergeImpl(::google::protobuf::MessageLite& to_msg,
   (void)cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if (BatchCheckHasBit(cached_has_bits, 0x0000000fU)) {
+  if (BatchCheckHasBit(cached_has_bits, 0x0000001fU)) {
     if (CheckHasBit(cached_has_bits, 0x00000001U)) {
       ABSL_DCHECK(from._impl_.metadata_ != nullptr);
       if (_this->_impl_.metadata_ == nullptr) {
@@ -977,11 +1007,16 @@ void PriceMetric::MergeImpl(::google::protobuf::MessageLite& to_msg,
       }
     }
     if (CheckHasBit(cached_has_bits, 0x00000004U)) {
+      if (from._internal_aggregation_window_ms() != 0) {
+        _this->_impl_.aggregation_window_ms_ = from._impl_.aggregation_window_ms_;
+      }
+    }
+    if (CheckHasBit(cached_has_bits, 0x00000008U)) {
       if (::absl::bit_cast<::uint32_t>(from._internal_value()) != 0) {
         _this->_impl_.value_ = from._impl_.value_;
       }
     }
-    if (CheckHasBit(cached_has_bits, 0x00000008U)) {
+    if (CheckHasBit(cached_has_bits, 0x00000010U)) {
       if (from._internal_statistic() != 0) {
         _this->_impl_.statistic_ = from._impl_.statistic_;
       }
@@ -1164,10 +1199,10 @@ OHLC::_table_ = {
     ::_pbi::TcParser::GetTable<::finance_protobuf_models::v1::OHLC>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // bool bullish = 8 [json_name = "bullish"];
-    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(OHLC, _impl_.bullish_), 7>(),
-     {64, 7, 0,
-      PROTOBUF_FIELD_OFFSET(OHLC, _impl_.bullish_)}},
+    // optional .finance_protobuf_models.v1.MessageMetadata metadata = 8 [json_name = "metadata"];
+    {::_pbi::TcParser::FastMtS1,
+     {66, 0, 0,
+      PROTOBUF_FIELD_OFFSET(OHLC, _impl_.metadata_)}},
     // uint64 timestamp_ms = 1 [json_name = "timestampMs"];
     {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(OHLC, _impl_.timestamp_ms_), 1>(),
      {8, 1, 0,
@@ -1192,10 +1227,10 @@ OHLC::_table_ = {
     {::_pbi::TcParser::FastF32S1,
      {53, 6, 0,
       PROTOBUF_FIELD_OFFSET(OHLC, _impl_.close_)}},
-    // optional .finance_protobuf_models.v1.MessageMetadata metadata = 7 [json_name = "metadata"];
-    {::_pbi::TcParser::FastMtS1,
-     {58, 0, 0,
-      PROTOBUF_FIELD_OFFSET(OHLC, _impl_.metadata_)}},
+    // bool bullish = 7 [json_name = "bullish"];
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(OHLC, _impl_.bullish_), 7>(),
+     {56, 7, 0,
+      PROTOBUF_FIELD_OFFSET(OHLC, _impl_.bullish_)}},
   }}, {{
     65535, 65535
   }}, {{
@@ -1211,10 +1246,10 @@ OHLC::_table_ = {
     {PROTOBUF_FIELD_OFFSET(OHLC, _impl_.low_), _Internal::kHasBitsOffset + 5, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
     // float close = 6 [json_name = "close"];
     {PROTOBUF_FIELD_OFFSET(OHLC, _impl_.close_), _Internal::kHasBitsOffset + 6, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional .finance_protobuf_models.v1.MessageMetadata metadata = 7 [json_name = "metadata"];
-    {PROTOBUF_FIELD_OFFSET(OHLC, _impl_.metadata_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
-    // bool bullish = 8 [json_name = "bullish"];
+    // bool bullish = 7 [json_name = "bullish"];
     {PROTOBUF_FIELD_OFFSET(OHLC, _impl_.bullish_), _Internal::kHasBitsOffset + 7, 0, (0 | ::_fl::kFcOptional | ::_fl::kBool)},
+    // optional .finance_protobuf_models.v1.MessageMetadata metadata = 8 [json_name = "metadata"];
+    {PROTOBUF_FIELD_OFFSET(OHLC, _impl_.metadata_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }},
   {{
       {::_pbi::TcParser::GetTable<::finance_protobuf_models::v1::MessageMetadata>()},
@@ -1316,20 +1351,20 @@ PROTOBUF_NOINLINE void OHLC::Clear() {
     }
   }
 
-  // optional .finance_protobuf_models.v1.MessageMetadata metadata = 7 [json_name = "metadata"];
-  if (CheckHasBit(cached_has_bits, 0x00000001U)) {
-    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-        7, *this_._impl_.metadata_, this_._impl_.metadata_->GetCachedSize(), target,
-        stream);
-  }
-
-  // bool bullish = 8 [json_name = "bullish"];
+  // bool bullish = 7 [json_name = "bullish"];
   if (CheckHasBit(cached_has_bits, 0x00000080U)) {
     if (this_._internal_bullish() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteBoolToArray(
-          8, this_._internal_bullish(), target);
+          7, this_._internal_bullish(), target);
     }
+  }
+
+  // optional .finance_protobuf_models.v1.MessageMetadata metadata = 8 [json_name = "metadata"];
+  if (CheckHasBit(cached_has_bits, 0x00000001U)) {
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        8, *this_._impl_.metadata_, this_._impl_.metadata_->GetCachedSize(), target,
+        stream);
   }
 
   if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -1358,7 +1393,7 @@ PROTOBUF_NOINLINE void OHLC::Clear() {
   ::_pbi::Prefetch5LinesFrom7Lines(&this_);
   cached_has_bits = this_._impl_._has_bits_[0];
   if (BatchCheckHasBit(cached_has_bits, 0x000000ffU)) {
-    // optional .finance_protobuf_models.v1.MessageMetadata metadata = 7 [json_name = "metadata"];
+    // optional .finance_protobuf_models.v1.MessageMetadata metadata = 8 [json_name = "metadata"];
     if (CheckHasBit(cached_has_bits, 0x00000001U)) {
       total_size += 1 +
                     ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.metadata_);
@@ -1401,7 +1436,7 @@ PROTOBUF_NOINLINE void OHLC::Clear() {
         total_size += 5;
       }
     }
-    // bool bullish = 8 [json_name = "bullish"];
+    // bool bullish = 7 [json_name = "bullish"];
     if (CheckHasBit(cached_has_bits, 0x00000080U)) {
       if (this_._internal_bullish() != 0) {
         total_size += 2;

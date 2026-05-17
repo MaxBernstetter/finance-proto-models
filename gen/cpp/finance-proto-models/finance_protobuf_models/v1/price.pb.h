@@ -234,12 +234,13 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED PriceMetric final : public ::google
 
   // accessors -------------------------------------------------------
   enum : int {
-    kMetadataFieldNumber = 4,
+    kMetadataFieldNumber = 5,
     kTimestampMsFieldNumber = 1,
-    kValueFieldNumber = 2,
-    kStatisticFieldNumber = 3,
+    kAggregationWindowMsFieldNumber = 2,
+    kValueFieldNumber = 3,
+    kStatisticFieldNumber = 4,
   };
-  // optional .finance_protobuf_models.v1.MessageMetadata metadata = 4 [json_name = "metadata"];
+  // optional .finance_protobuf_models.v1.MessageMetadata metadata = 5 [json_name = "metadata"];
   [[nodiscard]] bool has_metadata()
       const;
   void clear_metadata() ;
@@ -265,7 +266,17 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED PriceMetric final : public ::google
   void _internal_set_timestamp_ms(::uint64_t value);
 
   public:
-  // float value = 2 [json_name = "value"];
+  // uint64 aggregation_window_ms = 2 [json_name = "aggregationWindowMs"];
+  void clear_aggregation_window_ms() ;
+  [[nodiscard]] ::uint64_t aggregation_window_ms() const;
+  void set_aggregation_window_ms(::uint64_t value);
+
+  private:
+  ::uint64_t _internal_aggregation_window_ms() const;
+  void _internal_set_aggregation_window_ms(::uint64_t value);
+
+  public:
+  // float value = 3 [json_name = "value"];
   void clear_value() ;
   [[nodiscard]] float value() const;
   void set_value(float value);
@@ -275,7 +286,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED PriceMetric final : public ::google
   void _internal_set_value(float value);
 
   public:
-  // .finance_protobuf_models.v1.StatisticEnum statistic = 3 [json_name = "statistic"];
+  // .finance_protobuf_models.v1.StatisticEnum statistic = 4 [json_name = "statistic"];
   void clear_statistic() ;
   [[nodiscard]] ::finance_protobuf_models::v1::StatisticEnum statistic() const;
   void set_statistic(::finance_protobuf_models::v1::StatisticEnum value);
@@ -289,7 +300,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED PriceMetric final : public ::google
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<2, 4,
+  static const ::google::protobuf::internal::TcParseTable<3, 5,
                                    1, 0,
                                    2>
       _table_;
@@ -315,6 +326,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED PriceMetric final : public ::google
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::finance_protobuf_models::v1::MessageMetadata* PROTOBUF_NULLABLE metadata_;
     ::uint64_t timestamp_ms_;
+    ::uint64_t aggregation_window_ms_;
     float value_;
     int statistic_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -698,16 +710,16 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED OHLC final : public ::google::proto
 
   // accessors -------------------------------------------------------
   enum : int {
-    kMetadataFieldNumber = 7,
+    kMetadataFieldNumber = 8,
     kTimestampMsFieldNumber = 1,
     kAggregationWindowMsFieldNumber = 2,
     kOpenFieldNumber = 3,
     kHighFieldNumber = 4,
     kLowFieldNumber = 5,
     kCloseFieldNumber = 6,
-    kBullishFieldNumber = 8,
+    kBullishFieldNumber = 7,
   };
-  // optional .finance_protobuf_models.v1.MessageMetadata metadata = 7 [json_name = "metadata"];
+  // optional .finance_protobuf_models.v1.MessageMetadata metadata = 8 [json_name = "metadata"];
   [[nodiscard]] bool has_metadata()
       const;
   void clear_metadata() ;
@@ -783,7 +795,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED OHLC final : public ::google::proto
   void _internal_set_close(float value);
 
   public:
-  // bool bullish = 8 [json_name = "bullish"];
+  // bool bullish = 7 [json_name = "bullish"];
   void clear_bullish() ;
   [[nodiscard]] bool bullish() const;
   void set_bullish(bool value);
@@ -1275,12 +1287,37 @@ inline void PriceMetric::_internal_set_timestamp_ms(::uint64_t value) {
   _impl_.timestamp_ms_ = value;
 }
 
-// float value = 2 [json_name = "value"];
+// uint64 aggregation_window_ms = 2 [json_name = "aggregationWindowMs"];
+inline void PriceMetric::clear_aggregation_window_ms() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.aggregation_window_ms_ = ::uint64_t{0u};
+  ClearHasBit(_impl_._has_bits_[0],
+                  0x00000004U);
+}
+inline ::uint64_t PriceMetric::aggregation_window_ms() const {
+  // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.PriceMetric.aggregation_window_ms)
+  return _internal_aggregation_window_ms();
+}
+inline void PriceMetric::set_aggregation_window_ms(::uint64_t value) {
+  _internal_set_aggregation_window_ms(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00000004U);
+  // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.PriceMetric.aggregation_window_ms)
+}
+inline ::uint64_t PriceMetric::_internal_aggregation_window_ms() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.aggregation_window_ms_;
+}
+inline void PriceMetric::_internal_set_aggregation_window_ms(::uint64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.aggregation_window_ms_ = value;
+}
+
+// float value = 3 [json_name = "value"];
 inline void PriceMetric::clear_value() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.value_ = 0;
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000004U);
+                  0x00000008U);
 }
 inline float PriceMetric::value() const {
   // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.PriceMetric.value)
@@ -1288,7 +1325,7 @@ inline float PriceMetric::value() const {
 }
 inline void PriceMetric::set_value(float value) {
   _internal_set_value(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000004U);
+  SetHasBit(_impl_._has_bits_[0], 0x00000008U);
   // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.PriceMetric.value)
 }
 inline float PriceMetric::_internal_value() const {
@@ -1300,12 +1337,12 @@ inline void PriceMetric::_internal_set_value(float value) {
   _impl_.value_ = value;
 }
 
-// .finance_protobuf_models.v1.StatisticEnum statistic = 3 [json_name = "statistic"];
+// .finance_protobuf_models.v1.StatisticEnum statistic = 4 [json_name = "statistic"];
 inline void PriceMetric::clear_statistic() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.statistic_ = 0;
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000008U);
+                  0x00000010U);
 }
 inline ::finance_protobuf_models::v1::StatisticEnum PriceMetric::statistic() const {
   // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.PriceMetric.statistic)
@@ -1313,7 +1350,7 @@ inline ::finance_protobuf_models::v1::StatisticEnum PriceMetric::statistic() con
 }
 inline void PriceMetric::set_statistic(::finance_protobuf_models::v1::StatisticEnum value) {
   _internal_set_statistic(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000008U);
+  SetHasBit(_impl_._has_bits_[0], 0x00000010U);
   // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.PriceMetric.statistic)
 }
 inline ::finance_protobuf_models::v1::StatisticEnum PriceMetric::_internal_statistic() const {
@@ -1325,7 +1362,7 @@ inline void PriceMetric::_internal_set_statistic(::finance_protobuf_models::v1::
   _impl_.statistic_ = value;
 }
 
-// optional .finance_protobuf_models.v1.MessageMetadata metadata = 4 [json_name = "metadata"];
+// optional .finance_protobuf_models.v1.MessageMetadata metadata = 5 [json_name = "metadata"];
 inline bool PriceMetric::has_metadata() const {
   bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000001U);
   PROTOBUF_ASSUME(!value || _impl_.metadata_ != nullptr);
@@ -1572,7 +1609,32 @@ inline void OHLC::_internal_set_close(float value) {
   _impl_.close_ = value;
 }
 
-// optional .finance_protobuf_models.v1.MessageMetadata metadata = 7 [json_name = "metadata"];
+// bool bullish = 7 [json_name = "bullish"];
+inline void OHLC::clear_bullish() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.bullish_ = false;
+  ClearHasBit(_impl_._has_bits_[0],
+                  0x00000080U);
+}
+inline bool OHLC::bullish() const {
+  // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.OHLC.bullish)
+  return _internal_bullish();
+}
+inline void OHLC::set_bullish(bool value) {
+  _internal_set_bullish(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00000080U);
+  // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.OHLC.bullish)
+}
+inline bool OHLC::_internal_bullish() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.bullish_;
+}
+inline void OHLC::_internal_set_bullish(bool value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.bullish_ = value;
+}
+
+// optional .finance_protobuf_models.v1.MessageMetadata metadata = 8 [json_name = "metadata"];
 inline bool OHLC::has_metadata() const {
   bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000001U);
   PROTOBUF_ASSUME(!value || _impl_.metadata_ != nullptr);
@@ -1663,31 +1725,6 @@ inline void OHLC::set_allocated_metadata(::finance_protobuf_models::v1::MessageM
 
   _impl_.metadata_ = reinterpret_cast<::finance_protobuf_models::v1::MessageMetadata*>(value);
   // @@protoc_insertion_point(field_set_allocated:finance_protobuf_models.v1.OHLC.metadata)
-}
-
-// bool bullish = 8 [json_name = "bullish"];
-inline void OHLC::clear_bullish() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.bullish_ = false;
-  ClearHasBit(_impl_._has_bits_[0],
-                  0x00000080U);
-}
-inline bool OHLC::bullish() const {
-  // @@protoc_insertion_point(field_get:finance_protobuf_models.v1.OHLC.bullish)
-  return _internal_bullish();
-}
-inline void OHLC::set_bullish(bool value) {
-  _internal_set_bullish(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000080U);
-  // @@protoc_insertion_point(field_set:finance_protobuf_models.v1.OHLC.bullish)
-}
-inline bool OHLC::_internal_bullish() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.bullish_;
-}
-inline void OHLC::_internal_set_bullish(bool value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.bullish_ = value;
 }
 
 // -------------------------------------------------------------------
